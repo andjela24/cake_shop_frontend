@@ -64,11 +64,13 @@ export default function LoginUserForm({ handleNext }) {
 
                     <Grid item xs={12}>
                         <Button
+                        style={{
+                            backgroundColor: "#393119",
+                        }}
                             className="w-full"
                             type="submit"
                             variant="contained"
                             size="large"
-                            color="random"
                             sx={{ padding: ".8rem 0" }}
                         >
                             Uloguj se

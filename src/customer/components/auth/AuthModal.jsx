@@ -21,29 +21,27 @@ const style = {
 
 export default function AuthModal({ handleClose, open }) {
   const location = useLocation();
-  const { auth } = useSelector((store) => store);
+  const user = useSelector((store) => store.auth?.user);
   useEffect(() => {
-    if (auth.user) handleClose();
-  }, [auth.user]);
+    if (user) handleClose();
+  }, [user]);
   return (
     <>
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      size="large"
-    >
-      <Box className="rounded-md" sx={style}>
-        {location.pathname === "/login" ? (
-          <LoginUserForm />
-        ) : (
-          <RegisterUserForm />
-        )}
-      </Box>
-    </Modal>
-    
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        size="large"
+      >
+        <Box className="rounded-md" sx={style}>
+          {location.pathname === "/login" ? (
+            <LoginUserForm />
+          ) : (
+            <RegisterUserForm />
+          )}
+        </Box>
+      </Modal>
     </>
-    
   );
 }
