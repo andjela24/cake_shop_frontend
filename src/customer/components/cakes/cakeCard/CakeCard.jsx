@@ -11,6 +11,7 @@ export default function CakeCard({ cake }) {
     minTier,
     maxTier,
     imageUrl,
+    category
   } = cake;
   const navigate = useNavigate();
 
@@ -52,7 +53,7 @@ export default function CakeCard({ cake }) {
           <p className="font-bold opacity-60">{pricePerKilo} RSD/kg</p>
           <p className="">{title}</p>
 
-          <p className="font-semibold opacity-50">{decorationPrice} RSD</p>
+          <p className="font-semibold opacity-50">{category.name}</p>
         </div>
 
         {/* <div className="flex space-x-2 items-center">
