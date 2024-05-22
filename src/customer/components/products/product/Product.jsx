@@ -22,6 +22,8 @@ import { productdata } from "../../../../data";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
+  cakesPagable,
+  findAllCakes,
   findProducts,
   findProductsByCategory,
 } from "../../../../redux/customers/product/Action";
@@ -38,7 +40,8 @@ export default function Product() {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const param = useParams();
-  const { customersProduct } = useSelector((store) => store);
+  const customersProduct = useSelector((store) => store.customersProduct);
+  const cakes = useSelector((store) => store.customersProduct.products);
   const location = useLocation();
   const [isLoaderOpen, setIsLoaderOpen] = useState(false);
 
@@ -46,18 +49,18 @@ export default function Product() {
     setIsLoaderOpen(false);
   };
 
-  // const filter = decodeURIComponent(location.search);
+  console.log({cakes});
+
+  //category, minWeight, maxWeight, minTier, maxTier, sort, pageNumber, PageSize
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
-  const colorValue = searchParams.get("color");
-  const sizeValue = searchParams.get("size");
-  const price = searchParams.get("price");
-  const disccount = searchParams.get("disccout");
+  const categoryValue = searchParams.get("category");
+  const minWeightValue = searchParams.get("minWeight");
+  const maxWeightValue = searchParams.get("maxWeight");
+  const minTierValue = searchParams.get("minTier");
+  const maxTierValue = searchParams.get("maxTier");
   const sortValue = searchParams.get("sort");
-  const pageNumber = searchParams.get("page") || 1;
-  const stock = searchParams.get("stock");
-
-  // console.log("location - ", colorValue, sizeValue,price,disccount);
+  const pageNumber = searchParams.get("pageNumber") || 0; //Mozda ovde moze biti problem
 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
@@ -67,37 +70,67 @@ export default function Product() {
   };
   const handlePaginationChange = (event, value) => {
     const searchParams = new URLSearchParams(location.search);
-    searchParams.set("page", value);
+    searchParams.set("pageNumber", value);
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
 
+  // useEffect(() => {
+  //   const [minPrice, maxPrice] =
+  //     price === null ? [0, 0] : price.split("-").map(Number);
+  //   const data = {
+  //     category: param.lavelThree,
+  //     colors: colorValue || [],
+  //     sizes: sizeValue || [],
+  //     minPrice: minPrice || 0,
+  //     maxPrice: maxPrice || 10000,
+  //     minDiscount: disccount || 0,
+  //     sort: sortValue || "price_low",
+  //     pageNumber: pageNumber - 1,
+  //     pageSize: 10,
+  //     stock: stock,
+  //   };
+  //   dispatch(findProducts(data));
+  // }, [
+  //   param.lavelThree,
+  //   colorValue,
+  //   sizeValue,
+  //   price,
+  //   disccount,
+  //   sortValue,
+  //   pageNumber,
+  //   stock,
+  // ]);
+
+  //category, minWeight, maxWeight, minTier, maxTier, sort, pageNumber, PageSize
+  // useEffect(() => {
+  //   // const [minPrice, maxPrice] =
+  //   //   price === null ? [0, 0] : price.split("-").map(Number);
+  //   const data = {
+  //     category: categoryValue || "Svadbene",
+  //     minWeight: minWeightValue || 2,
+  //     maxWeight: maxWeightValue || 30,
+  //     minTier: minTierValue || 1,
+  //     maxTier: maxTierValue || 4,
+  //     sort: sortValue || "price_low",
+  //     pageNumber: pageNumber || 0,
+  //     // pageNumber: pageNumber - 1,
+  //     pageSize: 10,
+  //   };
+  //   dispatch(cakesPagable(data));
+  // }, [
+  //   categoryValue,
+  //   minWeightValue,
+  //   maxWeightValue,
+  //   minTierValue,
+  //   maxTierValue,
+  //   sortValue,
+  //   pageNumber,
+  // ]);
+
   useEffect(() => {
-    const [minPrice, maxPrice] =
-      price === null ? [0, 0] : price.split("-").map(Number);
-    const data = {
-      category: param.lavelThree,
-      colors: colorValue || [],
-      sizes: sizeValue || [],
-      minPrice: minPrice || 0,
-      maxPrice: maxPrice || 10000,
-      minDiscount: disccount || 0,
-      sort: sortValue || "price_low",
-      pageNumber: pageNumber - 1,
-      pageSize: 10,
-      stock: stock,
-    };
-    dispatch(findProducts(data));
-  }, [
-    param.lavelThree,
-    colorValue,
-    sizeValue,
-    price,
-    disccount,
-    sortValue,
-    pageNumber,
-    stock,
-  ]);
+    dispatch(findAllCakes());
+  }, []);
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
@@ -262,7 +295,7 @@ export default function Product() {
         <main className="mx-auto px-4 lg:px-14 ">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              Product
+              Torte
             </h1>
 
             <div className="flex items-center">
@@ -458,7 +491,7 @@ export default function Product() {
                 {/* Product grid */}
                 <div className="lg:col-span-4 w-full ">
                   <div className="flex flex-wrap justify-center bg-white border py-5 rounded-md ">
-                    {customersProduct?.products?.content?.map((item) => (
+                    {cakes?.map((item) => (
                       <ProductCard product={item} />
                     ))}
                   </div>

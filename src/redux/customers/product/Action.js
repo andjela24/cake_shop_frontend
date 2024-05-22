@@ -1,6 +1,8 @@
 import axios from "axios";
 
 import {
+  FIND_CAKES_REQUEST,
+  FIND_CAKE_PAGABLE_REQUEST,
   FIND_PRODUCTS_BY_CATEGORY_REQUEST,
   FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
   FIND_PRODUCTS_BY_CATEGORY_FAILURE,
@@ -16,9 +18,73 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAILURE,
+  FIND_CAKE_PAGABLE_SUCCESS,
+  FIND_CAKE_PAGABLE_FAILURE,
+  FIND_CAKES_SUCCESS,
+  FIND_CAKES_FAILURE,
 } from "./ActionType";
 import api, { API_BASE_URL } from "../../../config/api";
 
+export const findAllCakes = () => async (dispatch) => {
+  try {
+    dispatch({ type: FIND_CAKES_REQUEST });
+
+    const { data } = await api.get(
+      `/api/user-cake`
+    );
+
+    console.log("Find all cakes - ", data);
+    dispatch({
+      type: FIND_CAKES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FIND_CAKES_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+//Kod mene je Cakes pagable
+//category, minWeight, maxWeight, minTier, maxTier, sort, pageNumber, PageSize
+export const cakesPagable = (reqData) => async (dispatch) => {
+  const {
+    category,
+    minWeight,
+    maxWeight,
+    minTier,
+    maxTier,
+    sort,
+    pageNumber,
+    pageSize,
+  } = reqData;
+
+  try {
+    dispatch({ type: FIND_CAKE_PAGABLE_REQUEST });
+
+    const { data } = await api.get(
+      `/api/user-cake/cakes?category=${category}&minWeight=${minWeight}&maxWeight=${maxWeight}&minTier=${minTier}&maxTier=${maxTier}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
+
+    console.log("Cakes Pagable - ", data);
+    dispatch({
+      type: FIND_CAKE_PAGABLE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FIND_CAKE_PAGABLE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 export const findProducts = (reqData) => async (dispatch) => {
   const {
     colors,
@@ -55,7 +121,6 @@ export const findProducts = (reqData) => async (dispatch) => {
     });
   }
 };
-
 export const findProductById = (reqData) => async (dispatch) => {
   try {
     dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
@@ -129,20 +194,20 @@ export const updateProduct = (product) => async (dispatch) => {
 };
 
 export const deleteProduct = (productId) => async (dispatch) => {
-  console.log("delete product action",productId)
+  console.log("delete product action", productId);
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
-    let {data}=await api.delete(`/api/admin/products/${productId}/delete`);
+    let { data } = await api.delete(`/api/admin/products/${productId}/delete`);
 
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,
       payload: data,
     });
 
-    console.log("product delte ",data)
+    console.log("product delte ", data);
   } catch (error) {
-    console.log("catch error ",error)
+    console.log("catch error ", error);
     dispatch({
       type: DELETE_PRODUCT_FAILURE,
       payload:

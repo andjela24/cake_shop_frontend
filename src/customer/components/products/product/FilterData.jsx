@@ -8,33 +8,45 @@ export const color = [
     "Green",
     "Yellow",
   ];
-  
   export const filters = [
     {
-      id: "color",
-      name: "Color",
+      id: "category",
+      name: "Category",
       options: [
-        { value: "white", label: "White" },
-        { value: "beige", label: "Beige" },
-        { value: "blue", label: "Blue" },
-        { value: "brown", label: "Brown" },
-        { value: "green", label: "Green" },
-        { value: "purple", label: "Purple" },
-        {value:"yellow",label:"Yellow"}
+        { value: "decije", label: "Decije" },
+        { value: "svecane", label: "Svecane" },
+        { value: "svadbene", label: "Svadbene" },
+        { value: "specijal", label: "Specijal" }
       ],
     },
-  
-    {
-      id: "size",
-      name: "Size",
-      options: [
-        { value: "S", label: "S" },
-        { value: "M", label: "M" },
-        { value: "L", label: "L" },
-      ],
-    },
-    
   ];
+  
+  // export const filters = [
+  //   {
+  //     id: "color",
+  //     name: "Color",
+  //     options: [
+  //       { value: "white", label: "White" },
+  //       { value: "beige", label: "Beige" },
+  //       { value: "blue", label: "Blue" },
+  //       { value: "brown", label: "Brown" },
+  //       { value: "green", label: "Green" },
+  //       { value: "purple", label: "Purple" },
+  //       {value:"yellow",label:"Yellow"}
+  //     ],
+  //   },
+  
+  //   {
+  //     id: "size",
+  //     name: "Size",
+  //     options: [
+  //       { value: "S", label: "S" },
+  //       { value: "M", label: "M" },
+  //       { value: "L", label: "L" },
+  //     ],
+  //   },
+    
+  // ];
   
   export const singleFilter=[
     {

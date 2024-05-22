@@ -1,13 +1,13 @@
 export const navigation = {
     categories: [
       {
-        id: 'women',
+        id: 'torte',
         name: 'Torte',
         featured: [
           {
             name: 'Dečije',
-            id:"top",
-            href: '/',
+            id:"decije",
+            href: '/cakes/decije',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
           },
