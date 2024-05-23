@@ -128,9 +128,9 @@ export default function Product() {
   //   pageNumber,
   // ]);
 
-  useEffect(() => {
-    dispatch(findAllCakes());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(findAllCakes({category: 'svadbene'}));
+  // }, []);
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);

@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deepPurple } from "@mui/material/colors";
 import { getUser, logout } from "../../../redux/auth/Action";
 import { getCart } from "../../../redux/customers/cart/Action";
+import { findCakesByCategory } from "../../../redux/customers/product/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -53,7 +54,11 @@ export default function Navigation() {
   };
 
   const handleCategoryClick = (category, featured, close) => {
-    navigate(`/${category.id}/${featured.id}`);
+    dispatch(findCakesByCategory({ category: featured.id })); // Dispatch action to fetch cakes by category
+    // navigate(featured.href);
+    // navigate(`/${category.id}/${featured.id}`);
+    // navigate(`/cakes/${featured.id}`);
+    navigate({ pathname: "/cakes", search: `?category=${featured.id}` });
     close();
   };
 
@@ -314,7 +319,7 @@ export default function Navigation() {
                                           />
                                           {item.name}
                                         </a>
-                                        <p aria-hidden="true" className="mt-1" >
+                                        <p aria-hidden="true" className="mt-1">
                                           Shop now
                                         </p>
                                       </div>
@@ -434,4 +439,3 @@ export default function Navigation() {
     </div>
   );
 }
-

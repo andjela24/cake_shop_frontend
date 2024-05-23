@@ -39,6 +39,7 @@ const CustomerRoutes = () => {
      <Route path="/cakes" element={<Cake />}></Route>
 
 
+
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/home" element={<Homepage />}></Route>
         <Route path="/about" element={<About />}></Route>

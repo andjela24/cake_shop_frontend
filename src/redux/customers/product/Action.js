@@ -22,25 +22,52 @@ import {
   FIND_CAKE_PAGABLE_FAILURE,
   FIND_CAKES_SUCCESS,
   FIND_CAKES_FAILURE,
+  FIND_CAKES_BY_CATEGORY_REQUEST,
+  FIND_CAKES_BY_CATEGORY_SUCCESS,
+  FIND_CAKES_BY_CATEGORY_FAILURE,
 } from "./ActionType";
 import api, { API_BASE_URL } from "../../../config/api";
 
 export const findAllCakes = () => async (dispatch) => {
+    try {
+      dispatch({ type: FIND_CAKES_REQUEST });
+
+      const { data } = await api.get(`/api/user-cake`);
+
+      console.log("Find all cakes - ", data);
+      dispatch({
+        type: FIND_CAKES_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: FIND_CAKES_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+export const findCakesByCategory = (reqData) => async (dispatch) => {
+  const { category } = reqData;
+
   try {
-    dispatch({ type: FIND_CAKES_REQUEST });
+    dispatch({ type: FIND_CAKES_BY_CATEGORY_REQUEST });
 
-    const { data } = await api.get(
-      `/api/user-cake`
-    );
+    const { data } = await api.get(`/api/user-cake/cake/category`, {
+      params: { q: category },
+    });
 
-    console.log("Find all cakes - ", data);
+    console.log("Find Cake By Category - ", data);
     dispatch({
-      type: FIND_CAKES_SUCCESS,
+      type: FIND_CAKES_BY_CATEGORY_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: FIND_CAKES_FAILURE,
+      type: FIND_CAKES_BY_CATEGORY_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

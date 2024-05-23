@@ -17,6 +17,8 @@ import {
   DELETE_PRODUCT_FAILURE,
   DELETE_PRODUCT_SUCCESS,
   FIND_CAKES_SUCCESS,
+  FIND_CAKES_BY_CATEGORY_REQUEST,
+  FIND_CAKES_BY_CATEGORY_SUCCESS,
 } from "./ActionType";
 
 const initialState = {
@@ -35,6 +37,15 @@ const customerProductReducer = (state = initialState, action) => {
       return {
         ...state,
         cakesLoading: false,
+        error: null,
+        products: action.payload,
+      };
+    case FIND_CAKES_BY_CATEGORY_REQUEST:
+      return { ...state, cakesCategoryLoading: true, error: null, products: [] };
+    case FIND_CAKES_BY_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        cakesCategoryLoading: false,
         error: null,
         products: action.payload,
       };
