@@ -9,7 +9,7 @@ export const navigation = {
           id: "Decije",
           href: "/cakes",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+            "https://images.unsplash.com/photo-1562440499-64c9a111f713",
           imageAlt:
             "Models sitting back to back, wearing Basic Tee in black and bone.",
         },
@@ -18,7 +18,7 @@ export const navigation = {
           id: "Svecane",
           href: "/cakes",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+            "https://images.unsplash.com/photo-1562777717-dc6984f65a63",
           imageAlt:
             "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
@@ -27,7 +27,7 @@ export const navigation = {
           id: "Svadbene",
           href: "/cakes",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+            "https://images.unsplash.com/photo-1535141192574-5d4897c12636",
           imageAlt:
             "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
@@ -36,7 +36,7 @@ export const navigation = {
           id: "Specijal",
           href: "/cakes",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+            "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e",
           imageAlt:
             "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
