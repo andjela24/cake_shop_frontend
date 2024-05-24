@@ -19,6 +19,9 @@ import {
   FIND_CAKES_SUCCESS,
   FIND_CAKES_BY_CATEGORY_REQUEST,
   FIND_CAKES_BY_CATEGORY_SUCCESS,
+  FIND_CAKE_BY_ID_REQUEST,
+  FIND_CAKE_BY_ID_SUCCESS,
+  FIND_CAKE_BY_ID_FAILURE
 } from "./ActionType";
 
 const initialState = {
@@ -41,7 +44,12 @@ const customerProductReducer = (state = initialState, action) => {
         products: action.payload,
       };
     case FIND_CAKES_BY_CATEGORY_REQUEST:
-      return { ...state, cakesCategoryLoading: true, error: null, products: [] };
+      return {
+        ...state,
+        cakesCategoryLoading: true,
+        error: null,
+        products: [],
+      };
     case FIND_CAKES_BY_CATEGORY_SUCCESS:
       return {
         ...state,
@@ -49,6 +57,12 @@ const customerProductReducer = (state = initialState, action) => {
         error: null,
         products: action.payload,
       };
+    case FIND_CAKE_BY_ID_REQUEST:
+      return { ...state, loading: true, error: null };
+    case FIND_CAKE_BY_ID_SUCCESS:
+      return { ...state, product: action.payload, loading: false };
+    case FIND_CAKE_BY_ID_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     case FIND_CAKE_PAGABLE_REQUEST:
       return { ...state, loading: true, error: null, products: [] };
     case FIND_PRODUCTS_BY_CATEGORY_REQUEST:

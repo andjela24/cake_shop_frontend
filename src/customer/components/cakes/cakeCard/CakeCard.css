@@ -1,0 +1,11 @@
+.cakeCard .textPart {
+    transition: transform 0.3s ease-out;
+  }
+.cakeCard:hover .textPart{
+    transform: translateY(-1rem);
+
+}
+
+.caketCard:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

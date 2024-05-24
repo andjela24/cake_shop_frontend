@@ -25,6 +25,9 @@ import {
   FIND_CAKES_BY_CATEGORY_REQUEST,
   FIND_CAKES_BY_CATEGORY_SUCCESS,
   FIND_CAKES_BY_CATEGORY_FAILURE,
+  FIND_CAKE_BY_ID_REQUEST,
+  FIND_CAKE_BY_ID_SUCCESS,
+  FIND_CAKE_BY_ID_FAILURE
 } from "./ActionType";
 import api, { API_BASE_URL } from "../../../config/api";
 
@@ -75,6 +78,49 @@ export const findCakesByCategory = (reqData) => async (dispatch) => {
     });
   }
 };
+export const findCakeById = (cakeId) => async (dispatch) => {
+  try {
+    dispatch({ type: FIND_CAKE_BY_ID_REQUEST });
+
+    const { data } = await api.get(`/api/user-cake/cakes/${cakeId}`);
+
+    console.log("Find Cake By Id - ", data);
+    dispatch({
+      type: FIND_CAKE_BY_ID_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FIND_CAKE_BY_ID_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// export const findCakeById = (reqData) => async (dispatch) => {
+//   try {
+//     dispatch({ type: FIND_CAKE_BY_ID_REQUEST });
+
+//     const { data } = await api.get(`/api/user-cake/cakes/id/${reqData.cakeId}`);
+
+//     console.log("cAKES by  id : ", data);
+//     dispatch({
+//       type: FIND_CAKE_BY_ID_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: FIND_CAKE_BY_ID_FAILURE,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
 
 //Kod mene je Cakes pagable
 //category, minWeight, maxWeight, minTier, maxTier, sort, pageNumber, PageSize

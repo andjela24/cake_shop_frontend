@@ -19,6 +19,7 @@ import Footer from "../customer/components/footer/Footer";
 import PaymentSuccess from "../customer/components/paymentSuccess/PaymentSuccess";
 import RateProduct from "../customer/components/reviewProduct/RateProduct";
 import Cake from "../customer/components/cakes/cake/Cake";
+import CakeDetails from "../customer/components/cakeDetails/CakeDetails";
 
 const CustomerRoutes = () => {
     const location = useLocation();
@@ -37,6 +38,7 @@ const CustomerRoutes = () => {
      <Route path="/login" element={<Homepage />}></Route>
      <Route path="/register" element={<Homepage />}></Route>
      <Route path="/cakes" element={<Cake />}></Route>
+     <Route path="/cakes/:cakeId" element={<CakeDetails />}></Route>
 
 
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./CakeCard.css";
+
 
 export default function CakeCard({ cake }) {
   const {
@@ -16,13 +18,13 @@ export default function CakeCard({ cake }) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/api/cakes/${cake?.id}`);
+    navigate(`/cakes/${cake?.id}`);
   };
 
   return (
     <div
       onClick={handleNavigate}
-      className="productCard w-[15rem] border m-3 transition-all cursor-pointer "
+      className="cakeCard w-[15rem] border m-3 transition-all cursor-pointer "
     >
       <div className="h-[20rem]">
         <img
