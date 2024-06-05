@@ -28,7 +28,7 @@ export const addItemToCart = (reqData) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.put(`${API_BASE_URL}/api/cart/add`, 
+    const { data } = await axios.put(`${API_BASE_URL}/api/carts/add`, 
       reqData.data,
       config,
     );
@@ -56,7 +56,7 @@ export const getCart = (jwt) => async (dispatch) => {
           "Content-Type":"application/json"
         },
       };
-    const { data } = await axios.get(`${API_BASE_URL}/api/cart/`,config);
+    const { data } = await axios.get(`${API_BASE_URL}/api/carts/`,config);
 console.log("cart ",data)
     dispatch({
       type: GET_CART_SUCCESS,

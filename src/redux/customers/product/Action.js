@@ -27,7 +27,10 @@ import {
   FIND_CAKES_BY_CATEGORY_FAILURE,
   FIND_CAKE_BY_ID_REQUEST,
   FIND_CAKE_BY_ID_SUCCESS,
-  FIND_CAKE_BY_ID_FAILURE
+  FIND_CAKE_BY_ID_FAILURE,
+  ADD_ITEM_TO_CART_REQUEST,
+  ADD_ITEM_TO_CART_SUCCESS,
+  ADD_ITEM_TO_CART_FAILURE,
 } from "./ActionType";
 import api, { API_BASE_URL } from "../../../config/api";
 
@@ -121,6 +124,33 @@ export const findCakeById = (cakeId) => async (dispatch) => {
 //     });
 //   }
 // };
+
+export const addItemToCart = (itemData, jwt) => async (dispatch) => {
+  try {
+    dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    };
+
+    const { data } = await api.put(`/api/carts/add`, itemData, config);
+
+    dispatch({
+      type: ADD_ITEM_TO_CART_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_ITEM_TO_CART_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 //Kod mene je Cakes pagable
 //category, minWeight, maxWeight, minTier, maxTier, sort, pageNumber, PageSize

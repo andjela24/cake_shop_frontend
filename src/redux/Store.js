@@ -3,6 +3,7 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 import { thunk } from "redux-thunk";
 import authReducer from "./auth/Reducer";
 import customerProductReducer from "./customers/product/Reducer";
+import flavorReducer from "./customers/flavor/Reducer";
 import productReducer from "./admin/product/Reducer";
 import cartReducer from "./customers/cart/Reducer";
 import { orderReducer } from "./customers/order/Reducer";
@@ -12,6 +13,7 @@ import ReviewReducer from "./customers/review/Reducer";
 const rootReducers = combineReducers({
   auth: authReducer,
   customersProduct: customerProductReducer,
+  flavors: flavorReducer,
   cart: cartReducer,
   order: orderReducer,
   review: ReviewReducer,

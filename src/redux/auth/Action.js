@@ -48,7 +48,7 @@ export const login = (userData) => async (dispatch) => {
             userData
         );
         const user = response.data;
-        if (user.jwt) localStorage.setItem("jwt", user.jwt);
+        if (user.accessToken) localStorage.setItem("jwt", user.accessToken);
         console.log("login ", user);
         dispatch(loginSuccess(user));
     } catch (error) {

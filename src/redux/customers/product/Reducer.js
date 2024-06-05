@@ -21,7 +21,10 @@ import {
   FIND_CAKES_BY_CATEGORY_SUCCESS,
   FIND_CAKE_BY_ID_REQUEST,
   FIND_CAKE_BY_ID_SUCCESS,
-  FIND_CAKE_BY_ID_FAILURE
+  FIND_CAKE_BY_ID_FAILURE,
+  ADD_ITEM_TO_CART_REQUEST,
+  ADD_ITEM_TO_CART_SUCCESS,
+  ADD_ITEM_TO_CART_FAILURE,
 } from "./ActionType";
 
 const initialState = {
@@ -63,6 +66,33 @@ const customerProductReducer = (state = initialState, action) => {
       return { ...state, product: action.payload, loading: false };
     case FIND_CAKE_BY_ID_FAILURE:
       return { ...state, loading: false, error: action.payload };
+    case ADD_ITEM_TO_CART_REQUEST:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          loading: true,
+          error: null,
+        },
+      };
+    case ADD_ITEM_TO_CART_SUCCESS:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          products: [...state.cart.product, action.payload],
+          loading: false,
+        },
+      };
+    case ADD_ITEM_TO_CART_FAILURE:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          loading: false,
+          error: action.payload,
+        },
+      };
     case FIND_CAKE_PAGABLE_REQUEST:
       return { ...state, loading: true, error: null, products: [] };
     case FIND_PRODUCTS_BY_CATEGORY_REQUEST:
