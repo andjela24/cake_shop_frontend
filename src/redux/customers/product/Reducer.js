@@ -33,6 +33,11 @@ const initialState = {
   loading: false,
   error: null,
   deleteProduct: null,
+  cart: {
+    product: [], // Dodajte ovde prazan niz kao podrazumevano stanje
+    loading: false,
+    error: null,
+  },
 };
 
 const customerProductReducer = (state = initialState, action) => {

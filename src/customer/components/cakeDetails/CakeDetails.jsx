@@ -16,8 +16,6 @@ function classNames(...classes) {
 export default function CakeDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { customersProduct } = useSelector((store) => store);
-  // const { flavorReducer } = useSelector((store) => store);
   const { cakeId } = useParams();
   const cake = useSelector((store) => store.customersProduct.product);
   const flavorsList = useSelector((store) => store.flavors.flavors);
@@ -38,14 +36,12 @@ export default function CakeDetails() {
   }, [dispatch, cakeId]);
 
   useEffect(() => {
-    // Učitavanje ukusa kada se komponenta mount-uje
-    dispatch(fetchFlavors()); // Pretpostavljamo da imate akciju fetchFlavors koja vraća ukuse sa servera
+    dispatch(fetchFlavors());
   }, [dispatch]);
 
   const handleSizeChange = (e) => {
     const size = parseInt(e.target.value);
     setSelectedSize(size);
-    // Initialize selected flavors with empty arrays based on size
     setSelectedFlavors(Array(size).fill(""));
   };
 
@@ -63,23 +59,16 @@ export default function CakeDetails() {
 
   const handleSubmit = () => {
     const data = {
-      // selectedWeight: weight,
-      // selectedTiers: selectedSize,
-      // piecesNumber: weight * 8, // assuming each kg equals 8 pieces
-      // totalPrice: weight * cake.pricePerKilo,
-      // cakeId: cake.id,
-      // flavors: selectedFlavors.map((flavorId) => ({ id: flavorId })),
-      // note: "", // assuming an empty note for now
-      // fakeTier: 1, // assuming 1 fake tier for now
       selectedWeight: parseFloat(weight),
       selectedTiers: parseInt(selectedSize),
       piecesNumber: weight * 8,
       totalPrice: weight * cake.pricePerKilo + cake.decorationPrice,
       cakeId: parseInt(cake.id),
       flavors: selectedFlavors.map((flavorId) => parseInt(flavorId)),
-      note: "", // Postavite vrednost ove promenljive na tekst koji korisnik unese
+      note: "",
       fakeTier: parseInt(fakeTier),
     };
+    console.log("DATA ", data);
     dispatch(addItemToCart(data, jwt));
     navigate("/");
   };
