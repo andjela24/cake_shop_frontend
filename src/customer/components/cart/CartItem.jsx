@@ -17,42 +17,57 @@ const CartItem = ({ item, showButton }) => {
         const data = { cartItemId: item?.id, jwt };
         dispatch(removeCartItem(data));
     };
+
     const handleUpdateCartItem = (num) => {
         const data = {
-            data: { quantity: item.quantity + num },
+            data: { piecesNumber: item.piecesNumber + num },
             cartItemId: item?.id,
             jwt,
         };
         dispatch(updateCartItem(data));
     };
 
-    console.log("CART ITEM", item);
+    // Funkcija za prikaz ukusa u jednom redu razdvojenim zarezom
+    const renderFlavors = () => {
+        if (item?.flavors && item.flavors.length > 0) {
+            return (
+                <span>
+                    {item.flavors.map((flavor, index) => (
+                        <span key={index}>
+                            {flavor.flavorName}
+                            {index !== item.flavors.length - 1 ? ", " : ""}
+                        </span>
+                    ))}
+                </span>
+            );
+        } else {
+            return <p>Nema izabranih ukusa</p>;
+        }
+    };
+
     return (
         <div className="p-5 shadow-lg border rounded-md">
             <div className="flex items-center">
-                {/* <div className="w-[5rem] h-[5rem] lg:w-[9rem] lg:h-[9rem] ">
-                    <img
-                        className="w-full h-full object-cover object-top"
-                        src={item?.product.imageUrl}
-                        alt=""
-                    />
-                </div> */}
+                <img
+                    src={item?.cakeImageUrl}
+                    alt={item?.cakeTitle}
+                    className="w-20 h-20 object-cover rounded-md"
+                />
                 <div className="ml-5 space-y-1">
-                    <p className="font-semibold">{item?.product?.title}</p>
-                    {/* <p className="opacity-70">Size: {item?.size},White</p> */}
-                    <p className="opacity-70 mt-2">
-                        {/* Seller: {item?.product?.brand} */}
-                    </p>
+                    <p className="font-semibold">{item?.cakeTitle}</p>
+                    <p>Broj spratova: {item?.selectedTiers}</p>
+                    <p>Težina: {item?.selectedWeight} kg</p>
+                    <div className="flex items-center"> {/* Novi stil za naslov i ukuse */}
+                        <h3 className="mr-2">Ukusi:</h3>
+                        <div className="flex">
+                            {renderFlavors()}
+                        </div>
+                    </div>
+                    <p className="opacity-70 mt-2">{item?.note}</p>
                     <div className="flex space-x-2 items-center pt-3">
                         <p className="opacity-50 line-through">
-                            ₹{item?.totalPrice}
+                            {item?.totalPrice} RSD
                         </p>
-                        {/* <p className="font-semibold text-lg">
-                            ₹{item?.product.discountedPrice}
-                        </p>
-                        <p className="text-green-600 font-semibold">
-                            {item?.product.discountPersent}% off
-                        </p> */}
                     </div>
                 </div>
             </div>
@@ -61,30 +76,27 @@ const CartItem = ({ item, showButton }) => {
                     <div className="flex items-center space-x-2 ">
                         <IconButton
                             onClick={() => handleUpdateCartItem(-1)}
-                            disabled={item?.quantity <= 1}
+                            disabled={item?.piecesNumber <= 1}
                             color="primary"
-                            aria-label="add an alarm"
+                            aria-label="remove one piece"
                         >
                             <RemoveCircleOutlineIcon />
                         </IconButton>
 
                         <span className="py-1 px-7 border rounded-sm">
-                            {item?.quantity}
+                            {item?.piecesNumber}
                         </span>
                         <IconButton
                             onClick={() => handleUpdateCartItem(1)}
                             color="primary"
-                            aria-label="add an alarm"
+                            aria-label="add one piece"
                         >
                             <AddCircleOutlineIcon />
                         </IconButton>
                     </div>
                     <div className="flex text-sm lg:text-base mt-5 lg:mt-0">
-                        <Button
-                            onClick={handleRemoveItemFromCart}
-                            variant="text"
-                        >
-                            Remove{" "}
+                        <Button onClick={handleRemoveItemFromCart} variant="text">
+                            Ukloni
                         </Button>
                     </div>
                 </div>
