@@ -16,8 +16,7 @@ const CartItem = ({ item, showButton }) => {
   const [updatedWeight, setUpdatedWeight] = useState(item.selectedWeight);
 
   const handleRemoveItemFromCart = () => {
-    const data = { cartItemId: item?.id, jwt };
-    dispatch(removeCartItem(data));
+    dispatch(removeCartItem(item.id, jwt)); // Poziv akcije za uklanjanje stavke iz korpe
   };
 
   const handleWeightChange = (amount) => {
@@ -25,9 +24,9 @@ const CartItem = ({ item, showButton }) => {
     if (newWeight >= 1) {
       setUpdatedWeight(newWeight);
       if (amount > 0) {
-        dispatch(increaseCartItemWeight(item.id, jwt)); // Pozivamo akciju za povećanje težine
+        dispatch(increaseCartItemWeight(item.id, jwt)); // Poziv akcije za povećanje težine
       } else {
-        dispatch(decreaseCartItemWeight(item.id, jwt)); // Pozivamo akciju za smanjenje težine
+        dispatch(decreaseCartItemWeight(item.id, jwt)); // Poziv akcije za smanjenje težine
       }
     }
   };
@@ -37,15 +36,15 @@ const CartItem = ({ item, showButton }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           {showButton && (
-              <div className="flex items-center space-x-2 ">
-                <IconButton
-                  onClick={handleRemoveItemFromCart}
-                  color="primary"
-                  aria-label="remove item"
-                >
-                  <ClearOutlinedIcon />
-                </IconButton>
-              </div>
+            <div className="flex items-center space-x-2">
+              <IconButton
+                onClick={handleRemoveItemFromCart}
+                color="primary"
+                aria-label="remove item"
+              >
+                <ClearOutlinedIcon />
+              </IconButton>
+            </div>
           )}
           <img
             src={item?.cakeImageUrl}

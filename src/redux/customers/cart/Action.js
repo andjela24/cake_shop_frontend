@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// import { API_BASE_URL } from "../../../config/api";
 import {
   ADD_ITEM_TO_CART_REQUEST,
   ADD_ITEM_TO_CART_SUCCESS,
@@ -141,6 +140,30 @@ export const decreaseCartItemWeight = (cartItemId, jwt) => async (dispatch) => {
   }
 };
 
+export const removeCartItem = (cartItemId, jwt) => async (dispatch) => {
+  try {
+    dispatch({ type: REMOVE_CART_ITEM_REQUEST });
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    };
+
+    await api.delete(`/api/cart-items/${cartItemId}`, config);
+
+    dispatch({
+      type: REMOVE_CART_ITEM_SUCCESS,
+      payload: cartItemId,
+    });
+  } catch (error) {
+    dispatch({
+      type: REMOVE_CART_ITEM_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
 //Ova metoda je od indijca
 // export const addItemToCart = (reqData) => async (dispatch) => {
 //     console.log("req data ",reqData)
@@ -199,34 +222,34 @@ export const decreaseCartItemWeight = (cartItemId, jwt) => async (dispatch) => {
 //   }
 // };
 
-export const removeCartItem = (reqData) => async (dispatch) => {
-  try {
-    dispatch({ type: REMOVE_CART_ITEM_REQUEST });
-    const config = {
-      headers: {
-        Authorization: `Bearer ${reqData.jwt}`,
-        "Content-Type": "application/json",
-      },
-    };
-    await axios.delete(
-      `${API_BASE_URL}/api/cart_items/${reqData.cartItemId}`,
-      config
-    );
+// export const removeCartItem = (reqData) => async (dispatch) => {
+//   try {
+//     dispatch({ type: REMOVE_CART_ITEM_REQUEST });
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${reqData.jwt}`,
+//         "Content-Type": "application/json",
+//       },
+//     };
+//     await axios.delete(
+//       `${API_BASE_URL}/api/cart_items/${reqData.cartItemId}`,
+//       config
+//     );
 
-    dispatch({
-      type: REMOVE_CART_ITEM_SUCCESS,
-      payload: reqData.cartItemId,
-    });
-  } catch (error) {
-    dispatch({
-      type: REMOVE_CART_ITEM_FAILURE,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+//     dispatch({
+//       type: REMOVE_CART_ITEM_SUCCESS,
+//       payload: reqData.cartItemId,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: REMOVE_CART_ITEM_FAILURE,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
 
 export const updateCartItem = (reqData) => async (dispatch) => {
   try {

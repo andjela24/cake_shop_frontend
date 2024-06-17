@@ -6,22 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCart } from "../../../redux/customers/cart/Action";
 
-// {
-//   "user": {
-//       "id": 2,
-//       "email": "korisnik1@gmail.com",
-//       "password": "$2a$10$79YpNQpQ6lZw88Ttb2C76uo0FXWy3HtjuZKvM5nSYEuciNYeQlgOq",
-//       "firstName": "Korisnik",
-//       "lastName": "Korisnik",
-//       "phoneNumber": "+38161234567",
-//       "address": null
-//   },
-//   "totalPrice": 38700,
-//   "totalItem": 0,
-//   "totalDiscountedPrice": 0,
-//   "discount": 0
-// }
-
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,29 +31,29 @@ const Cart = () => {
           </div>
           <div className="px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0 ">
             <div className="border p-5 bg-white shadow-lg rounded-md">
-              <p className="font-bold opacity-60 pb-4">PRICE DETAILS</p>
+              <p className="font-bold opacity-60 pb-4">UKUPNA VREDNOST KORPE</p>
               <hr />
 
               <div className="space-y-3 font-semibold">
-                <div className="flex justify-between pt-3 text-black ">
-                  <span>Price ({cart.cart?.totalItem} item)</span>
-                  <span>₹{cart.cart.totalPrice}</span>
-                </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between pt-3 text-black ">
+                  <span>Cena ({cart.cart?.totalItem} item)</span>
+                  <span>{cart.cart.totalPrice} RSD</span>
+                </div> */}
+                {/* <div className="flex justify-between">
                   <span>Discount</span>
                   <span className="text-green-700">
                     -₹{cart.cart?.discount}
                   </span>
-                </div>
+                </div> */}
                 <div className="flex justify-between">
-                  <span>Delivery Charges</span>
-                  <span className="text-green-700">Free</span>
+                  <span>Dostava</span>
+                  <span className="text-green-700">Besplatna</span>
                 </div>
                 <hr />
                 <div className="flex justify-between font-bold text-lg">
-                  <span>Total Amount</span>
+                  <span>Ukupna cena</span>
                   <span className="text-green-700">
-                    ₹{cart.cart?.totalDiscountedPrice}
+                    {cart.cart?.totalPrice} RSD
                   </span>
                 </div>
               </div>
@@ -80,7 +64,7 @@ const Cart = () => {
                 type="submit"
                 sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%" }}
               >
-                Check Out
+                Plaćanje
               </Button>
             </div>
           </div>

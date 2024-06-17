@@ -75,7 +75,7 @@ const cartReducer = (state = initialState, action) => {
         error: action.payload,
         loading: false,
       };
-      case DECREASE_CART_ITEM_WEIGHT_REQUEST:
+    case DECREASE_CART_ITEM_WEIGHT_REQUEST:
       return {
         ...state,
         loading: true,
@@ -95,7 +95,6 @@ const cartReducer = (state = initialState, action) => {
         loading: false,
       };
     case REMOVE_CART_ITEM_REQUEST:
-    case UPDATE_CART_ITEM_REQUEST:
       return {
         ...state,
         loading: true,
@@ -106,6 +105,17 @@ const cartReducer = (state = initialState, action) => {
         cartItems: state.cartItems.filter((item) => item.id !== action.payload),
         loading: false,
       };
+    case REMOVE_CART_ITEM_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case UPDATE_CART_ITEM_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case UPDATE_CART_ITEM_SUCCESS:
       return {
         ...state,
@@ -114,7 +124,6 @@ const cartReducer = (state = initialState, action) => {
         ),
         loading: false,
       };
-    case REMOVE_CART_ITEM_FAILURE:
     case UPDATE_CART_ITEM_FAILURE:
       return {
         ...state,
