@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-import { API_BASE_URL } from "../../../config/api";
+// import { API_BASE_URL } from "../../../config/api";
 import {
     ADD_ITEM_TO_CART_REQUEST,
     ADD_ITEM_TO_CART_SUCCESS,
@@ -17,22 +17,21 @@ import {
   UPDATE_CART_ITEM_SUCCESS,
 } from "./ActionType";
 
-export const addItemToCart = (reqData) => async (dispatch) => {
-    console.log("req data ",reqData)
+import api, { API_BASE_URL } from "../../../config/api";
+
+
+export const addItemToCart = (itemData, jwt) => async (dispatch) => {
   try {
-   
     dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
+
     const config = {
       headers: {
-        Authorization: `Bearer ${reqData.jwt}`,
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
       },
     };
-    const { data } = await axios.put(`${API_BASE_URL}/api/carts/add`, 
-      reqData.data,
-      config,
-    );
-console.log("add item to cart ",data)
+
+    const { data } = await api.put(`/api/carts/add`, itemData, config);
+
     dispatch({
       type: ADD_ITEM_TO_CART_SUCCESS,
       payload: data,
@@ -47,16 +46,17 @@ console.log("add item to cart ",data)
     });
   }
 };
+
 export const getCart = (jwt) => async (dispatch) => {
   try {
     dispatch({ type: GET_CART_REQUEST });
     const config = {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          "Content-Type":"application/json"
-        },
-      };
-    const { data } = await axios.get(`${API_BASE_URL}/api/carts/`,config);
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    };
+
+    const { data } = await api.get(`/api/carts`, config);
 console.log("cart ",data)
     dispatch({
       type: GET_CART_SUCCESS,
@@ -72,6 +72,65 @@ console.log("cart ",data)
     });
   }
 };
+
+//Ova metoda je od indijca
+// export const addItemToCart = (reqData) => async (dispatch) => {
+//     console.log("req data ",reqData)
+//   try {
+   
+//     dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${reqData.jwt}`,
+//         "Content-Type": "application/json",
+//       },
+//     };
+//     const { data } = await axios.put(`${API_BASE_URL}/api/carts/add`, 
+//       reqData.data,
+//       config,
+//     );
+// console.log("add item to cart ",data)
+//     dispatch({
+//       type: ADD_ITEM_TO_CART_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: ADD_ITEM_TO_CART_FAILURE,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
+
+
+// export const getCart = (jwt) => async (dispatch) => {
+//   try {
+//     dispatch({ type: GET_CART_REQUEST });
+//     const config = {
+//         headers: {
+//           Authorization: `Bearer ${jwt}`,
+//           "Content-Type":"application/json"
+//         },
+//       };
+//     const { data } = await axios.get(`${API_BASE_URL}/api/carts/`,config);
+// console.log("cart ",data)
+//     dispatch({
+//       type: GET_CART_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: GET_CART_FAILURE,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
 
 export const removeCartItem = (reqData) => async (dispatch) => {
     try {
