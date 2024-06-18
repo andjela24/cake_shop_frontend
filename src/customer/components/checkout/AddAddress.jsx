@@ -3,160 +3,225 @@ import { Grid, TextField, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../../redux/customers/order/Action";
-import userEvent from "@testing-library/user-event";
 import AddressCard from "../address/AddressCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AddDeliveryAddressForm({ handleNext }) {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const jwt = localStorage.getItem("jwt");
-    const { auth } = useSelector((store) => store);
-    const [selectedAddress, setSelectedAdress] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const { auth, cart } = useSelector((store) => store); // Pretpostavljamo da se `cart` nalazi u Redux store-u
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [userDetails, setUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+  });
 
-    // console.log("auth", auth);
+  useEffect(() => {
+    if (auth.user) {
+      setUserDetails({
+        firstName: auth.user.firstName,
+        lastName: auth.user.lastName,
+        phoneNumber: auth.user.phoneNumber,
+        email: auth.user.email,
+      });
+    }
+  }, [auth.user]);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-        const address = {
-            firstName: data.get("firstName"),
-            lastName: data.get("lastName"),
-            streetAddress: data.get("address"),
-            city: data.get("city"),
-            state: data.get("state"),
-            zipCode: data.get("zip"),
-            mobile: data.get("phoneNumber"),
-        };
-
-        dispatch(createOrder({ address, jwt, navigate }));
-        // after perfoming all the opration
-        handleNext();
+    const address = {
+      streetAddress: data.get("address"),
+      city: data.get("city"),
+      zipCode: data.get("zip"),
     };
 
-    const handleCreateOrder = (item) => {
-        dispatch(createOrder({ address: item, jwt, navigate }));
-        handleNext();
+    const orderData = {
+      address,
+      jwt,
+      navigate,
+      userId: auth.user.id,
+      cartItems: cart.cart.cartItems.map((item) => item.id), // Pristupamo `cartItems` unutar `cart.cart`
+      deliveryDate: new Date().toISOString(),
+      totalPrice: cart.cart.totalPrice || 0, // Pristupamo `totalPrice` unutar `cart.cart`
+      totalDiscountedPrice: cart.cart.totalDiscountedPrice || 0,
+      discount: cart.cart.discount || 0,
+      orderDate: new Date().toISOString(),
+      orderStatus: "Pending",
+      totalItem: cart.cart.totalItem || 0,
+    };
+    console.log("Order data", orderData);
+    dispatch(createOrder(orderData));
+    handleNext();
+  };
+
+  useEffect(() => {
+    console.log("Cart data", cart);
+  }, [cart]);
+
+  const handleCreateOrder = (item) => {
+    const orderData = {
+      address: item,
+      jwt,
+      navigate,
+      userId: auth.user.id,
+      cartItems: cart.cartItems.map((item) => item.id), // Koristimo `cartItems` umjesto `items`
+      deliveryDate: new Date().toISOString(), // Prilagodite prema potrebi
+      totalPrice: cart.totalPrice,
+      totalDiscountedPrice: cart.totalDiscountedPrice,
+      discount: cart.discount,
+      orderDate: new Date().toISOString(), // Dodajemo `orderDate`
+      orderStatus: "Pending", // Dodajemo `orderStatus`
+      totalItem: cart.totalItem,
     };
 
-    return (
-        <Grid container spacing={4}>
-            <Grid item xs={12} lg={5}>
-                <Box className="border rounded-md shadow-md h-[30.5rem] overflow-y-scroll ">
-                    {auth.user?.addresses.map((item) => (
-                        <div
-                            onClick={() => setSelectedAdress(item)}
-                            className="p-5 py-7 border-b cursor-pointer"
-                        >
-                            {" "}
-                            <AddressCard address={item} />
-                            {selectedAddress?.id === item.id && (
-                                <Button
-                                    sx={{ mt: 2 }}
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => handleCreateOrder(item)}
-                                >
-                                    Deliverd Here
-                                </Button>
-                            )}
-                        </div>
-                    ))}
-                </Box>
+    dispatch(createOrder(orderData));
+    handleNext();
+  };
+
+  return (
+    <Grid container spacing={4}>
+      <Grid item xs={12} lg={5}>
+        <Box className="border rounded-md shadow-md h-[30.5rem] overflow-y-scroll ">
+          {auth.user?.addresses?.map((item) => (
+            <div
+              key={item.id}
+              onClick={() => setSelectedAddress(item)}
+              className="p-5 py-7 border-b cursor-pointer"
+            >
+              <AddressCard address={item} />
+              {selectedAddress?.id === item.id && (
+                <Button
+                  sx={{ mt: 2 }}
+                  size="large"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleCreateOrder(item)}
+                >
+                  Potvrdi
+                </Button>
+              )}
+            </div>
+          ))}
+        </Box>
+      </Grid>
+      <Grid item xs={12} lg={7}>
+        <Box className="border rounded-md shadow-md p-5">
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="firstName"
+                  name="firstName"
+                  label="Ime"
+                  fullWidth
+                  autoComplete="given-name"
+                  value={userDetails.firstName}
+                  onChange={(e) =>
+                    setUserDetails({
+                      ...userDetails,
+                      firstName: e.target.value,
+                    })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="lastName"
+                  name="lastName"
+                  label="Prezime"
+                  fullWidth
+                  autoComplete="family-name"
+                  value={userDetails.lastName}
+                  onChange={(e) =>
+                    setUserDetails({ ...userDetails, lastName: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  label="Broj telefona"
+                  fullWidth
+                  autoComplete="tel"
+                  value={userDetails.phoneNumber}
+                  onChange={(e) =>
+                    setUserDetails({
+                      ...userDetails,
+                      phoneNumber: e.target.value,
+                    })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="email"
+                  name="email"
+                  label="E-mail"
+                  fullWidth
+                  autoComplete="email"
+                  value={userDetails.email}
+                  onChange={(e) =>
+                    setUserDetails({ ...userDetails, email: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="address"
+                  name="address"
+                  label="Adresa"
+                  fullWidth
+                  autoComplete="shipping address"
+                  multiline
+                  rows={4}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="city"
+                  name="city"
+                  label="Grad"
+                  fullWidth
+                  autoComplete="shipping address-level2"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="zip"
+                  name="zip"
+                  label="Poštanski broj"
+                  fullWidth
+                  autoComplete="shipping postal-code"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  sx={{ padding: ".9rem 1.5rem" }}
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >
+                  Potvrdi
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12} lg={7}>
-                <Box className="border rounded-md shadow-md p-5">
-                    <form onSubmit={handleSubmit}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="firstName"
-                                    name="firstName"
-                                    label="First Name"
-                                    fullWidth
-                                    autoComplete="given-name"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="lastName"
-                                    name="lastName"
-                                    label="Last Name"
-                                    fullWidth
-                                    autoComplete="given-name"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    id="address"
-                                    name="address"
-                                    label="Address"
-                                    fullWidth
-                                    autoComplete="shipping address"
-                                    multiline
-                                    rows={4}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="city"
-                                    name="city"
-                                    label="City"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="state"
-                                    name="state"
-                                    label="State/Province/Region"
-                                    fullWidth
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="zip"
-                                    name="zip"
-                                    label="Zip / Postal code"
-                                    fullWidth
-                                    autoComplete="shipping postal-code"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="phoneNumber"
-                                    name="phoneNumber"
-                                    label="Phone Number"
-                                    fullWidth
-                                    autoComplete="tel"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button
-                                    sx={{ padding: ".9rem 1.5rem" }}
-                                    size="large"
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                >
-                                    Deliverd Here
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </Box>
-            </Grid>
-        </Grid>
-    );
+          </form>
+        </Box>
+      </Grid>
+    </Grid>
+  );
 }

@@ -35,16 +35,6 @@ const Cart = () => {
               <hr />
 
               <div className="space-y-3 font-semibold">
-                {/* <div className="flex justify-between pt-3 text-black ">
-                  <span>Cena ({cart.cart?.totalItem} item)</span>
-                  <span>{cart.cart.totalPrice} RSD</span>
-                </div> */}
-                {/* <div className="flex justify-between">
-                  <span>Discount</span>
-                  <span className="text-green-700">
-                    -₹{cart.cart?.discount}
-                  </span>
-                </div> */}
                 <div className="flex justify-between">
                   <span>Dostava</span>
                   <span className="text-green-700">Besplatna</span>

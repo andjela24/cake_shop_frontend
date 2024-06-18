@@ -13,7 +13,6 @@ import {
 import api, { API_BASE_URL } from "../../../config/api";
 
 export const createOrder = (reqData) => async (dispatch) => {
-  console.log("req data ", reqData);
   try {
     dispatch({ type: CREATE_ORDER_REQUEST });
 
@@ -24,21 +23,30 @@ export const createOrder = (reqData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
-      `${API_BASE_URL}/api/orders/`,
-      reqData.address,
-      config
-    );
+    // Kreiranje objekta zahteva koji uključuje address i cartItems
+    const requestData = {
+      userId: reqData.userId,
+      cartItems: reqData.cartItems, // Dodali smo listu cartItems
+      orderDate: new Date().toISOString(),
+      deliveryDate: reqData.deliveryDate,
+      addressDto: reqData.address,
+      totalPrice: reqData.totalPrice,
+      totalDiscountedPrice: reqData.totalDiscountedPrice,
+      discount: reqData.discount,
+      orderStatus: "Pending",
+      totalItem: reqData.cartItems.length,
+    };
+
+    const { data } = await api.post(`/api/orders`, requestData, config);
+
     if (data.id) {
-      reqData.navigate({ search: `step=3&order_id=${data.id}` });
+      reqData.navigate(`/checkout?step=3&id=${data.id}`);
     }
-    console.log("created order - ", data);
     dispatch({
       type: CREATE_ORDER_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    console.log("catch error : ", error);
     dispatch({
       type: CREATE_ORDER_FAILURE,
       payload:
@@ -48,6 +56,45 @@ export const createOrder = (reqData) => async (dispatch) => {
     });
   }
 };
+// export const createOrder = (reqData) => async (dispatch) => {
+//   console.log("req data ", reqData);
+//   try {
+//     dispatch({ type: CREATE_ORDER_REQUEST });
+
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${reqData.jwt}`,
+//       },
+//     };
+
+//     // Kreiranje objekta zahteva koji uključuje address i cartItems
+//     const requestData = {
+//       address: reqData.address,
+//       cartItems: reqData.cartItems, // Dodali smo listu cartItems
+//     };
+
+//     const { data } = await api.post(`/api/orders/orders`, requestData, config);
+
+//     if (data.id) {
+//       reqData.navigate({ search: `step=3&id=${data.id}` });
+//     }
+//     console.log("created order - ", data);
+//     dispatch({
+//       type: CREATE_ORDER_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     console.log("catch error : ", error);
+//     dispatch({
+//       type: CREATE_ORDER_FAILURE,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
 
 export const getOrderById = (orderId) => async (dispatch) => {
   console.log("get order req ", orderId);
@@ -58,6 +105,7 @@ export const getOrderById = (orderId) => async (dispatch) => {
       `/api/orders/${orderId}`,
       
     );
+    console.log("order id u action", orderId);
     console.log("order by id ", data);
     dispatch({
       type: GET_ORDER_BY_ID_SUCCESS,
