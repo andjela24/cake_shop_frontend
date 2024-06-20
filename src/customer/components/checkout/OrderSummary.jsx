@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-import CartItem from "../cart/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderById } from "../../../redux/customers/order/Action";
 import AddressCard from "../address/AddressCard";
@@ -17,8 +16,6 @@ const OrderSummary = () => {
   const jwt = localStorage.getItem("jwt");
   const order = useSelector((state) => state.order.order);
 
-  console.log("orderId ", orderId);
-
   useEffect(() => {
     if (orderId) {
       dispatch(getOrderById(orderId));
@@ -31,31 +28,17 @@ const OrderSummary = () => {
   };
 
   return (
-    <div className="space-y-5">
-      <div className="p-5 shadow-lg rounded-md border ">
+    <div className="lg:px-16 space-y-5">
+      <div className="p-5 shadow-lg rounded-md border">
         {order?.shippingAddress && (
           <AddressCard address={order.shippingAddress} />
         )}
       </div>
-      <div className="lg:grid grid-cols-3 relative justify-between">
+      <div className="lg:grid grid-cols-3 gap-5">
         <div className="lg:col-span-2">
           <div className="space-y-3">
-            {/* {order?.orderItems?.map((item) => (
-              <CartItem
-                key={item.id}
-                item={item}
-                showButton={false}
-                title={item.cakeTitle}
-                imageUrl={item.cakeImageUrl}
-                flavors={item.flavors}
-              />
-            ))} */}
             {order?.orderItems?.map((item) => (
-              <OrderItem
-                key={item.id}
-                item={item}
-                showButton={false}
-              />
+              <OrderItem key={item.id} item={item} showButton={false} />
             ))}
           </div>
         </div>
@@ -92,7 +75,7 @@ const OrderSummary = () => {
                 width: "100%",
               }}
             >
-              Payment
+              PLAćANJE
             </Button>
           </div>
         </div>
