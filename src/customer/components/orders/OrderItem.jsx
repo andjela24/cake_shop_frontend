@@ -13,39 +13,28 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 const OrderItem = ({ item, showButton }) => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const [updatedWeight, setUpdatedWeight] = useState(item.selectedWeight);
+//   const [updatedWeight, setUpdatedWeight] = useState(item.selectedWeight);
 
-  const handleRemoveItemFromCart = () => {
-    dispatch(removeCartItem(item.id, jwt)); // Poziv akcije za uklanjanje stavke iz korpe
-  };
+//   const handleRemoveItemFromCart = () => {
+//     dispatch(removeCartItem(item.id, jwt)); // Poziv akcije za uklanjanje stavke iz korpe
+//   };
 
-  const handleWeightChange = (amount) => {
-    const newWeight = updatedWeight + amount;
-    if (newWeight >= 1) {
-      setUpdatedWeight(newWeight);
-      if (amount > 0) {
-        dispatch(increaseCartItemWeight(item.id, jwt)); // Poziv akcije za povećanje težine
-      } else {
-        dispatch(decreaseCartItemWeight(item.id, jwt)); // Poziv akcije za smanjenje težine
-      }
-    }
-  };
+//   const handleWeightChange = (amount) => {
+//     const newWeight = updatedWeight + amount;
+//     if (newWeight >= 1) {
+//       setUpdatedWeight(newWeight);
+//       if (amount > 0) {
+//         dispatch(increaseCartItemWeight(item.id, jwt)); // Poziv akcije za povećanje težine
+//       } else {
+//         dispatch(decreaseCartItemWeight(item.id, jwt)); // Poziv akcije za smanjenje težine
+//       }
+//     }
+//   };
 
   return (
     <div className="p-5 shadow-lg border rounded-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          {showButton && (
-            <div className="flex items-center space-x-2">
-              <IconButton
-                onClick={handleRemoveItemFromCart}
-                color="primary"
-                aria-label="remove item"
-              >
-                <ClearOutlinedIcon />
-              </IconButton>
-            </div>
-          )}
           <img
             src={item?.cake.imageUrl}
             alt={item?.cake.title}
@@ -58,25 +47,6 @@ const OrderItem = ({ item, showButton }) => {
           <p>Spratnost: {item?.selectedTiers}</p>
           <p>Težina: {item?.selectedWeight} kg</p>
           <p className="opacity-70 mt-2">{item?.note}</p>
-        </div>
-        <div className="flex items-center space-x-2">
-          <IconButton
-            onClick={() => handleWeightChange(-1)}
-            disabled={updatedWeight <= 1}
-            color="primary"
-            aria-label="remove one piece"
-          >
-            <RemoveCircleOutlineIcon />
-          </IconButton>
-
-          <span className="py-1 px-7 border rounded-sm">{updatedWeight}</span>
-          <IconButton
-            onClick={() => handleWeightChange(1)}
-            color="primary"
-            aria-label="add one piece"
-          >
-            <AddCircleOutlineIcon />
-          </IconButton>
         </div>
         <div className="flex space-x-2 items-center pt-3">
           <p className="font-semibold opacity-50">{item?.totalPrice} RSD</p>

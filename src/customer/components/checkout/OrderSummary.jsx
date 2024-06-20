@@ -29,13 +29,13 @@ const OrderSummary = () => {
 
   return (
     <div className="lg:px-16 space-y-5">
-      <div className="p-5 shadow-lg rounded-md border">
-        {order?.shippingAddress && (
-          <AddressCard address={order.shippingAddress} />
-        )}
-      </div>
       <div className="lg:grid grid-cols-3 gap-5">
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 space-y-10">
+          <div className="space-y-3">
+            {order?.shippingAddress && (
+              <AddressCard address={order.shippingAddress} />
+            )}
+          </div>
           <div className="space-y-3">
             {order?.orderItems?.map((item) => (
               <OrderItem key={item.id} item={item} showButton={false} />
