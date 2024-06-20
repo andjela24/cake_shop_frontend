@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePayment } from "../../../redux/customers/payment/Action";
-import { Alert, AlertTitle, Grid } from "@mui/material";
 import { getOrderById } from "../../../redux/customers/order/Action";
+import { confirmPaymentSuccess } from "../../../redux/customers/payment/Action";
 import OrderTracker from "../orders/OrderTracker";
 import AddressCard from "../address/AddressCard";
+import { Alert, AlertTitle, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 const PaymentSuccess = () => {
@@ -17,8 +17,10 @@ const PaymentSuccess = () => {
     const paymentId = urlParams.get("paymentId");
     const payerId = urlParams.get("PayerID");
 
+    const orderId = localStorage.getItem("orderId");
+
     if (paymentId && payerId) {
-      dispatch(updatePayment({ orderId, paymentId }));
+      // dispatch(confirmPaymentSuccess(paymentId, payerId));
       dispatch(getOrderById(orderId));
     }
   }, [dispatch, orderId]);
@@ -31,14 +33,14 @@ const PaymentSuccess = () => {
           severity="success"
           sx={{ mb: 6, width: "fit-content" }}
         >
-          <AlertTitle>Payment Success</AlertTitle>
-          Congratulations! Your order has been placed successfully.
+          <AlertTitle>Plaćanje uspešno</AlertTitle>
+          Vaša porudžbina je uspešno poslata.
         </Alert>
       </div>
 
       <OrderTracker activeStep={1} />
 
-      <Grid container className="space-y-5 py-5 pt-20">
+      {/* <Grid container className="space-y-5 py-5 pt-20">
         {order?.orderItems.map((item) => (
           <Grid
             key={item.id}
@@ -69,7 +71,7 @@ const PaymentSuccess = () => {
             </Grid>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
     </div>
   );
 };

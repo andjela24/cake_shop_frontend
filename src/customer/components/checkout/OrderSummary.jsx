@@ -27,6 +27,8 @@ const OrderSummary = () => {
       return; // Dodajte proveru da li postoji order pre nego što se nastavi
     }
 
+    localStorage.setItem("orderId", order.id);
+
     const data = {
       orderId: order.id,
       jwt,

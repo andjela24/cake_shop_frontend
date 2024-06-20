@@ -5,6 +5,7 @@ import {
     UPDATE_PAYMENT_REQUEST,
     UPDATE_PAYMENT_SUCCESS,
     UPDATE_PAYMENT_FAILURE,
+    CONFIRM_PAYMENT_SUCCESS
   } from './ActionType.js';
   import api, { API_BASE_URL } from "../../../config/api";
   import axios from 'axios';
@@ -42,6 +43,44 @@ import {
       });
     }
   };
+
+  //Ipak mi ne treba
+  // export const confirmPaymentSuccess = (paymentId, payerId) => async (dispatch) => {
+  //   try {
+  //     const response = await api.get(`/api/payments/success?paymentId=${paymentId}&PayerID=${payerId}`);
+  
+  //     if (response.status === 200) {
+  //       dispatch({
+  //         type: CONFIRM_PAYMENT_SUCCESS,
+  //         payload: response.data,
+  //       });
+  //     }
+  
+  //     return response;
+  //   } catch (error) {
+  //     console.error('Error confirming payment:', error);
+  //     throw error;
+  //   }
+  // };
+
+  // export const confirmPaymentSuccess = (paymentId, payerId) => async (dispatch) => {
+  //   try {
+  //     const response = await api.get(`/api/payments/success?paymentId=${paymentId}&PayerID=${payerId}`);
+  
+  //     // Pretpostavka da server vraća 200 OK ako je plaćanje uspešno
+  //     if (response.status === 200) {
+  //       dispatch({
+  //         type: CONFIRM_PAYMENT_SUCCESS,
+  //         payload: response.data, // Ovde možete proslediti podatke ako su potrebni
+  //       });
+  //     }
+  
+  //     return response; // Opciono: možete vratiti odgovor ako je potrebno obraditi u komponenti
+  //   } catch (error) {
+  //     console.error('Error confirming payment:', error);
+  //     throw error; // Opciono: možete ponovo baciti grešku za dalju obradu
+  //   }
+  // };
 
   export const updatePayment = (reqData) => {
     return async (dispatch) => {
