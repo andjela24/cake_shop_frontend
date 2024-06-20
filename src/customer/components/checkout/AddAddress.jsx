@@ -10,7 +10,7 @@ export default function AddDeliveryAddressForm({ handleNext }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const { auth, cart } = useSelector((store) => store); // Pretpostavljamo da se `cart` nalazi u Redux store-u
+  const { auth, cart } = useSelector((store) => store);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [userDetails, setUserDetails] = useState({
     firstName: "",
@@ -20,13 +20,17 @@ export default function AddDeliveryAddressForm({ handleNext }) {
   });
 
   useEffect(() => {
+    console.log("Auth state in AddDeliveryAddressForm: ", auth);
     if (auth.user) {
+      console.log("Setting user details from auth.user");
       setUserDetails({
         firstName: auth.user.firstName,
         lastName: auth.user.lastName,
         phoneNumber: auth.user.phoneNumber,
         email: auth.user.email,
       });
+    } else {
+      console.log("auth.user is undefined in AddDeliveryAddressForm");
     }
   }, [auth.user]);
 
@@ -44,10 +48,10 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       address,
       jwt,
       navigate,
-      userId: auth.user.id,
-      cartItems: cart.cart.cartItems.map((item) => item.id), // Pristupamo `cartItems` unutar `cart.cart`
+      userId: auth.user?.id,
+      cartItems: cart.cart.cartItems.map((item) => item.id),
       deliveryDate: new Date().toISOString(),
-      totalPrice: cart.cart.totalPrice || 0, // Pristupamo `totalPrice` unutar `cart.cart`
+      totalPrice: cart.cart.totalPrice || 0,
       totalDiscountedPrice: cart.cart.totalDiscountedPrice || 0,
       discount: cart.cart.discount || 0,
       orderDate: new Date().toISOString(),
@@ -68,14 +72,14 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       address: item,
       jwt,
       navigate,
-      userId: auth.user.id,
-      cartItems: cart.cartItems.map((item) => item.id), // Koristimo `cartItems` umjesto `items`
-      deliveryDate: new Date().toISOString(), // Prilagodite prema potrebi
+      userId: auth.user?.id,
+      cartItems: cart.cartItems.map((item) => item.id),
+      deliveryDate: new Date().toISOString(),
       totalPrice: cart.totalPrice,
       totalDiscountedPrice: cart.totalDiscountedPrice,
       discount: cart.discount,
-      orderDate: new Date().toISOString(), // Dodajemo `orderDate`
-      orderStatus: "Pending", // Dodajemo `orderStatus`
+      orderDate: new Date().toISOString(),
+      orderStatus: "Pending",
       totalItem: cart.totalItem,
     };
 

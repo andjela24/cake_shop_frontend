@@ -6,89 +6,99 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrderById } from "../../../redux/customers/order/Action";
 import AddressCard from "../address/AddressCard";
 import { createPayment } from "../../../redux/customers/payment/Action";
+import OrderItem from "../orders/OrderItem";
 
 const OrderSummary = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const orderId = searchParams.get("id");
-    const dispatch = useDispatch();
-    const jwt = localStorage.getItem("jwt");
-    const order = useSelector((state) => state.order.order);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const orderId = searchParams.get("id");
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const order = useSelector((state) => state.order.order);
 
-    console.log("orderId ", orderId);
+  console.log("orderId ", orderId);
 
-    useEffect(() => {
-        if (orderId) {
-            dispatch(getOrderById(orderId));
-        }
-    }, [dispatch, orderId]);
+  useEffect(() => {
+    if (orderId) {
+      dispatch(getOrderById(orderId));
+    }
+  }, [dispatch, orderId]);
 
-    const handleCreatePayment = () => {
-        const data = { orderId: order?.id, jwt };
-        dispatch(createPayment(data));
-    };
+  const handleCreatePayment = () => {
+    const data = { orderId: order?.id, jwt };
+    dispatch(createPayment(data));
+  };
 
-    return (
-        <div className="space-y-5">
-            <div className="p-5 shadow-lg rounded-md border ">
-                {order?.shippingAddress && <AddressCard address={order.shippingAddress} />}
-            </div>
-            <div className="lg:grid grid-cols-3 relative justify-between">
-                <div className="lg:col-span-2">
-                    <div className="space-y-3">
-                        {order?.orderItems?.map((item) => (
-                            <CartItem key={item.id} item={item} showButton={false} />
-                        ))}
-                    </div>
-                </div>
-                <div className="sticky top-0 h-[100vh] mt-5 lg:mt-0 ml-5">
-                    <div className="border p-5 bg-white shadow-lg rounded-md">
-                        <p className="font-bold opacity-60 pb-4">UKUPNA VREDNOST KORPE</p>
-                        <hr />
-                        <div className="space-y-3 font-semibold">
-                            <div className="flex justify-between pt-3 text-black">
-                                <span>
-                                    Cena ({order?.totalItem} {order?.totalItem === 1 ? 'stavka' : 'stavke'}) RSD
-                                </span>
-                                <span>{order?.totalPrice} RSD</span>
-                            </div>
-                            {/* <div className="flex justify-between">
-                                <span>Popust</span>
-                                <span className="text-green-700">
-                                    -{order?.discount} RSD
-                                </span>
-                            </div> */}
-                            <div className="flex justify-between">
-                                <span>Dostava</span>
-                                <span className="text-green-700">Besplatna</span>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between font-bold text-lg">
-                                <span>Ukupna cena</span>
-                                <span className="text-green-700">
-                                    {order?.totalPrice} RSD
-                                </span>
-                            </div>
-                        </div>
-
-                        <Button
-                            onClick={handleCreatePayment}
-                            variant="contained"
-                            type="submit"
-                            sx={{
-                                padding: ".8rem 2rem",
-                                marginTop: "2rem",
-                                width: "100%",
-                            }}
-                        >
-                            Payment
-                        </Button>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="space-y-5">
+      <div className="p-5 shadow-lg rounded-md border ">
+        {order?.shippingAddress && (
+          <AddressCard address={order.shippingAddress} />
+        )}
+      </div>
+      <div className="lg:grid grid-cols-3 relative justify-between">
+        <div className="lg:col-span-2">
+          <div className="space-y-3">
+            {/* {order?.orderItems?.map((item) => (
+              <CartItem
+                key={item.id}
+                item={item}
+                showButton={false}
+                title={item.cakeTitle}
+                imageUrl={item.cakeImageUrl}
+                flavors={item.flavors}
+              />
+            ))} */}
+            {order?.orderItems?.map((item) => (
+              <OrderItem
+                key={item.id}
+                item={item}
+                showButton={false}
+              />
+            ))}
+          </div>
         </div>
-    );
+        <div className="sticky top-0 h-[100vh] mt-5 lg:mt-0 ml-5">
+          <div className="border p-5 bg-white shadow-lg rounded-md">
+            <p className="font-bold opacity-60 pb-4">UKUPNA VREDNOST KORPE</p>
+            <hr />
+            <div className="space-y-3 font-semibold">
+              <div className="flex justify-between pt-3 text-black">
+                <span>
+                  Cena ({order?.totalItem}{" "}
+                  {order?.totalItem === 1 ? "proizvod" : "proizvoda"})
+                </span>
+                <span>{order?.totalPrice} RSD</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Dostava</span>
+                <span className="text-green-700">Besplatna</span>
+              </div>
+              <hr />
+              <div className="flex justify-between font-bold text-lg">
+                <span>Ukupna cena</span>
+                <span className="text-green-700">{order?.totalPrice} RSD</span>
+              </div>
+            </div>
+
+            <Button
+              onClick={handleCreatePayment}
+              variant="contained"
+              type="submit"
+              sx={{
+                padding: ".8rem 2rem",
+                marginTop: "2rem",
+                width: "100%",
+              }}
+            >
+              Payment
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default OrderSummary;

@@ -56,45 +56,6 @@ export const createOrder = (reqData) => async (dispatch) => {
     });
   }
 };
-// export const createOrder = (reqData) => async (dispatch) => {
-//   console.log("req data ", reqData);
-//   try {
-//     dispatch({ type: CREATE_ORDER_REQUEST });
-
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${reqData.jwt}`,
-//       },
-//     };
-
-//     // Kreiranje objekta zahteva koji uključuje address i cartItems
-//     const requestData = {
-//       address: reqData.address,
-//       cartItems: reqData.cartItems, // Dodali smo listu cartItems
-//     };
-
-//     const { data } = await api.post(`/api/orders/orders`, requestData, config);
-
-//     if (data.id) {
-//       reqData.navigate({ search: `step=3&id=${data.id}` });
-//     }
-//     console.log("created order - ", data);
-//     dispatch({
-//       type: CREATE_ORDER_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     console.log("catch error : ", error);
-//     dispatch({
-//       type: CREATE_ORDER_FAILURE,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
 
 export const getOrderById = (orderId) => async (dispatch) => {
   console.log("get order req ", orderId);
