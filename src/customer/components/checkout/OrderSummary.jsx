@@ -23,7 +23,18 @@ const OrderSummary = () => {
   }, [dispatch, orderId]);
 
   const handleCreatePayment = () => {
-    const data = { orderId: order?.id, jwt };
+    if (!order) {
+      return; // Dodajte proveru da li postoji order pre nego što se nastavi
+    }
+
+    const data = {
+      orderId: order.id,
+      jwt,
+      total: order.totalPrice, // Dodajte total iz order objekta
+      currency: "EUR", // Postavite odgovarajuću valutu, trenutno hardkodirana RSD
+      description: "P", // Postavite odgovarajući opis plaćanja
+    };
+    console.log("Payment data", data);
     dispatch(createPayment(data));
   };
 
@@ -75,7 +86,7 @@ const OrderSummary = () => {
                 width: "100%",
               }}
             >
-              PLAćANJE
+              PLAĆANJE
             </Button>
           </div>
         </div>
