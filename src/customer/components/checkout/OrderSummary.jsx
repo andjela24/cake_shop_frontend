@@ -22,22 +22,35 @@ const OrderSummary = () => {
     }
   }, [dispatch, orderId]);
 
-  const handleCreatePayment = () => {
-    if (!order) {
-      return; // Dodajte proveru da li postoji order pre nego što se nastavi
+  const handleCreatePayment = async () => {
+    try {
+      if (!order) {
+        throw new Error("Order not found");
+      }
+
+      localStorage.setItem("orderId", order.id);
+
+      const paymentData = {
+        orderId: order.id,
+        jwt,
+        total: order.totalPrice,
+        currency: "EUR", // Postavite odgovarajuću valutu
+        description: "Opis plaćanja", // Postavite odgovarajući opis
+      };
+
+      const response = await dispatch(createPayment(paymentData));
+
+      // Nakon uspešnog kreiranja plaćanja, pozovite akciju za potvrdu plaćanja
+      if (response && response.success) {
+        // Preusmerite na success stranicu
+        navigate(`/payments/success`);
+      } else {
+        throw new Error("Payment creation failed");
+      }
+    } catch (error) {
+      console.error("Error creating payment:", error);
+      // Handle error if needed
     }
-
-    localStorage.setItem("orderId", order.id);
-
-    const data = {
-      orderId: order.id,
-      jwt,
-      total: order.totalPrice, // Dodajte total iz order objekta
-      currency: "EUR", // Postavite odgovarajuću valutu, trenutno hardkodirana RSD
-      description: "P", // Postavite odgovarajući opis plaćanja
-    };
-    console.log("Payment data", data);
-    dispatch(createPayment(data));
   };
 
   return (
