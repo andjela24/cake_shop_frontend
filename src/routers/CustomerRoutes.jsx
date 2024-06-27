@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Product from "../customer/components/products/product/Product";
-import Contact from "../pages/Contact";
+import Contact from "../customer/pages/Contact";
 import TearmsCondition from "../pages/TermsCondition";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
-import About from "../pages/About";
-import Homepage from "../pages/HomePage";
+import About from "../customer/pages/About";
+import Homepage from "../customer/pages/HomePage";
 import Navigation from "../customer/components/navbar/Navigation";
 import Cart from "../customer/components/cart/Cart";
 import { createTheme, ThemeProvider } from '@mui/material/styles';

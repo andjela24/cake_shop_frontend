@@ -1,12 +1,12 @@
 import React from "react";
-import HomeCarousel from "../customer/components/carousel/HomeCarousel";
-import { homeCarouselData } from "../customer/components/carousel/HomeCarouselData";
-import HomeProductSection from "../customer/components/home/HomeProductSection";
-import { latest_cake } from "../data/latest_cake";
-import { birthday_cake } from "../data/birthday_cake";
-import { wedding_cake } from "../data/wedding_cake";
-import { formal_cake } from "../data/formal_cake";
-import { special_cake } from "../data/special_cake";
+import HomeCarousel from "../components/carousel/HomeCarousel";
+import { homeCarouselData } from "../components/carousel/HomeCarouselData";
+import HomeProductSection from "../components/home/HomeProductSection";
+import { latest_cake } from "../../data/latest_cake";
+import { birthday_cake } from "../../data/birthday_cake";
+import { wedding_cake } from "../../data/wedding_cake";
+import { formal_cake } from "../../data/formal_cake";
+import { special_cake } from "../../data/special_cake";
 
 const Homepage = () => {
   return (

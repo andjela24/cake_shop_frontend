@@ -1,13 +1,12 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  findCakeById
-} from "../../../../redux/customers/product/Action";
+import { findCakeById } from "../../../../redux/customers/product/Action";
 import { addItemToCart } from "../../../../redux/customers/cart/Action";
 import { fetchFlavors } from "../../../../redux/customers/flavor/Action";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import { FormControl, InputLabel, Slider } from "@mui/material";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -26,8 +25,6 @@ export default function CakeDetails() {
   const [fakeTier, setFakeTier] = useState(0);
 
   const jwt = localStorage.getItem("jwt");
-  console.log("JWT U CAKE DETAILES", localStorage.getItem("jwt"));
-  console.log("CAKE ID ", cakeId);
 
   useEffect(() => {
     if (cakeId) {
@@ -73,8 +70,6 @@ export default function CakeDetails() {
     navigate("/");
   };
 
-  console.log("Cake", cake);
-
   const availableSizes = Array.from(
     { length: cake?.maxTier || 0 },
     (_, i) => i + 1
@@ -83,6 +78,7 @@ export default function CakeDetails() {
   if (!cake) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="bg-white">
       <div className="pt-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,99 +140,104 @@ export default function CakeDetails() {
           <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0 lg:col-span-6">
             <h1 className="text-2xl font-bold text-gray-900">{cake.title}</h1>
             <div className="grid grid-cols-3 gap-4">
-              <div className="mt-3">
+              <div className="mt-3 border-2 border-[#F8E8EE] p-4 rounded-md">
                 <h2 className="text-l font-semibold text-gray-900">
                   Cena / kg
                 </h2>
                 <p className="text-gray-900">{cake.pricePerKilo} RSD</p>
               </div>
 
-              <div className="mt-3">
+              <div className="mt-3 border-2 border-[#F8E8EE] p-4 rounded-md">
                 <h2 className="text-l font-semibold text-gray-900">
                   Cena ukrašavanja
                 </h2>
                 <p className="text-gray-900">{cake.decorationPrice} RSD</p>
               </div>
 
-              <div className="mt-3">
+              <div className="mt-3 border-2 border-[#F8E8EE] p-4 rounded-md">
                 <h2 className="text-l font-semibold text-gray-900">Ukusi</h2>
                 <p className="text-gray-900">Vi birate</p>
               </div>
             </div>
             <div className="mt-6">
-              <label
-                htmlFor="size"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Odaberite veličinu
-              </label>
-              <select
-                id="size"
-                name="size"
-                value={selectedSize}
-                onChange={handleSizeChange}
-                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-              >
-                <option value="">Odaberite veličinu</option>
-                {availableSizes.map((size) => (
-                  <option key={size} value={size}>
-                    {size}
-                  </option>
-                ))}
-              </select>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel id="size-label">Odaberite veličinu</InputLabel>
+                <Select
+                  labelId="size-label"
+                  id="size"
+                  name="size"
+                  value={selectedSize}
+                  onChange={handleSizeChange}
+                  label="Odaberite veličinu"
+                  className="mt-1 block w-full h-10 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                >
+                  <MenuItem value="">
+                    <em>Odaberite veličinu</em>
+                  </MenuItem>
+                  {availableSizes.map((size) => (
+                    <MenuItem key={size} value={size}>
+                      {size}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </div>
             {/* Flavor selection */}
             <div className="mt-6">
-              <label
-                htmlFor="flavor"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Odaberite ukuse
-              </label>
               {Array.from({ length: selectedSize }, (_, index) => (
-                <div key={index} className="mt-2">
-                  <label
-                    htmlFor={`flavor_${index}`}
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Odaberite ukus za sprat {index + 1}
-                  </label>
-                  <select
-                    id={`flavor_${index}`}
-                    name={`flavor_${index}`}
-                    value={selectedFlavors[index]}
-                    onChange={(e) => handleFlavorChange(index, e.target.value)}
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                  >
-                    <option value="">Odaberite ukus</option>
-                    {flavorsList.map((flavor) => (
-                      <option key={flavor.id} value={flavor.id}>
-                        {flavor.name}
-                      </option>
-                    ))}
-                  </select>
+                <div key={index} className="mt-5">
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel id={`flavor_${index}_label`}>
+                      Odaberite ukus za sprat {index + 1}
+                    </InputLabel>
+                    <Select
+                      labelId={`flavor_${index}_label`}
+                      id={`flavor_${index}`}
+                      name={`flavor_${index}`}
+                      value={selectedFlavors[index]}
+                      onChange={(e) =>
+                        handleFlavorChange(index, e.target.value)
+                      }
+                      label={`Odaberite ukus za sprat ${index + 1}`}
+                      className="mt-1 block w-full h-10 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    >
+                      <MenuItem value="">
+                        <em>Odaberite ukus</em>
+                      </MenuItem>
+                      {flavorsList.map((flavor) => (
+                        <MenuItem key={flavor.id} value={flavor.id}>
+                          {flavor.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </div>
               ))}
             </div>
             <div className="mt-6">
-              <label
-                htmlFor="fakeTier"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Odaberite lažni sprat
-              </label>
-              <select
-                id="fakeTier"
-                name="fakeTier"
-                value={fakeTier}
-                onChange={(e) => setFakeTier(parseInt(e.target.value))}
-                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-              >
-                <option value="0">Bez laznog sprata</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel id="fakeTier-label">
+                  Odaberite lažni sprat
+                </InputLabel>
+                <Select
+                  labelId="fakeTier-label"
+                  id="fakeTier"
+                  name="fakeTier"
+                  value={fakeTier}
+                  onChange={(e) => setFakeTier(parseInt(e.target.value))}
+                  label="Odaberite lažni sprat"
+                  className="mt-1 block w-full h-10 pl-3 pr-10 py-2 text-base border-gray-300 focus
+                  focus
+                  focus
+                  sm
+                  rounded-md"
+                >
+                  <MenuItem value="0">Bez lažnog sprata</MenuItem>
+                  <MenuItem value="1">1</MenuItem>
+                  <MenuItem value="2">2</MenuItem>
+                  <MenuItem value="3">3</MenuItem>
+                </Select>
+              </FormControl>
             </div>
             <div className="mt-6">
               <label
@@ -245,46 +246,43 @@ export default function CakeDetails() {
               >
                 Težina torte:
               </label>
-              <input
+              <Slider
                 id="weight"
                 name="weight"
-                type="range"
                 min={cake.minWeight}
                 max={cake.maxWeight}
                 value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-                className="w-full"
+                onChange={(e, newValue) => setWeight(newValue)}
+                valueLabelDisplay="auto"
+                marks={[
+                  { value: cake.minWeight, label: cake.minWeight  + "kg" },
+                  { value: cake.maxWeight, label: cake.maxWeight + "kg" },
+                ]}
               />
-              <div className="flex justify-between text-sm text-gray-500">
-                <span>Min: {cake.minWeight}kg</span>
-                <span>Maks: {cake.maxWeight}kg</span>
-              </div>
               <div className="grid grid-cols-2 gap-4 mt-2">
-                <p className="text-lg font-medium text-gray-900">
+                <p className="text-lg font-medium text-gray-900 border-2 border-[#F8E8EE] p-4 rounded-md">
                   Težina torte: {weight} kg
                 </p>
-                <p className="text-lg font-medium text-gray-900">
+                <p className="text-lg font-medium text-gray-900 border-2 border-[#F8E8EE] p-4 rounded-md">
                   Broj parčića: {weight * 8}
                 </p>
               </div>
             </div>
-            <div className="mt-6 flex items-center">
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <p className="text-lg font-medium border-2 border-[#F8E8EE] p-4  text-gray-900">
+                Cena: {weight * cake.pricePerKilo + cake.decorationPrice} RSD
+              </p>
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="w-full bg-red-600 border border-transparent rounded-md py-3 px-8 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className="bg-[#132743] border border-transparent rounded-md py-3 px-8 text-base font-medium text-white hover:bg-[#749dd8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#749dd8]"
               >
                 Dodaj u korpu
               </button>
             </div>
             <div className="mt-6">
-              <p className="text-base font-medium text-gray-900">
-                Cena {weight * cake.pricePerKilo + cake.decorationPrice} RSD
-              </p>
-            </div>
-            <div className="mt-6">
               <p className="text-sm text-gray-600">
-                Ili pozovite 013 2521 545 / 064 267 72 76
+                Ili pozovite 011 2345 678 / 060 123 45 67
               </p>
             </div>
           </div>
