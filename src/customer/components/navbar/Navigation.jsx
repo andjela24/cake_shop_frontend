@@ -81,7 +81,7 @@ export default function Navigation() {
   };
 
   return (
-    <div className="bg-white pb-10">
+    <div className="bg-white">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -224,7 +224,7 @@ export default function Navigation() {
       </Transition.Root>
 
       <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-[#2E294E] px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+        <p className="flex h-10 items-center justify-center bg-[#F8E8EE] px-4 text-sm font-medium sm:px-6 lg:px-8">
           Besplatna dostava za porudžbine iznad 6000 din.
         </p>
 
@@ -245,9 +245,9 @@ export default function Navigation() {
                 <Link to="/">
                   <span className="sr-only">Your Company</span>
                   <img
-                    src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png"
-                    alt="Shopwithzosh"
-                    className="h-8 w-8 mr-2"
+                    src="https://res.cloudinary.com/do7xoj7ks/image/upload/v1719396356/PrincessAndjelaLogo_vuim5x.png"
+                    alt="PrincessAndjela"
+                    className="h-10 w-10 mr-2"
                   />
                 </Link>
               </div>
@@ -320,7 +320,7 @@ export default function Navigation() {
                                           {item.name}
                                         </a>
                                         <p aria-hidden="true" className="mt-1">
-                                          Shop now
+                                          Pogledaj sve
                                         </p>
                                       </div>
                                     ))}
@@ -358,7 +358,7 @@ export default function Navigation() {
                         aria-expanded={open ? "true" : undefined}
                         // onClick={handleUserClick}
                         sx={{
-                          bgcolor: deepPurple[500],
+                          bgcolor: "#132743",
                           color: "white",
                           cursor: "pointer",
                         }}
@@ -384,13 +384,13 @@ export default function Navigation() {
                         }}
                       >
                         <MenuItem onClick={handleCloseUserMenu}>
-                          Profile
+                          Profil
                         </MenuItem>
 
                         <MenuItem onClick={handleMyOrderClick}>
-                          My Orders
+                          Moje porudžbine
                         </MenuItem>
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                        <MenuItem onClick={handleLogout}>Izloguj se</MenuItem>
                       </Menu>
                     </div>
                   ) : (
@@ -398,7 +398,7 @@ export default function Navigation() {
                       onClick={handleOpen}
                       className="text-sm font-medium text-gray-700 hover:text-gray-800"
                     >
-                      Signin
+                      Prijavite se
                     </Button>
                   )}
                 </div>

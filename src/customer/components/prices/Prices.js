@@ -1,0 +1,25 @@
+export const prices = [
+    { name: "Čokolizalica Mala 16g", price: "60 din/kom" },
+    { name: "Čokolizalica malo veća 20g", price: "70 din/kom" },
+    { name: "Čokolizalica Srednja 25g", price: "80 din/kom" },
+    { name: "Čokolizalica Velika 30g", price: "90 din/kom" },
+    { name: "Čokolizalica Najveća 40g", price: "100 din/kom" },
+    { name: "Voćni ražnjić 100g", price: "100 din/kom" },
+    { name: "Ananas sa 50 ražnjića voća", price: "3900 din/kom" },
+    { name: "Cakepops 25g", price: "110 din/kom" },
+    { name: "Cakepops Extra 25g", price: "130 din/kom" },
+    { name: "Cakepops Lux 25g", price: "160 din/kom" },
+    { name: "Cakepops Košnica 40g", price: "140 din/kom" },
+    { name: "Cakepops Novogodišnji 40g", price: "140 din/kom" },
+    { name: "Macarons 23g", price: "100 din/kom" },
+    { name: "Kapkejk u korpici Logo 100g", price: "300 din/kom" },
+    { name: "Lux Kapkejk u korpici 100g", price: "350 din/kom" },
+    { name: "Dekorisani kapkejk u korpici", price: "230 din/kom" },
+    { name: "Torta osnovna dekoracija", price: "1650din/kg" },
+    { name: "Torta Svečane, Specijal", price: "1650 din/kg" },
+    { name: "Torte Dečije", price: "1750 din/kg" },
+    { name: "Torte Svadbene", price: "1900 din/kg" },
+    { name: "Torta sa svežim voćem", price: "1650 din/kg" },
+    { name: "Slatke dekoracije od", price: "100 din/kom" }
+  ];
+  

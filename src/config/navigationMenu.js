@@ -44,11 +44,11 @@ export const navigation = {
     },
   ],
   pages: [
-    { name: "Ukusi torti", id: "/" }, //Ovde treba dodati href
-    { name: "Cenovnik", id: "/" },
-    { name: "Pitanja", id: "/" },
-    { name: "O nama", id: "/" },
-    { name: "Kontakt", id: "/" },
+    { name: "Ukusi torti", id: "/flavors", href: "flavors" },
+    { name: "Cenovnik", id: "prices", href: "prices"},
+    { name: "Pitanja", id: "/questions", href: "questions" },
+    { name: "O nama", id: "/about", href: "about" },
+    { name: "Kontakt", id: "/contact", href: "contact" },
   ],
 };
 

@@ -1,272 +1,33 @@
 export const birthday_cake = [
     {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
+      imageUrl:
+        "https://img.freepik.com/free-photo/delicious-cake-with-fruits_23-2150727752.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen",
+      title: "Neki naslov",
     },
     {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice Ajde radi",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
+      imageUrl:
+        "https://img.freepik.com/free-photo/3d-cake-with-lit-candles-top-macarons_23-2150915506.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen",
+      title: "Neki naslov",
     },
     {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
+      imageUrl:
+        "https://img.freepik.com/free-photo/delicious-cake-with-fruits_23-2150727554.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen",
+      title: "Neki naslov",
     },
     {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
+      imageUrl:
+        "https://img.freepik.com/free-photo/delicious-cake-with-cute-character_23-2150727695.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen",
+      title: "Neki naslov",
     },
     {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
+      imageUrl:
+        "https://img.freepik.com/free-photo/delicious-astronaut-3d-cake_23-2151184993.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen",
+      title: "Neki naslov",
     },
     {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
+      imageUrl:
+        "https://img.freepik.com/free-photo/delicious-cake-with-cute-character_23-2150727760.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen",
+      title: "Neki naslov",
     },
-    {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
-    },
-    {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
-    },
-    {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
-    },
-    {
-        imageUrl: "https://i.postimg.cc/nhbxdjh9/home-card.jpg",
-        brand: "Bice kategorija",
-        title: "Birthday Cake",
-        color: "Ne znam sta treba da bude",
-        discountedPrice: 1800,
-        price: 2200,
-        size: [
-            {
-                name: "Bice weight - S",
-                quantity: 10,
-            },
-            {
-                name: "Bice weight - M",
-                quantity: 20,
-            },
-            {
-                name: "Bice weight - L",
-                quantity: 30,
-            },
-        ],
-        quantity: 100,
-        topLevelCategory: "Cake",
-        secondLevelCategory: "Girl",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit velit non elit eleifend faucibus. Ut posuere tortor leo, at lacinia ligula lacinia ut. Nulla sit amet nulla vitae orci aliquet imperdiet at at neque.",
-    },
-];
+  ];
+  

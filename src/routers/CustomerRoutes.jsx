@@ -20,6 +20,9 @@ import PaymentSuccess from "../customer/components/paymentSuccess/PaymentSuccess
 import RateProduct from "../customer/components/reviewProduct/RateProduct";
 import Cake from "../customer/components/cakes/cake/Cake";
 import CakeDetails from "../customer/components/cakeDetails/CakeDetails";
+import FlavorGrid from "../customer/components/flavors/FlavorGrid";
+import PriceList from "../customer/components/prices/PriceList";
+import FAQComponent from "../customer/components/faq/FAQComponent";
 
 const CustomerRoutes = () => {
     const location = useLocation();
@@ -44,6 +47,10 @@ const CustomerRoutes = () => {
 
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/home" element={<Homepage />}></Route>
+        <Route path="/flavors" element={<FlavorGrid />}></Route>
+        <Route path="/prices" element={<PriceList />}></Route>
+        <Route path="/questions" element={<FAQComponent />}></Route>
+
         <Route path="/about" element={<About />}></Route>
         <Route path="/privaciy-policy" element={<PrivacyPolicy />}></Route>
         <Route path="/terms-condition" element={<TearmsCondition />}></Route>

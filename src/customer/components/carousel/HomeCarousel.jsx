@@ -13,6 +13,7 @@ const HomeCarousel = () => {
       className="cursor-pointer"
       onClick={() => navigate(item.path)}
       src={item.image}
+      style={{ width: "100%", height: "550px" }}
       alt=""
       onDragStart={handleDragStart}
       role="presentation"

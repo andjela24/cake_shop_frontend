@@ -66,7 +66,7 @@ export default function LoginUserForm({ handleNext }) {
                     <Grid item xs={12}>
                         <Button
                         style={{
-                            backgroundColor: "#393119",
+                            backgroundColor: "#132743",
                         }}
                             className="w-full"
                             type="submit"

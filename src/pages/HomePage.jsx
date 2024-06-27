@@ -10,6 +10,11 @@ import { mensShoesPage1 } from "../data/shoes";
 import { mens_kurta } from "../data/men/menKurta";
 import { torte } from "../data/torte/torte";
 import { lengha_page1 } from "../data/women/LenghaCholi";
+import { latest_cake } from "../data/latest_cake";
+import { birthday_cake } from "../data/birthday_cake";
+import { wedding_cake } from "../data/wedding_cake";
+import { formal_cake } from "../data/formal_cake";
+import { special_cake } from "../data/special_cake";
 
 const Homepage = () => {
   return (
@@ -17,15 +22,11 @@ const Homepage = () => {
       <HomeCarousel images={homeCarouselData} />
 
       <div className="space-y-10 py-20">
-        <HomeProductSection data={torte} section={"Sve torte"} />
-        <HomeProductSection data={mens_kurta} section={"Men's Kurta"} />
-        <HomeProductSection data={mensShoesPage1} section={"Men's Shoes"} />
-        {/* <HomeProductSection data={lengha_page1} section={"Lengha Choli"} /> */}
-        <HomeProductSection data={sareePage1} section={"Saree"} />
-        <HomeProductSection data={dressPage1} section={"Dress"} />
-        <HomeProductSection data={gounsPage1} section={"Women's Gouns"} />
-        <HomeProductSection data={kurtaPage1} section={"Women's Kurtas"} />
-        {/* <HomeProductSection data={mensPantsPage1} section={"Men's Pants"} /> */}
+        <HomeProductSection data={latest_cake} section={"Najnovije"} />
+        <HomeProductSection data={birthday_cake} section={"Dečije Torte"} />
+        <HomeProductSection data={wedding_cake} section={"Svadbene Torte"} />
+        <HomeProductSection data={formal_cake} section={"Svečane Torte"} />
+        <HomeProductSection data={special_cake} section={"Specijal"} />
       </div>
     </div>
   );
