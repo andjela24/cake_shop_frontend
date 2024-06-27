@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import ProductDetails from "../customer/components/products/productDetails/ProductDetails";
 import Product from "../customer/components/products/product/Product";
 import Contact from "../pages/Contact";
 import TearmsCondition from "../pages/TermsCondition";
@@ -19,7 +18,7 @@ import Footer from "../customer/components/footer/Footer";
 import PaymentSuccess from "../customer/components/paymentSuccess/PaymentSuccess";
 import RateProduct from "../customer/components/reviewProduct/RateProduct";
 import Cake from "../customer/components/cakes/cake/Cake";
-import CakeDetails from "../customer/components/cakeDetails/CakeDetails";
+import CakeDetails from "../customer/components/cakes/cakeDetails/CakeDetails";
 import FlavorGrid from "../customer/components/flavors/FlavorGrid";
 import PriceList from "../customer/components/prices/PriceList";
 import FAQComponent from "../customer/components/faq/FAQComponent";
@@ -56,7 +55,6 @@ const CustomerRoutes = () => {
         <Route path="/terms-condition" element={<TearmsCondition />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/:lavelOne/:lavelTwo/:lavelThree" element={<Product />}></Route>
-        <Route path="/product/:productId" element={<ProductDetails />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/account/order" element={<Order />}></Route>
         <Route path="/account/order/:orderId" element={<OrderDetails />}></Route>

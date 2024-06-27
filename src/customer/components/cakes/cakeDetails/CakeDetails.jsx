@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   findCakeById
-} from "../../../redux/customers/product/Action";
-import { addItemToCart } from "../../../redux/customers/cart/Action";
-import { fetchFlavors } from "../../../redux/customers/flavor/Action";
+} from "../../../../redux/customers/product/Action";
+import { addItemToCart } from "../../../../redux/customers/cart/Action";
+import { fetchFlavors } from "../../../../redux/customers/flavor/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
