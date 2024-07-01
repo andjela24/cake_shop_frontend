@@ -20,21 +20,17 @@ export default function AddDeliveryAddressForm({ handleNext }) {
   });
 
   useEffect(() => {
-    console.log("Auth state in AddDeliveryAddressForm: ", auth);
     if (auth.user) {
-      console.log("Setting user details from auth.user");
       setUserDetails({
         firstName: auth.user.firstName,
         lastName: auth.user.lastName,
         phoneNumber: auth.user.phoneNumber,
         email: auth.user.email,
       });
-    } else {
-      console.log("auth.user is undefined in AddDeliveryAddressForm");
     }
   }, [auth.user]);
 
-  const handleSubmit = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -51,7 +47,7 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       userId: auth.user?.id,
       cartItems: cart.cart.cartItems.map((item) => item.id),
       deliveryDate: new Date().toISOString(),
-      totalPrice: cart.cart.totalPrice || 0,
+      totalPrice: cart.cart.totalPrice || 1,
       totalDiscountedPrice: cart.cart.totalDiscountedPrice || 0,
       discount: cart.cart.discount || 0,
       orderDate: new Date().toISOString(),
@@ -63,24 +59,22 @@ export default function AddDeliveryAddressForm({ handleNext }) {
     handleNext();
   };
 
-  useEffect(() => {
-    console.log("Cart data", cart);
-  }, [cart]);
+  const handleAddressSelect = () => {
+    if (!selectedAddress) return;
 
-  const handleCreateOrder = (item) => {
     const orderData = {
-      address: item,
+      address: selectedAddress,
       jwt,
       navigate,
       userId: auth.user?.id,
-      cartItems: cart.cartItems.map((item) => item.id),
+      cartItems: cart.cart.cartItems.map((item) => item.id),
       deliveryDate: new Date().toISOString(),
-      totalPrice: cart.totalPrice,
-      totalDiscountedPrice: cart.totalDiscountedPrice,
-      discount: cart.discount,
+      totalPrice: cart.cart.totalPrice,
+      totalDiscountedPrice: cart.cart.totalDiscountedPrice,
+      discount: cart.cart.discount,
       orderDate: new Date().toISOString(),
       orderStatus: "Pending",
-      totalItem: cart.totalItem,
+      totalItem: cart.cart.totalItem,
     };
 
     dispatch(createOrder(orderData));
@@ -89,33 +83,26 @@ export default function AddDeliveryAddressForm({ handleNext }) {
 
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12} lg={5}>
+      <Grid item xs={12} lg={6}>
         <Box className="border rounded-md shadow-md h-[30.5rem] overflow-y-scroll ">
-          {auth.user?.addresses?.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedAddress(item)}
-              className="p-5 py-7 border-b cursor-pointer"
-            >
-              <AddressCard address={item} />
-              {selectedAddress?.id === item.id && (
-                <Button
-                  sx={{ mt: 2 }}
-                  size="large"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handleCreateOrder(item)}
-                >
-                  Potvrdi
-                </Button>
-              )}
-            </div>
-          ))}
+          {auth.user?.address?.length > 0 ? (
+            auth.user.address.map((item) => (
+              <div
+                key={item.id}
+                onClick={() => setSelectedAddress(item)}
+                className={`p-5 py-7 border-b cursor-pointer ${selectedAddress?.id === item.id ? "bg-gray-200" : ""}`}
+              >
+                <AddressCard address={item} />
+              </div>
+            ))
+          ) : (
+            <p>Nema dostupnih adresa</p>
+          )}
         </Box>
       </Grid>
-      <Grid item xs={12} lg={7}>
+      <Grid item xs={12} lg={6}>
         <Box className="border rounded-md shadow-md p-5">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleFormSubmit}>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -213,14 +200,23 @@ export default function AddDeliveryAddressForm({ handleNext }) {
               </Grid>
               <Grid item xs={12}>
                 <Button
-                  sx={{ padding: ".9rem 1.5rem" }}
+                  sx={{ padding: ".9rem 1.5rem", background: "#132743" }}
                   size="large"
                   type="submit"
                   variant="contained"
-                  color="primary"
                 >
-                  Potvrdi
+                  Kreiraj adresu
                 </Button>
+                {selectedAddress && (
+                  <Button
+                    sx={{ padding: ".9rem 1.5rem", background: "#132743", marginLeft: "1rem" }}
+                    size="large"
+                    variant="contained"
+                    onClick={handleAddressSelect}
+                  >
+                    Potvrdi odabranu adresu
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </form>

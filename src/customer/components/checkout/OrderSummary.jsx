@@ -99,6 +99,7 @@ const OrderSummary = () => {
                 padding: ".8rem 2rem",
                 marginTop: "2rem",
                 width: "100%",
+                background: "#132743"
               }}
             >
               PLAĆANJE

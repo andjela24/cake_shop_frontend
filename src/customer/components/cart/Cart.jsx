@@ -17,7 +17,7 @@ const Cart = () => {
     dispatch(getCart(jwt));
   }, [jwt]);
   return (
-    <div className="">
+    <div className="mt-4">
       {cart.cartItems.length > 0 && (
         <div className="lg:grid grid-cols-3 lg:px-16 relative">
           <div className="lg:col-span-2 lg:px-5 bg-white">
@@ -52,7 +52,7 @@ const Cart = () => {
                 onClick={() => navigate("/checkout?step=2")}
                 variant="contained"
                 type="submit"
-                sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%" }}
+                sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%", background: "#132743"}}
               >
                 Plaćanje
               </Button>

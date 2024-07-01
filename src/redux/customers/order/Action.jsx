@@ -26,7 +26,7 @@ export const createOrder = (reqData) => async (dispatch) => {
     // Kreiranje objekta zahteva koji uključuje address i cartItems
     const requestData = {
       userId: reqData.userId,
-      cartItems: reqData.cartItems, // Dodali smo listu cartItems
+      cartItems: reqData.cartItems,
       orderDate: new Date().toISOString(),
       deliveryDate: reqData.deliveryDate,
       addressDto: reqData.address,
@@ -36,6 +36,7 @@ export const createOrder = (reqData) => async (dispatch) => {
       orderStatus: "Pending",
       totalItem: reqData.cartItems.length,
     };
+    console.log("REQUEST DATA za order: ", requestData);
 
     const { data } = await api.post(`/api/orders`, requestData, config);
 
