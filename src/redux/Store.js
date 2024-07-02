@@ -9,6 +9,7 @@ import cartReducer from "./customers/cart/Reducer";
 import { orderReducer } from "./customers/order/Reducer";
 import adminOrderReducer from "./admin/orders/Reducer";
 import ReviewReducer from "./customers/review/Reducer";
+import customerCakeReducer from "./customers/cake/Reducer";
 
 const rootReducers = combineReducers({
   auth: authReducer,
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   cart: cartReducer,
   order: orderReducer,
   review: ReviewReducer,
+  customersCake: customerCakeReducer,
 
   // admin
   adminsProduct: productReducer,
