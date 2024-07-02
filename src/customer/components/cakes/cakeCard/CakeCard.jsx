@@ -1,19 +1,13 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./CakeCard.css";
-
 
 export default function CakeCard({ cake }) {
   const {
     title,
     pricePerKilo,
-    decorationPrice,
-    minWeight,
-    maxWeight,
-    minTier,
-    maxTier,
+    category,
     imageUrl,
-    category
   } = cake;
   const navigate = useNavigate();
 
@@ -24,45 +18,22 @@ export default function CakeCard({ cake }) {
   return (
     <div
       onClick={handleNavigate}
-      className="cakeCard w-[15rem] border m-3 transition-all cursor-pointer "
+      className="cakeCard border transition-all cursor-pointer overflow-hidden"
+      style={{ maxWidth: "15rem" }}
     >
       <div className="h-[20rem]">
         <img
-          className="h-full w-full object-cover object-left-top"
+          className="h-full w-100 object-cover"
           src={imageUrl}
           alt="cake"
         />
       </div>
-      <div className="textPart bg-white p-3 ">
-        {/* <pre>
-          {JSON.stringify(
-            {
-              title,
-              pricePerKilo,
-              decorationPrice,
-              minWeight,
-              maxWeight,
-              minTier,
-              maxTier,
-              imageUrl,
-              category,
-            },
-            null,
-            2
-          )}
-        </pre> */}
+      <div className="textPart bg-white p-3">
         <div>
           <p className="font-bold opacity-60">{pricePerKilo} RSD/kg</p>
           <p className="">{title}</p>
-
           <p className="font-semibold opacity-50">{category.name}</p>
         </div>
-
-        {/* <div className="flex space-x-2 items-center">
-              <p className="font-semibold">₹{discountedPrice}</p>
-              <p className="opacity-50 line-through">₹{price}</p>
-              <p className="text-green-600 font-semibold">{discountPersent}% off</p>
-            </div> */}
       </div>
     </div>
   );

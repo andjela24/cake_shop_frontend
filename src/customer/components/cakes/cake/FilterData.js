@@ -1,7 +1,8 @@
-  export const filters = [
+// FilterData.js
+export const filters = [
     {
       id: "category",
-      name: "Category",
+      name: "Kategorija",
       options: [
         { value: "decije", label: "Decije" },
         { value: "svecane", label: "Svecane" },
@@ -11,7 +12,7 @@
     },
   ];
   
-  export const singleFilter=[
+  export const singleFilter = [
     {
       id: "price",
       name: "Price",
@@ -24,13 +25,10 @@
       ],
     },
     {
-      id: "disccout",
-      name: "Disccount Range",
+      id: "discount",
+      name: "Discount Range",
       options: [
-        {
-          value: "10",
-          label: "10% And Above",
-        },
+        { value: "10", label: "10% And Above" },
         { value: "20", label: "20% And Above" },
         { value: "30", label: "30% And Above" },
         { value: "40", label: "40% And Above" },
@@ -46,14 +44,12 @@
       options: [
         { value: "in_stock", label: "In Stock" },
         { value: "out_of_stock", label: "Out Of Stock" },
-        
       ],
     },
-  ]
+  ];
   
   export const sortOptions = [
-    
-    { name: "Price: Low to High", query: "price_low", current: false },
-    { name: "Price: High to Low", query: "price_high", current: false },
+    { name: "Cena rastuća", query: "price_low", current: false },
+    { name: "Cena opadajuća", query: "price_high", current: false },
   ];
   

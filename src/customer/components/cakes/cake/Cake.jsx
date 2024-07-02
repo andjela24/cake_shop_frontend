@@ -61,40 +61,30 @@ export default function Cake() {
     navigate({ search: `?${query}` });
   };
 
-  const handleFilter = (value, sectionId) => {
+  const handleCategoryFilterChange = (event) => {
     const searchParams = new URLSearchParams(location.search);
-    let filterValues = searchParams.getAll(sectionId);
-
-    if (filterValues.length > 0 && filterValues[0].split(",").includes(value)) {
-      filterValues = filterValues[0]
-        .split(",")
-        .filter((item) => item !== value);
-      if (filterValues.length === 0) {
-        searchParams.delete(sectionId);
-      }
-    } else {
-      filterValues.push(value);
-    }
-
-    if (filterValues.length > 0) {
-      searchParams.set(sectionId, filterValues.join(","));
-    }
-
+    searchParams.set("category", event.target.value); // Update category parameter
+    searchParams.delete("pageNumber"); // Reset pageNumber when changing filters
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
-  };
 
-  const handleRadioFilterChange = (e, sectionId) => {
-    const searchParams = new URLSearchParams(location.search);
-    searchParams.set(sectionId, e.target.value);
-    const query = searchParams.toString();
-    navigate({ search: `?${query}` });
+    // Dispatch cakesPagable with updated category
+    dispatch(cakesPagable({
+      category: event.target.value,
+      minWeight: minWeightValue || 1,
+      maxWeight: maxWeightValue || 30,
+      minTier: minTierValue || 1,
+      maxTier: maxTierValue || 4,
+      sort: sortValue || "price_low",
+      pageNumber: 0, // Reset page number to 0
+      pageSize: 10,
+    }));
   };
 
   useEffect(() => {
     const data = {
-      category: categoryValue || "Svadbene",
-      minWeight: minWeightValue || 2,
+      category: categoryValue || "Specijal",
+      minWeight: minWeightValue || 1,
       maxWeight: maxWeightValue || 30,
       minTier: minTierValue || 1,
       maxTier: maxTierValue || 4,
@@ -123,9 +113,8 @@ export default function Cake() {
     }
   }, [customersCake.loading]);
   console.log({ cakes });
-
   return (
-    <div className="bg-white -z-20">
+<div className="bg-white -z-20">
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -203,15 +192,13 @@ export default function Cake() {
                             </h3>
                             <Disclosure.Panel className="pt-6">
                               <div className="space-y-6">
-                                {section.id === "sort" ? (
+                                {section.id === "category" ? (
                                   <FormControl>
                                     <RadioGroup
-                                      value={sortValue}
-                                      onChange={(e) =>
-                                        handleRadioFilterChange(e, section.id)
-                                      }
+                                      value={categoryValue || "specijal"}
+                                      onChange={handleCategoryFilterChange}
                                     >
-                                      {sortOptions.map((option) => (
+                                      {section.options.map((option) => (
                                         <FormControlLabel
                                           key={option.value}
                                           value={option.value}
@@ -221,34 +208,7 @@ export default function Cake() {
                                       ))}
                                     </RadioGroup>
                                   </FormControl>
-                                ) : (
-                                  section.options.map((option, optionIdx) => (
-                                    <div
-                                      key={option.value}
-                                      className="flex items-center"
-                                    >
-                                      <input
-                                        id={`filter-mobile-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
-                                        defaultValue={option.value}
-                                        type="checkbox"
-                                        checked={searchParams
-                                          .getAll(section.id)
-                                          .includes(option.value)}
-                                        onChange={() =>
-                                          handleFilter(option.value, section.id)
-                                        }
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                      />
-                                      <label
-                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                        className="ml-3 text-sm text-gray-500"
-                                      >
-                                        {option.label}
-                                      </label>
-                                    </div>
-                                  ))
-                                )}
+                                ) : null}
                               </div>
                             </Disclosure.Panel>
                           </>
@@ -294,18 +254,18 @@ export default function Cake() {
                       {sortOptions.map((option) => (
                         <Menu.Item key={option.value}>
                           {({ active }) => (
-                            <button
-                              onClick={() => handleSortChange(option.value)}
+                            <span
                               className={classNames(
-                                sortValue === option.value
+                                option.value === sortValue
                                   ? "font-medium text-gray-900"
                                   : "text-gray-500",
                                 active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm w-full text-left"
+                                "block px-4 py-2 text-sm cursor-pointer"
                               )}
+                              onClick={() => handleSortChange(option.value)}
                             >
-                              {option.label}
-                            </button>
+                              {option.name}
+                            </span>
                           )}
                         </Menu.Item>
                       ))}
@@ -319,7 +279,7 @@ export default function Cake() {
                 className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
                 onClick={() => setMobileFiltersOpen(true)}
               >
-                <span className="sr-only">Filteri</span>
+                <span className="sr-only">Filters</span>
                 <FunnelIcon className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
@@ -327,7 +287,7 @@ export default function Cake() {
 
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
-              Proizvodi
+              Products
             </h2>
 
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
@@ -363,15 +323,13 @@ export default function Cake() {
                         </h3>
                         <Disclosure.Panel className="pt-6">
                           <div className="space-y-4">
-                            {section.id === "sort" ? (
+                            {section.id === "category" ? (
                               <FormControl>
                                 <RadioGroup
-                                  value={sortValue}
-                                  onChange={(e) =>
-                                    handleRadioFilterChange(e, section.id)
-                                  }
+                                  value={categoryValue || "specijal"}
+                                  onChange={handleCategoryFilterChange}
                                 >
-                                  {sortOptions.map((option) => (
+                                  {section.options.map((option) => (
                                     <FormControlLabel
                                       key={option.value}
                                       value={option.value}
@@ -381,34 +339,7 @@ export default function Cake() {
                                   ))}
                                 </RadioGroup>
                               </FormControl>
-                            ) : (
-                              section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`filter-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    checked={searchParams
-                                      .getAll(section.id)
-                                      .includes(option.value)}
-                                    onChange={() =>
-                                      handleFilter(option.value, section.id)
-                                    }
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className="ml-3 text-sm text-gray-600"
-                                  >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))
-                            )}
+                            ) : null}
                           </div>
                         </Disclosure.Panel>
                       </>
@@ -418,8 +349,8 @@ export default function Cake() {
               </form>
               {/* Product grid */}
               <div className="lg:col-span-3">
-                {cakes.empty == false ? (
-                  <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {cakes.empty === false ? (
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {cakes.content.map((cake) => (
                       <CakeCard key={cake.id} cake={cake} />
                     ))}
@@ -431,7 +362,7 @@ export default function Cake() {
                     </p>
                   </div>
                 )}
-                {cakes.empty == false && (
+                {cakes.empty === false && (
                   <div className="flex justify-center mt-8">
                     <Pagination
                       count={cakes.totalPages}
