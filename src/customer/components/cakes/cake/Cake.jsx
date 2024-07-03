@@ -47,23 +47,6 @@ export default function Cake() {
   const sortValue = searchParams.get("sort");
   const pageNumber = searchParams.get("pageNumber") || 0;
 
-  // const handleSortChange = (value) => {
-  //   const searchParams = new URLSearchParams(location.search);
-  //   searchParams.set("sort", value);
-  //   const query = searchParams.toString();
-  //   navigate({ search: `?${query}` });
-  //       // Dispatch cakesPagable with updated category
-  //       dispatch(cakesPagable({
-  //         category: categoryValue,
-  //         minWeight: minWeightValue || 1,
-  //         maxWeight: maxWeightValue || 30,
-  //         minTier: minTierValue || 1,
-  //         maxTier: maxTierValue || 4,
-  //         sort: value,
-  //         pageNumber: 0, // Reset page number to 0
-  //         pageSize: 10,
-  //       }));
-  // };
 
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
@@ -254,7 +237,7 @@ export default function Cake() {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              Kolači
+              Torte
             </h1>
 
             <div className="flex items-center">
@@ -387,7 +370,7 @@ export default function Cake() {
                 ) : (
                   <div className="flex justify-center items-center min-h-[200px]">
                     <p className="text-gray-500">
-                      Nema kolača prema zadatim kriterijumima.
+                      Nema torti prema zadatim kriterijumima.
                     </p>
                   </div>
                 )}

@@ -6,7 +6,7 @@ export const navigation = {
       featured: [
         {
           name: "Dečije",
-          id: "Decije",
+          id: "Dečije",
           href: "/cakes",
           imageSrc:
             "https://images.unsplash.com/photo-1562440499-64c9a111f713",
@@ -15,7 +15,7 @@ export const navigation = {
         },
         {
           name: "Svečane",
-          id: "Svecane",
+          id: "Svečane",
           href: "/cakes",
           imageSrc:
             "https://images.unsplash.com/photo-1562777717-dc6984f65a63",

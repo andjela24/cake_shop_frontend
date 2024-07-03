@@ -4,8 +4,8 @@ export const filters = [
       id: "category",
       name: "Kategorija",
       options: [
-        { value: "decije", label: "Decije" },
-        { value: "svecane", label: "Svecane" },
+        { value: "dečije", label: "Dečije" },
+        { value: "svečane", label: "Svečane" },
         { value: "svadbene", label: "Svadbene" },
         { value: "specijal", label: "Specijal" }
       ],

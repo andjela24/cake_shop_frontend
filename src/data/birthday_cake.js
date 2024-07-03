@@ -17,7 +17,7 @@ export const birthday_cake = [
     {
       imageUrl:
         "https://img.freepik.com/free-photo/delicious-cake-with-cute-character_23-2150727695.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen",
-      title: "Kolovn Torta",
+      title: "Klovn Torta",
     },
     {
       imageUrl:
