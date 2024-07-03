@@ -47,13 +47,42 @@ export default function Cake() {
   const sortValue = searchParams.get("sort");
   const pageNumber = searchParams.get("pageNumber") || 0;
 
+  // const handleSortChange = (value) => {
+  //   const searchParams = new URLSearchParams(location.search);
+  //   searchParams.set("sort", value);
+  //   const query = searchParams.toString();
+  //   navigate({ search: `?${query}` });
+  //       // Dispatch cakesPagable with updated category
+  //       dispatch(cakesPagable({
+  //         category: categoryValue,
+  //         minWeight: minWeightValue || 1,
+  //         maxWeight: maxWeightValue || 30,
+  //         minTier: minTierValue || 1,
+  //         maxTier: maxTierValue || 4,
+  //         sort: value,
+  //         pageNumber: 0, // Reset page number to 0
+  //         pageSize: 10,
+  //       }));
+  // };
+
   const handleSortChange = (value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("sort", value);
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
+  
+    dispatch(cakesPagable({
+      category: categoryValue,
+      minWeight: minWeightValue || 1,
+      maxWeight: maxWeightValue || 30,
+      minTier: minTierValue || 1,
+      maxTier: maxTierValue || 4,
+      sort: value,
+      pageNumber: 0, // Reset page number to 0
+      pageSize: 10,
+    }));
   };
-
+  
   const handlePaginationChange = (event, value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("pageNumber", value);

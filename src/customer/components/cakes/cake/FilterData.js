@@ -49,7 +49,7 @@ export const filters = [
   ];
   
   export const sortOptions = [
-    { name: "Cena rastuća", query: "price_low", current: false },
-    { name: "Cena opadajuća", query: "price_high", current: false },
+    { name: "Cena rastuća", value: "price_low", current: false },
+    { name: "Cena opadajuća", value: "price_high", current: false },
   ];
   
