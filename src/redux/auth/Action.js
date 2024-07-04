@@ -11,7 +11,7 @@ import {
     GET_USER_FAILURE,
     LOGOUT,
 } from "./ActionTypes";
-import api, { API_BASE_URL } from "../../config/api";
+import api from "../../config/api";
 
 // Register action creators
 const registerRequest = () => ({ type: REGISTER_REQUEST });
@@ -21,8 +21,8 @@ const registerFailure = (error) => ({ type: REGISTER_FAILURE, payload: error });
 export const register = (userData) => async (dispatch) => {
     dispatch(registerRequest());
     try {
-        const response = await axios.post(
-            `${API_BASE_URL}/api/registration/register-client`,
+        const response = await api.post(
+            `/api/registration/register-client`,
             userData
         );
         const user = response.data;
@@ -37,14 +37,14 @@ export const register = (userData) => async (dispatch) => {
 // Login action creators
 const loginRequest = () => ({ type: LOGIN_REQUEST });
 const loginSuccess = (user) => ({ type: LOGIN_SUCCESS, payload: user });
+// const loginSuccess = (user) => ({ type: LOGIN_SUCCESS, payload: { user } });
 const loginFailure = (error) => ({ type: LOGIN_FAILURE, payload: error });
 
 export const login = (userData) => async (dispatch) => {
     dispatch(loginRequest());
     try {
-        //const response = await axios.post(`${API_BASE_URL}/auth/signin`, userData);
-        const response = await axios.post(
-            `${API_BASE_URL}/api/auth/login`,
+        const response = await api.post(
+            `/api/auth/login`,
             userData
         );
         const user = response.data;
@@ -55,14 +55,36 @@ export const login = (userData) => async (dispatch) => {
         dispatch(loginFailure(error.message));
     }
 };
+// const loginRequest = () => ({ type: LOGIN_REQUEST });
+// const loginSuccess = (user) => ({ type: LOGIN_SUCCESS, payload: user });
+// const loginFailure = (error) => ({ type: LOGIN_FAILURE, payload: error });
+
+// export const login = (userData) => async (dispatch) => {
+//     dispatch(loginRequest());
+//     try {
+//         const response = await api.post(`/api/auth/login`, userData);
+//         const user = response.data;
+//         if (user.accessToken) localStorage.setItem("jwt", user.accessToken);
+//         console.log("login ", user);
+//         dispatch(loginSuccess(user));
+
+//         if (user.roles && user.roles.includes('ADMIN')) {
+//             window.location.href = '/admin';
+//         } else {
+//             window.location.href = '/';
+//         }
+//     } catch (error) {
+//         dispatch(loginFailure(error.message));
+//     }
+// };
 
 //  get user from token
 export const getUser = (token) => {
     return async (dispatch) => {
         dispatch({ type: GET_USER_REQUEST });
         try {
-            const response = await axios.get(
-                `${API_BASE_URL}/api/users/profile`,
+            const response = await api.get(
+                `/api/users/profile`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

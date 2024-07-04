@@ -15,6 +15,8 @@ import AdminPannel from "../admin/AdminPannel";
 import Navigation from "../customer/components/navbar/Navigation";
 
 const Routers = () => {
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+
   return (
     <div>
         <div>
@@ -34,7 +36,8 @@ const Routers = () => {
         <Route path="/cart" element={<Cart/>}></Route>
       
 
-        <Route path="/admin" element={<AdminPannel/>}></Route>
+        <Route path="/admin" element={isAuthenticated && user?.roles.includes('ADMIN') ? <AdminPannel/> : <Navigate to="/login" />} />
+        {/* <Route path="/admin" element={<AdminPannel/>}></Route> */}
         <Route path="/demo" element={<DemoAdmin/>}></Route>
 
       </Routes>

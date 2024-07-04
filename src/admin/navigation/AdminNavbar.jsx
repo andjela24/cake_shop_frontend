@@ -18,6 +18,10 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import Avatar from '@mui/material/Avatar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
+import { PermissionControl } from '../../config/PermissionControl';
+import { Claim } from '../../config/Claim';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,6 +64,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function AdminNavbar({handleSideBarViewInMobile}) {
+
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const theme = useTheme();
@@ -159,6 +165,10 @@ export default function AdminNavbar({handleSideBarViewInMobile}) {
     </Menu>
   );
 // https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png
+<PermissionControl
+permission={Claim.ADMIN}
+fallbackContent={navigate("/admin")}
+>
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + isLargeScreen, backgroundColor: 'rgb(0, 0, 22)' }}>
@@ -228,4 +238,5 @@ export default function AdminNavbar({handleSideBarViewInMobile}) {
       
     </Box>
   );
+  </PermissionControl>
 }

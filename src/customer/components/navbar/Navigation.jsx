@@ -80,6 +80,8 @@ export default function Navigation() {
     navigate("/account/order");
   };
 
+  console.log("U navbaru", auth.user)
+
   return (
     <div className="bg-white">
       {/* Mobile menu */}
@@ -343,6 +345,13 @@ export default function Navigation() {
                       {page.name}
                     </a>
                   ))}
+
+{auth.user && auth.user.roles.some(role => role.name === "ADMIN") && (
+  <Link to="/admin" className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">
+    Admin panel
+  </Link>
+)}
+
                 </div>
               </Popover.Group>
 
