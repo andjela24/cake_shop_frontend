@@ -8,7 +8,7 @@ import TotalEarning from "../tables/TotalEarning";
 import CardStatsVertical from "../../styles/CardStatusVertical";
 import CustomersTable from "../tables/CustomersTable";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { customTheme, darkTheme } from "../theme/CustomTheme";
+import { customTheme } from "../theme/CustomTheme";
 import "./Admin.css";
 import RecentlyAddeddProducts from "../tables/RecentlyAddedProducts";
 import SalesOverTime from "../tables/SalesOverTime";
@@ -51,32 +51,32 @@ const Dashboard = () => {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <CardStatsVertical
-                    stats="$25.6k"
+                    stats="869.721 RSD"
                     icon={<Poll />}
                     color="success"
-                    trendNumber="+42%"
-                    title="Total Profit"
-                    subtitle="Weekly Profit"
+                    trendNumber="+22%"
+                    title="Nedeljnji profit"
+                    subtitle="U odnosu na 678.382 RSD prošle nedelje"
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <CardStatsVertical
-                    stats="$78"
-                    title="Refunds"
+                    stats="6200 RSD"
+                    title="Povraćaj"
                     trend="negative"
                     color="secondary"
                     trendNumber="-15%"
-                    subtitle="Past Month"
+                    subtitle="U padu 15% prethodni mesec"
                     icon={<CurrencyUsd />}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <CardStatsVertical
                     stats="862"
-                    trend="negative"
-                    trendNumber="-18%"
-                    title="New Orders"
-                    subtitle="Weekly Orders"
+                    trend="positive"
+                    trendNumber="27%"
+                    title="Nove porudžbine"
+                    subtitle="U toku ove nedelje"
                     icon={<BriefcaseVariantOutline />}
                   />
                 </Grid>
@@ -86,8 +86,8 @@ const Dashboard = () => {
                     color="warning"
                     trend="negative"
                     trendNumber="-18%"
-                    subtitle="Last Week"
-                    title="Sales Queries"
+                    subtitle="U toku prethodne nedelje"
+                    title="Upiti"
                     icon={<HelpCircleOutline />}
                   />
                 </Grid>

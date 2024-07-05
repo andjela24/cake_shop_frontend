@@ -4,16 +4,16 @@ const customTheme = createTheme({
     palette: {
         mode: "dark", // Set the custom color mode name here
         primary: {
-            main: "#393119",
+            main: "#f46583",
         },
         secondary: {
-            main: "#c39b46",
+            main: "#ff1",
         },
         white: {
             main: "#fff",
         },
         orange: {
-            main: "#ffdb0f",
+            main: "#f46583",
         },
 
         background: {
@@ -24,17 +24,17 @@ const customTheme = createTheme({
     },
 });
 
-const darkTheme = createTheme({
-    palette: {
-        mode: "dark",
-        primary: {
-            main: "#9155FD",
-        },
-        secondary: {
-            main: "#f48fb1",
-        },
-    },
-});
+// const darkTheme = createTheme({
+//     palette: {
+//         mode: "dark",
+//         primary: {
+//             main: "#f46583",
+//         },
+//         secondary: {
+//             main: "#f46583",
+//         },
+//     },
+// });
 
 const customerTheme = createTheme({
     palette: {
@@ -44,7 +44,7 @@ const customerTheme = createTheme({
             main: "#393119",
         },
         secondary: {
-            main: "#c39b46",
+            main: "#f46583",
         },
         white: {
             main: "#fff",
@@ -66,4 +66,4 @@ const customerTheme = createTheme({
     },
 });
 
-export { customTheme, darkTheme, customerTheme };
+export { customTheme, customerTheme };

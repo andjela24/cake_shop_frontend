@@ -16,29 +16,26 @@ const data = [
   {
     progress: 75,
     imgHeight: 20,
-    title: 'Men',
+    title: 'Dečije torte',
     color: 'primary',
-    amount: '$24,895.65',
-    subtitle: 'Clothing, Footware',
-    imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/shirt/z/3/7/xl-r-dark-grey-stoneberg-original-imaghghn2vcf5euv.jpeg?q=70'
+    amount: '2.036.965 RSD',
+    imgSrc: 'https://img.freepik.com/free-photo/delicious-astronaut-3d-cake_23-2151184993.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen'
   },
   {
     progress: 50,
     color: 'info',
     imgHeight: 27,
-    title: 'Women',
-    amount: '$8,650.20',
-    subtitle: 'Clothing, Handbags, jewellery',
-    imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/lehenga-choli/y/p/c/free-half-sleeve-jk-6-kedar-fab-original-imaghh4unhxgyveg.jpeg?q=70'
+    title: 'Svadbene torte',
+    amount: '865.020 RSD',
+    imgSrc: 'https://img.freepik.com/free-photo/view-beautifully-ornate-weeding-cake_23-2151379544.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen'
   },
   {
     progress: 20,
     imgHeight: 20,
-    title: 'Kids',
+    title: 'Svečane torte',
     color: 'secondary',
-    amount: '$1,245.80',
-    subtitle: 'Clothing',
-    imgSrc: 'https://rukminim1.flixcart.com/image/612/612/xif0q/kids-t-shirt/i/7/e/10-11-years-bwtrnfulboy-bz55-blive-original-imagmuafh2ennezv.jpeg?q=70'
+    amount: '312.729 RSD',
+    imgSrc: 'https://img.freepik.com/free-photo/3d-design-delicious-wedding-cake_23-2151109606.jpg?uid=R91655651&ga=GA1.1.360058317.1716372183&semt=ais_user_ai_gen'
   }
 ]
 
@@ -46,7 +43,7 @@ const TotalEarning = () => {
   return (
     <Card>
       <CardHeader
-        title='Total Earning'
+        title='Ukupan profit'
         titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
         action={
           <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
@@ -57,18 +54,18 @@ const TotalEarning = () => {
       <CardContent sx={{ pt: theme => `${theme.spacing(1.5)} !important` }}>
         <Box sx={{ mb: 1.5, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h4' sx={{ fontWeight: 600, fontSize: '2.125rem !important' }}>
-            $24,895
+          3.214.714 RSD
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', color: 'success.main' }}>
             <MenuUp sx={{ fontSize: '1.875rem', verticalAlign: 'middle' }} />
             <Typography variant='body2' sx={{ fontWeight: 600, color: 'success.main' }}>
-              10%
+              18%
             </Typography>
           </Box>
         </Box>
 
         <Typography component='p' variant='caption' sx={{ mb: 5 }}>
-          Compared to $84,325 last year
+          U odnosu na 2.636.065 RSD prethodne godine
         </Typography>
 
         {data.map((item, index) => {

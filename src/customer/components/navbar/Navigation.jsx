@@ -80,7 +80,7 @@ export default function Navigation() {
     navigate("/account/order");
   };
 
-  console.log("U navbaru", auth.user)
+  console.log("U navbaru", auth.user);
 
   return (
     <div className="bg-white">
@@ -245,7 +245,7 @@ export default function Navigation() {
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <Link to="/">
-                  <span className="sr-only">Your Company</span>
+                  <span className="sr-only">Princess Andjela</span>
                   <img
                     src="https://res.cloudinary.com/do7xoj7ks/image/upload/v1719396356/PrincessAndjelaLogo_vuim5x.png"
                     alt="PrincessAndjela"
@@ -346,12 +346,15 @@ export default function Navigation() {
                     </a>
                   ))}
 
-{auth.user && auth.user.roles.some(role => role.name === "ADMIN") && (
-  <Link to="/admin" className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">
-    Admin panel
-  </Link>
-)}
-
+                  {auth.user &&
+                    auth.user.roles.some((role) => role.name === "ADMIN") && (
+                      <Link
+                        to="/admin"
+                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        Admin panel
+                      </Link>
+                    )}
                 </div>
               </Popover.Group>
 

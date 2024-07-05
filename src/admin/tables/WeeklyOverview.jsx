@@ -66,7 +66,7 @@ const WeeklyOverview = () => {
       }
     },
     xaxis: {
-      categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       tickPlacement: 'on',
       labels: { show: false },
       axisTicks: { show: false },
@@ -85,7 +85,7 @@ const WeeklyOverview = () => {
   return (
     <Card>
       <CardHeader
-        title='Weekly Overview'
+        title='Nedeljni pregled'
         titleTypographyProps={{
           sx: { lineHeight: '0rem !important', letterSpacing: '0.15px !important' }
         }}
@@ -101,10 +101,10 @@ const WeeklyOverview = () => {
           <Typography variant='h5' sx={{ mr: 4 }}>
             45%
           </Typography>
-          <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
+          <Typography variant='body2'>Vaš prodajni učinak je 45% 😎 bolji u odnosu na prošli mesec</Typography>
         </Box>
-        <Button fullWidth variant='contained'>
-          Details
+        <Button fullWidth variant='contained' sx={{ color: 'white.main' }}>
+          Detalji
         </Button>
       </CardContent>
     </Card>

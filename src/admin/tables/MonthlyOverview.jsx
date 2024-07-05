@@ -19,26 +19,26 @@ import AccountOutline from 'mdi-material-ui/AccountOutline'
 const salesData = [
   {
     stats: '245k',
-    title: 'Sales',
+    title: 'Prodaja',
     color: 'primary',
     icon: <TrendingUpIcon sx={{ fontSize: '1.75rem' }} />
   },
   {
     stats: '12.5k',
-    title: 'Customers',
+    title: 'Korisnici',
     color: 'success',
     icon: <AccountOutline sx={{ fontSize: '1.75rem' }} />
   },
   {
     stats: '1.54k',
     color: 'warning',
-    title: 'Products',
+    title: 'Proizvodi',
     icon: <CellphoneLink sx={{ fontSize: '1.75rem' }} />
   },
   {
     stats: '$88k',
     color: 'info',
-    title: 'Revenue',
+    title: 'Profit',
     icon: <CurrencyUsd sx={{ fontSize: '1.75rem' }} />
   }
 ]
@@ -73,7 +73,7 @@ const MonthlyOverview = () => {
   return (
     <Card>
       <CardHeader
-        title='Monthly Overview'
+        title='Mesečni pregled'
         action={
           <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
             <DotsVertical />
@@ -82,9 +82,9 @@ const MonthlyOverview = () => {
         subheader={
           <Typography variant='body2'>
             <Box component='span' sx={{ fontWeight: 600, color: 'text.primary' }}>
-              Total 48.5% growth
+              Ukupan porast 48.5%
             </Box>{' '}
-            😎 this month
+            😎
           </Typography>
         }
         titleTypographyProps={{

@@ -30,13 +30,13 @@ const drawerWidth = 240;
 
 const menu = [
   {name:"Dashboard",path:"/admin"},
-  {name:"Products",path:"/admin/products"},
-  {name:"Customers",path:"/admin/customers"},
-  {name:"Orders",path:"/admin/orders"},
-  {name:"Total Earnings",path:"/admin"},
-  {name:"Weekly Overview",path:"/admin"},
-  {name:"Monthly Overview",path:"/admin"},
-  {name:"Add Product",path:"/admin/product/create"},
+  {name:"Proizvodi",path:"/admin/products"},
+  {name:"Korisnici",path:"/admin/customers"},
+  {name:"Porudžbine",path:"/admin/orders"},
+  {name:"Ukupan profit",path:"/admin"},
+  {name:"Nedeljni pregled",path:"/admin"},
+  {name:"Mesečni pregled",path:"/admin"},
+  {name:"Dodaj proizvod",path:"/admin/product/create"},
 ];
 
 export default function AdminPannel() {
@@ -70,7 +70,7 @@ export default function AdminPannel() {
 
       <List sx={{ position: "absolute", bottom: 0, width: "100%" }}>
         <Divider />
-        {["Account", "Request"].map((text, index) => (
+        {["Nalog", "Zahtev"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>

@@ -164,11 +164,6 @@ export default function AdminNavbar({handleSideBarViewInMobile}) {
       </MenuItem>
     </Menu>
   );
-// https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png
-<PermissionControl
-permission={Claim.ADMIN}
-fallbackContent={navigate("/admin")}
->
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + isLargeScreen, backgroundColor: 'rgb(0, 0, 22)' }}>
@@ -183,7 +178,7 @@ fallbackContent={navigate("/admin")}
           >
             <MenuIcon />
           </IconButton>}
-          <Avatar alt="Zosh" src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png" />
+          <Avatar alt="PrincessAndjela" src="https://res.cloudinary.com/do7xoj7ks/image/upload/v1719396356/PrincessAndjelaLogo_vuim5x.png" />
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -238,5 +233,4 @@ fallbackContent={navigate("/admin")}
       
     </Box>
   );
-  </PermissionControl>
 }
