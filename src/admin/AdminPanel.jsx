@@ -18,7 +18,7 @@ import { customTheme } from "./theme/CustomTheme";
 import AdminNavbar from "./navigation/AdminNavbar";
 import Dashboard from "./views/Admin";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import DemoAdmin from "./views/DemoAdmin";
+// import DemoAdmin from "./views/DemoAdmin";
 import CreateProductForm from "./components/createProduct/CreateProductForm";
 import "./AdminPanel.css";
 import ProductsTable from "./components/products/ProductsTable";
@@ -135,7 +135,7 @@ export default function AdminPannel() {
             <Route path="/products" element={<ProductsTable/>}></Route>
             <Route path="/orders" element={<OrdersTable/>}></Route>
             <Route path="/customers" element={<Customers/>}></Route>
-            <Route path="/demo" element={<DemoAdmin />}></Route>
+            {/* <Route path="/demo" element={<DemoAdmin />}></Route> */}
           </Routes>
          
         </Box>

@@ -13,7 +13,6 @@ import "./Admin.css";
 import RecentlyAddeddProducts from "../tables/RecentlyAddedProducts";
 import SalesOverTime from "../tables/SalesOverTime";
 import RecentOrders from "../tables/RecentOrders";
-import {AssuredWorkloadIcon }from '@mui/icons-material';
 import { BriefcaseVariantOutline, CurrencyUsd, HelpCircleOutline, Poll } from "mdi-material-ui";
 
 const darkTheme1 = createTheme({

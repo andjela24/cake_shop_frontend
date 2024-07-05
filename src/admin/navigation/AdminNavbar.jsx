@@ -19,8 +19,6 @@ import Avatar from '@mui/material/Avatar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
-import { PermissionControl } from '../../config/PermissionControl';
-import { Claim } from '../../config/Claim';
 
 
 const Search = styled('div')(({ theme }) => ({
