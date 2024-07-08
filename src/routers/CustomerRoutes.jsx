@@ -50,20 +50,11 @@ const CustomerRoutes = () => {
           <Route path="/privaciy-policy" element={<PrivacyPolicy />}></Route>
           <Route path="/terms-condition" element={<TearmsCondition />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
-          <Route
-            path="/:lavelOne/:lavelTwo/:lavelThree"
-            element={<Product />}
-          ></Route>
+          <Route path="/:lavelOne/:lavelTwo/:lavelThree" element={<Product />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/account/order" element={<Order />}></Route>
-          <Route
-            path="/account/order/:orderId"
-            element={<OrderDetails />}
-          ></Route>
-          <Route
-            path="/account/rate/:productId"
-            element={<RateProduct />}
-          ></Route>
+          <Route path="/account/order/:orderId" element={<OrderDetails />}></Route>
+          <Route path="/account/rate/:productId" element={<RateProduct />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/payments/success" element={<PaymentSuccess />} />
           {/* <Route path="/payment-success" element={<PaymentSuccess />} /> */}

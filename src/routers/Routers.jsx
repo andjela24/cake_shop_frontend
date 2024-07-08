@@ -36,8 +36,8 @@ const Routers = () => {
         <Route path="/cart" element={<Cart/>}></Route>
       
 
-        <Route path="/admin" element={isAuthenticated && user?.roles.includes('ADMIN') ? <AdminPannel/> : <Navigate to="/login" />} />
-        {/* <Route path="/admin" element={<AdminPannel/>}></Route> */}
+        {/* <Route path="/admin" element={isAuthenticated && user?.roles.includes('ADMIN') ? <AdminPannel/> : <Navigate to="/login" />} /> */}
+        <Route path="/admin" element={<AdminPannel/>}></Route>
         <Route path="/demo" element={<DemoAdmin/>}></Route>
 
       </Routes>

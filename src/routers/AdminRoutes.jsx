@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import AdminPannel from "../admin/AdminPanel";
-import DemoAdmin from "../admin/views/DemoAdmin";
+// import DemoAdmin from "../admin/views/DemoAdmin";
 
 const AdminRoutes = () => {
   return (

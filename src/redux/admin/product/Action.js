@@ -3,6 +3,9 @@ import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
   GET_PRODUCTS_FAILURE,
+  GET_PRODUCT_PAGABLE_FAILURE,
+  GET_PRODUCT_PAGABLE_REQUEST,
+  GET_PRODUCT_PAGABLE_SUCCESS,
   CREATE_PRODUCT_REQUEST,
   CREATE_PRODUCT_SUCCESS,
   CREATE_PRODUCT_FAILURE,
@@ -13,28 +16,63 @@ import {
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAILURE,
 } from "./ActionType";
-import api, { API_BASE_URL } from "../../../config/api";
+import api from "../../../config/api";
 
-// export const getProducts = () => async (dispatch) => {
-//   try {
-//     dispatch({ type: GET_PRODUCTS_REQUEST });
+export const getProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_PRODUCTS_REQUEST });
 
-//     const { data } = await api.get(`${API_BASE_URL}/api/admin/products/`);
+    const { data } = await api.get(`/api/admin/cakes`);
+    console.log("GET PRODUCTS", data);
+    dispatch({
+      type: GET_PRODUCTS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_PRODUCTS_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
-//     dispatch({
-//       type: GET_PRODUCTS_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: GET_PRODUCTS_FAILURE,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
+export const productsPagable = (reqData) => async (dispatch) => {
+  const {
+    category,
+    minWeight,
+    maxWeight,
+    minTier,
+    maxTier,
+    sort,
+    pageNumber,
+    pageSize,
+  } = reqData;
+
+  try {
+    dispatch({ type: GET_PRODUCT_PAGABLE_REQUEST });
+
+    const { data } = await api.get(
+      `/api/user-cake/cakes?category=${category}&minWeight=${minWeight}&maxWeight=${maxWeight}&minTier=${minTier}&maxTier=${maxTier}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
+
+    console.log("Cakes Pagable - ", data);
+    dispatch({
+      type: GET_PRODUCT_PAGABLE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_PRODUCT_PAGABLE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 // export const createProduct = (product) => async (dispatch) => {
 //   try {
