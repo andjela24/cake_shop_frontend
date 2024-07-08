@@ -3,6 +3,9 @@ import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
   GET_PRODUCTS_FAILURE,
+  GET_PRODUCT_BY_ID_FAILURE,
+  GET_PRODUCT_BY_ID_REQUEST,
+  GET_PRODUCT_BY_ID_SUCCESS,
   GET_PRODUCT_PAGABLE_FAILURE,
   GET_PRODUCT_PAGABLE_REQUEST,
   GET_PRODUCT_PAGABLE_SUCCESS,
@@ -15,6 +18,9 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAILURE,
+  GET_CATEGORIES_REQUEST,
+  GET_CATEGORIES_SUCCESS,
+  GET_CATEGORIES_FAILURE,
 } from "./ActionType";
 import api from "../../../config/api";
 
@@ -38,6 +44,72 @@ export const getProducts = () => async (dispatch) => {
     });
   }
 };
+
+export const getProductById = (cakeId) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_PRODUCT_BY_ID_REQUEST });
+
+    const { data } = await api.get(`/api/user-cake/cakes/${cakeId}`);
+
+    dispatch({
+      type: GET_PRODUCT_BY_ID_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_PRODUCT_BY_ID_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateProduct = (product) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PRODUCT_REQUEST });
+
+    const { data } = await api.put(
+      `/api/admin/cakes/${product.productId}`,
+      product
+    );
+
+    dispatch({
+      type: UPDATE_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PRODUCT_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getCategories = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_CATEGORIES_REQUEST });
+
+    const { data } = await api.get(`/api/admin/cakes/categories`);
+    dispatch({
+      type: GET_CATEGORIES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_CATEGORIES_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 
 export const productsPagable = (reqData) => async (dispatch) => {
   const {
@@ -100,29 +172,7 @@ export const productsPagable = (reqData) => async (dispatch) => {
 //   }
 // };
 
-// export const updateProduct = (product) => async (dispatch) => {
-//   try {
-//     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
-//     const { data } = await api.put(
-//       `${API_BASE_URL}/api/admin/products/${product.productId}`,
-//       product
-//     );
-
-//     dispatch({
-//       type: UPDATE_PRODUCT_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: UPDATE_PRODUCT_FAILURE,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
 
 // export const deleteProduct = (data) => async (dispatch) => {
 //   try {

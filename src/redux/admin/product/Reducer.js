@@ -13,11 +13,18 @@ import {
   GET_PRODUCT_PAGABLE_REQUEST,
   GET_PRODUCT_PAGABLE_FAILURE,
   GET_PRODUCT_PAGABLE_SUCCESS,
+  GET_PRODUCT_BY_ID_REQUEST,
+  GET_PRODUCT_BY_ID_SUCCESS,
+  GET_PRODUCT_BY_ID_FAILURE,
+  GET_CATEGORIES_REQUEST,
+  GET_CATEGORIES_SUCCESS,
+  GET_CATEGORIES_FAILURE,
 } from "./ActionType";
 import { UPDATE_PRODUCT_REQUEST } from "./ActionType";
 
 const initialState = {
   products: [],
+  categories: [],
   loading: false,
   error: null,
 };
@@ -42,6 +49,12 @@ const productReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case GET_PRODUCT_BY_ID_REQUEST:
+      return { ...state, loading: true, error: null };
+    case GET_PRODUCT_BY_ID_SUCCESS:
+      return { ...state, product: action.payload, loading: false };
+    case GET_PRODUCT_BY_ID_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     case CREATE_PRODUCT_REQUEST:
       return {
         ...state,
@@ -61,6 +74,24 @@ const productReducer = (state = initialState, action) => {
       };
     case GET_PRODUCT_PAGABLE_FAILURE:
       return { ...state, loading: false, error: action.payload };
+      case GET_CATEGORIES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case GET_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: action.payload,
+      };
+    case GET_CATEGORIES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     case CREATE_PRODUCT_SUCCESS:
       return {
         ...state,
