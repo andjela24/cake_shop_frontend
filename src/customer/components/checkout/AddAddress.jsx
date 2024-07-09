@@ -46,7 +46,7 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       navigate,
       userId: auth.user?.id,
       cartItems: cart.cart.cartItems.map((item) => item.id),
-      deliveryDate: new Date().toISOString(),
+      deliveryDate: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString() + 7,
       totalPrice: cart.cart.totalPrice || 1,
       totalDiscountedPrice: cart.cart.totalDiscountedPrice || 0,
       discount: cart.cart.discount || 0,

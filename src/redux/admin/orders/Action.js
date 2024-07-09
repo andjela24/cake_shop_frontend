@@ -23,22 +23,44 @@ import {
   shipOrderRequest,
   shipOrderSuccess,
 } from "./ActionCreator";
+import { GET_ORDERS_FAILURE, GET_ORDERS_REQUEST, GET_ORDERS_SUCCESS} from "./ActionType";
 
-export const getOrders = (reqData) => {
-  console.log("get all orders ", reqData);
-  return async (dispatch) => {
-    dispatch(getOrdersRequest());
-    try {
-     
-      const response = await api.get(`/api/admin/orders/`);
-      console.log("get all orders ", response.data);
-      dispatch(getOrdersSuccess(response.data));
-    } catch (error) {
-      console.log("catch error ", error);
-      dispatch(getOrdersFailure(error.message));
-    }
-  };
+export const getAllOrders = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_ORDERS_REQUEST });
+
+    const { data } = await api.get(`/api/admin/orders`);
+
+    console.log("Find all orders - ", data);
+    dispatch({
+      type: GET_ORDERS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_ORDERS_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
+// export const getOrders = (reqData) => {
+//   console.log("get all orders ", reqData);
+//   return async (dispatch) => {
+//     dispatch(getOrdersRequest());
+//     try {
+     
+//       const response = await api.get(`/api/admin/orders/`);
+//       console.log("get all orders ", response.data);
+//       dispatch(getOrdersSuccess(response.data));
+//     } catch (error) {
+//       console.log("catch error ", error);
+//       dispatch(getOrdersFailure(error.message));
+//     }
+//   };
+// };
 
 export const confirmOrder = (orderId) => async (dispatch) => {
   dispatch(confirmedOrderRequest());
@@ -59,7 +81,7 @@ export const shipOrder = (orderId) => {
   return async (dispatch) => {
     try {
       dispatch(shipOrderRequest());
-      const {data} = await api.put(`/api/admin/orders/${orderId}/ship`);
+      const {data} = await api.put(`/api/admin/orders/${orderId}/shipped`);
       console.log(" shipped order",data)
       dispatch(shipOrderSuccess(data));
     } catch (error) {
@@ -73,7 +95,7 @@ export const deliveredOrder = (orderId) => async (dispatch) => {
 
   try {
     const response = await api.put(
-      `/api/admin/orders/${orderId}/deliver`
+      `/api/admin/orders/${orderId}/delivered`
     );
     const data = response.data;
     console.log("dilivered order ",data)
@@ -88,7 +110,7 @@ export const cancelOrder = (orderId) => async (dispatch) => {
 
   try {
     const response = await api.put(
-      `/api/admin/orders/${orderId}/cancel`
+      `/api/admin/orders/${orderId}/canceled`
     );
     const data = response.data;
     dispatch(canceledOrderSuccess(data));
