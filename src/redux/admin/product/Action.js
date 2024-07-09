@@ -146,31 +146,31 @@ export const productsPagable = (reqData) => async (dispatch) => {
   }
 };
 
-// export const createProduct = (product) => async (dispatch) => {
-//   try {
-//     dispatch({ type: CREATE_PRODUCT_REQUEST });
+export const createProduct = (product) => async (dispatch) => {
+  try {
+    dispatch({ type: CREATE_PRODUCT_REQUEST });
 
-//     const { data } = await api.post(
-//       `${API_BASE_URL}/api/admin/products/`,
-//       product.data
-//     );
+    const { data } = await api.post(
+      `/api/admin/cakes`,
+      product.data
+    );
 
-//     dispatch({
-//       type: CREATE_PRODUCT_SUCCESS,
-//       payload: data,
-//     });
+    dispatch({
+      type: CREATE_PRODUCT_SUCCESS,
+      payload: data,
+    });
 
-//     console.log("created product ", data);
-//   } catch (error) {
-//     dispatch({
-//       type: CREATE_PRODUCT_FAILURE,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
+    console.log("created product ", data);
+  } catch (error) {
+    dispatch({
+      type: CREATE_PRODUCT_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 
 

@@ -194,7 +194,7 @@ const ProductsTable = () => {
                     {item.category.name}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {item.pricePerKilo}
+                    {item.pricePerKilo} RSD
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     <Button

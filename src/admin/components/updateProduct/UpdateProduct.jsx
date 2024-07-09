@@ -115,11 +115,11 @@ const UpdateProductForm = () => {
   };
 
   return (
-    <Fragment className="createProductContainer">
+    <div className="px-20 py-0">
       <Typography variant="h3" sx={{ textAlign: "center", color: 'white.main' }} className="py-10 text-center">
         Izmeni proizvod
       </Typography>
-      <form onSubmit={handleSubmit} className="createProductContainer min-h-screen">
+      <form onSubmit={handleSubmit} className="px-20 py-0 min-h-screen">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -233,7 +233,7 @@ const UpdateProductForm = () => {
         </Alert>
       </Snackbar>
       </form>
-    </Fragment>
+    </div>
   );
 };
 
