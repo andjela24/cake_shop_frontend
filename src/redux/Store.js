@@ -6,7 +6,7 @@ import customerProductReducer from "./customers/product/Reducer";
 import flavorReducer from "./customers/flavor/Reducer";
 import productReducer from "./admin/product/Reducer";
 import cartReducer from "./customers/cart/Reducer";
-import { orderReducer } from "./customers/order/Reducer";
+import orderReducer from "./customers/order/Reducer"
 import adminOrderReducer from "./admin/orders/Reducer";
 import ReviewReducer from "./customers/review/Reducer";
 import customerCakeReducer from "./customers/cake/Reducer";

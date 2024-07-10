@@ -13,9 +13,9 @@ const OrderDetails = () => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const { orderId } = useParams();
-  const { order } = useSelector((store) => store);
+  const order = useSelector((store) => store.order);
 
-  console.log("order", order.order);
+  console.log("order", order);
 
   useEffect(() => {
     dispatch(getOrderById(orderId));
@@ -25,12 +25,12 @@ const OrderDetails = () => {
   return (
     <div className=" px-2 lg:px-36 space-y-7 ">
       <Grid container className="p-3 shadow-lg">
-        <Grid xs={12}>
-          <p className="font-bold text-lg py-2">Delivery Address</p>
+        {/* <Grid xs={12}>
+          <p className="font-bold text-lg py-2">Adresa dostave</p>
         </Grid>
         <Grid item xs={6}>
-          <AddressCard address={order.order?.shippingAddress} />
-        </Grid>
+          <AddressCard address={order?.order.shippingAddress} />
+        </Grid> */}
       </Grid>
       <Box className="p-5 shadow-lg border rounded-md">
         <Grid
@@ -77,21 +77,21 @@ const OrderDetails = () => {
               <div className="flex  items-center ">
                 <img
                   className="w-[5rem] h-[5rem] object-cover object-top"
-                  src={item?.product.imageUrl}
+                  src={item?.cake.imageUrl}
                   alt=""
                 />
                 <div className="ml-5 space-y-2">
-                  <p className="">{item.product.title}</p>
+                  <p className="">{item.cake.title}</p>
                   <p className="opacity-50 text-xs font-semibold space-x-5">
                     <span>Color: pink</span> <span>Size: {item.size}</span>
                   </p>
-                  <p>Seller: {item.product.brand}</p>
-                  <p>₹{item.price} </p>
+                  {/* <p>Seller: {item.product.brand}</p> */}
+                  <p>{item.totalPrice} RSD</p>
                 </div>
               </div>
             </Grid>
             <Grid item>
-              {
+              {/* {
                 <Box
                   sx={{ color: deepPurple[500] }}
                   onClick={() => navigate(`/account/rate/${item.product.id}`)}
@@ -103,7 +103,7 @@ const OrderDetails = () => {
                   />
                   <span>Rate & Review Product</span>
                 </Box>
-              }
+              } */}
             </Grid>
           </Grid>
         ))}
