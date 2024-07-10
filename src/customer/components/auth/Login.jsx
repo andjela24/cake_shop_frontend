@@ -1,28 +1,44 @@
-import * as React from "react";
-import { Grid, TextField, Button, Box, Snackbar, Alert } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid, TextField, Button, Snackbar, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, login } from "../../../redux/auth/Action";
-import { useEffect } from "react";
-import { useState } from "react";
 
-export default function LoginUserForm({ handleNext }) {
+export default function LoginUserForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
     const [openSnackBar, setOpenSnackBar] = useState(false);
-    const  auth  = useSelector((store) => store);
+    const [loginSuccess, setLoginSuccess] = useState(null);
+    const [errors, setErrors] = useState({});
+    const auth = useSelector((store) => store.auth);
+    
     const handleCloseSnakbar = () => setOpenSnackBar(false);
+
     useEffect(() => {
         if (jwt) {
             dispatch(getUser(jwt));
         }
-    }, [jwt]);
+    }, [jwt, dispatch]);
 
     useEffect(() => {
-        if (auth.user || auth.error) setOpenSnackBar(true);
-    }, [auth.user]);
+        if (auth.user) {
+            setLoginSuccess(true);
+            setOpenSnackBar(true);
+        } else if (auth.error) {
+            setLoginSuccess(false);
+            setOpenSnackBar(true);
+        }
+    }, [auth.user, auth.error]);
     
+    const validate = (data) => {
+        let tempErrors = {};
+        if (!data.email) tempErrors.email = "Email je obavezan.";
+        if (!data.password) tempErrors.password = "Šifra je obavezna.";
+        setErrors(tempErrors);
+        return Object.keys(tempErrors).length === 0;
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -31,13 +47,13 @@ export default function LoginUserForm({ handleNext }) {
             email: data.get("email"),
             password: data.get("password"),
         };
-        console.log("login user", userData);
 
-        dispatch(login(userData));
+        if (validate(userData)) {
+            dispatch(login(userData));
+        }
     };
 
     return (
-        //className=" shadow-lg "
         <React.Fragment> 
             <form className="w-full" onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
@@ -49,6 +65,8 @@ export default function LoginUserForm({ handleNext }) {
                             label="Email"
                             fullWidth
                             autoComplete="given-name"
+                            error={!!errors.email}
+                            helperText={errors.email}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -60,6 +78,8 @@ export default function LoginUserForm({ handleNext }) {
                             fullWidth
                             autoComplete="given-name"
                             type="password"
+                            error={!!errors.password}
+                            helperText={errors.password}
                         />
                     </Grid>
 
@@ -93,19 +113,15 @@ export default function LoginUserForm({ handleNext }) {
             </div>
             <Snackbar
                 open={openSnackBar}
-                autoHideDuration={6000}
+                autoHideDuration={2000}
                 onClose={handleCloseSnakbar}
             >
                 <Alert
                     onClose={handleCloseSnakbar}
-                    severity="success"
+                    severity={loginSuccess ? "success" : "error"}
                     sx={{ width: "100%" }}
                 >
-                    {auth.error
-                        ? auth.error
-                        : auth.user
-                        ? "Register Success"
-                        : ""}
+                    {loginSuccess ? "Uspešno logovanje!" : "Neuspešno logovanje! Pokušajte ponovo."}
                 </Alert>
             </Snackbar>
         </React.Fragment>
