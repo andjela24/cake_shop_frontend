@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   getCategories,
   createProduct,
@@ -16,10 +16,7 @@ import {
   Alert,
   Snackbar,
 } from "@mui/material";
-
-// import "./CreateProductForm.css";
-import { useDispatch, useSelector } from "react-redux";
-// import { createProduct } from "../../../redux/customers/product/Action";
+import { useDispatch } from "react-redux";
 
 const categories = [
   {
@@ -41,30 +38,14 @@ const categories = [
 ];
 
 const CreateProductForm = () => {
-  // const [productData, setProductData] = useState({
-  //     imageUrl: "",
-  //     brand: "",
-  //     title: "",
-  //     color: "",
-  //     discountedPrice: "",
-  //     price: "",
-  //     discountPersent: "",
-  //     size: initialSizes,
-  //     quantity: "",
-  //     topLavelCategory: "",
-  //     secondLavelCategory: "",
-  //     thirdLavelCategory: "",
-  //     description: "",
-  // });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
-  const [alertOpen, setAlertOpen] = useState(false); // State for displaying alert
+  const [alertOpen, setAlertOpen] = useState(false);
 
-  // const categories = useSelector((store) => store.adminsProduct.categories);
 
   useEffect(() => {
-    dispatch(getCategories()); // Fetch categories on component mount
+    dispatch(getCategories());
   }, [dispatch]);
 
   const [productData, setProductData] = useState({
@@ -77,7 +58,6 @@ const CreateProductForm = () => {
     minTier: "",
     maxTier: "",
     categoryId: "",
-    // category: { id: "", name: "" },
   });
 
   const handleChange = (e) => {
@@ -95,44 +75,6 @@ const CreateProductForm = () => {
     }
   };
 
-  // const handleChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setProductData((prevState) => ({
-  //         ...prevState,
-  //         [name]: value,
-  //     }));
-  // };
-
-  // const handleSizeChange = (e, index) => {
-  //     let { name, value } = e.target;
-  //     name === "size_quantity" ? (name = "quantity") : (name = e.target.name);
-
-  //     const sizes = [...productData.size];
-  //     sizes[index][name] = value;
-  //     setProductData((prevState) => ({
-  //         ...prevState,
-  //         size: sizes,
-  //     }));
-  // };
-
-  // const handleAddSize = () => {
-  //     const sizes = [...productData.size];
-  //     sizes.push({ name: "", quantity: "" });
-  //     setProductData((prevState) => ({
-  //         ...prevState,
-  //         size: sizes,
-  //     }));
-  // };
-
-  // const handleRemoveSize = (index) => {
-  //   const sizes = [...productData.size];
-  //   sizes.splice(index, 1);
-  //   setProductData((prevState) => ({
-  //     ...prevState,
-  //     size: sizes,
-  //   }));
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createProduct({ data: productData, jwt }))
@@ -145,9 +87,7 @@ const CreateProductForm = () => {
       })
       .catch((error) => {
         console.error("Error creating product:", error);
-        // Handle error state or display error message
       });
-    console.log(productData);
   };
 
   return (
@@ -159,10 +99,7 @@ const CreateProductForm = () => {
       >
         Kreiraj proizvod
       </Typography>
-      <form
-        onSubmit={handleSubmit}
-        className="px-20 py-0 min-h-screen"
-      >
+      <form onSubmit={handleSubmit} className="px-20 py-0 min-h-screen">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -260,35 +197,6 @@ const CreateProductForm = () => {
               </Select>
             </FormControl>
           </Grid>
-
-          {/* {productData.size.map((size, index) => (
-                        <Grid container item spacing={3}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    label="Size Name"
-                                    name="name"
-                                    value={size.name}
-                                    onChange={(event) =>
-                                        handleSizeChange(event, index)
-                                    }
-                                    required
-                                    fullWidth
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    label="Quantity"
-                                    name="size_quantity"
-                                    type="number"
-                                    onChange={(event) =>
-                                        handleSizeChange(event, index)
-                                    }
-                                    required
-                                    fullWidth
-                                />
-                            </Grid>{" "}
-                        </Grid>
-                    ))} */}
           <Grid item xs={12}>
             <Button
               variant="contained"
@@ -299,15 +207,6 @@ const CreateProductForm = () => {
             >
               Dodaj proizvod
             </Button>
-            {/* <Button
-              variant="contained"
-              sx={{ p: 1.8 }}
-              className="py-20 ml-10"
-              size="large"
-              onClick={()=>handleAddProducts(dressPage1)}
-            >
-              Add Products By Loop
-            </Button> */}
           </Grid>
         </Grid>
       </form>

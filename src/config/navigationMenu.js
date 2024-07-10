@@ -8,8 +8,7 @@ export const navigation = {
           name: "Dečije",
           id: "Dečije",
           href: "/cakes",
-          imageSrc:
-            "https://images.unsplash.com/photo-1562440499-64c9a111f713",
+          imageSrc: "https://images.unsplash.com/photo-1562440499-64c9a111f713",
           imageAlt:
             "Models sitting back to back, wearing Basic Tee in black and bone.",
         },
@@ -17,8 +16,7 @@ export const navigation = {
           name: "Svečane",
           id: "Svečane",
           href: "/cakes",
-          imageSrc:
-            "https://images.unsplash.com/photo-1562777717-dc6984f65a63",
+          imageSrc: "https://images.unsplash.com/photo-1562777717-dc6984f65a63",
           imageAlt:
             "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
@@ -45,11 +43,9 @@ export const navigation = {
   ],
   pages: [
     { name: "Ukusi torti", id: "/flavors", href: "flavors" },
-    { name: "Cenovnik", id: "prices", href: "prices"},
+    { name: "Cenovnik", id: "prices", href: "prices" },
     { name: "Pitanja", id: "/questions", href: "questions" },
     { name: "O nama", id: "/about", href: "about" },
     { name: "Kontakt", id: "/contact", href: "contact" },
   ],
 };
-
-//Ovo mi sluzi za ucitavanje u navbar

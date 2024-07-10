@@ -16,7 +16,7 @@ const CartItem = ({ item, showButton }) => {
   const [updatedWeight, setUpdatedWeight] = useState(item.selectedWeight);
 
   const handleRemoveItemFromCart = () => {
-    dispatch(removeCartItem(item.id, jwt)); // Poziv akcije za uklanjanje stavke iz korpe
+    dispatch(removeCartItem(item.id, jwt));
   };
 
   const handleWeightChange = (amount) => {
@@ -24,9 +24,9 @@ const CartItem = ({ item, showButton }) => {
     if (newWeight >= 1) {
       setUpdatedWeight(newWeight);
       if (amount > 0) {
-        dispatch(increaseCartItemWeight(item.id, jwt)); // Poziv akcije za povećanje težine
+        dispatch(increaseCartItemWeight(item.id, jwt));
       } else {
-        dispatch(decreaseCartItemWeight(item.id, jwt)); // Poziv akcije za smanjenje težine
+        dispatch(decreaseCartItemWeight(item.id, jwt));
       }
     }
   };

@@ -9,28 +9,14 @@ import CardStatsVertical from "../../styles/CardStatusVertical";
 import CustomersTable from "../tables/CustomersTable";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { customTheme } from "../theme/CustomTheme";
-import "./Admin.css";
 import RecentlyAddeddProducts from "../tables/RecentlyAddedProducts";
 import SalesOverTime from "../tables/SalesOverTime";
 import RecentOrders from "../tables/RecentOrders";
 import { BriefcaseVariantOutline, CurrencyUsd, HelpCircleOutline, Poll } from "mdi-material-ui";
 
-const darkTheme1 = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#312d4b',
-    },
-    secondary: {
-      main: '#f48fb1',
-    },
-  },
-});
-
-// bg-[#28243d]
 const Dashboard = () => {
   return (
-    <div className="adminContainer ">
+    <div className="!bg-[rgb(0,_0,_22)] p-4">
       <ThemeProvider theme={customTheme}>
         <AdminPannel>
           <Grid container spacing={2}>

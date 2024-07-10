@@ -7,10 +7,13 @@ import StarIcon from "@mui/icons-material/Star";
 
 const OrderCard = ({ item, order }) => {
   const navigate = useNavigate();
-  console.log("items ", item,order,order.orderStatus);
   return (
     <Box className="p-5 shadow-lg hover:shadow-2xl border ">
-      <Grid spacing={2} container sx={{ justifyContent: "space-between", alignItems: "center"}}>
+      <Grid
+        spacing={2}
+        container
+        sx={{ justifyContent: "space-between", alignItems: "center" }}
+      >
         <Grid item xs={3}>
           <div
             onClick={() => navigate(`/account/order/${order?.id}`)}
@@ -37,35 +40,24 @@ const OrderCard = ({ item, order }) => {
         </Grid>
         <Grid item xs={3}>
           <p className="space-y-2 font-semibold">
-            {order?.orderStatus === "DELIVERED"? (
-             <>
-             <FiberManualRecordIcon
+            {order?.orderStatus === "DELIVERED" ? (
+              <>
+                <FiberManualRecordIcon
                   sx={{ width: "15px", height: "15px" }}
                   className="text-green-600 p-0 mr-2 text-sm"
                 />
                 <span>Dostavljeno {order.deliveryDate}</span>
-
-            </>
-            ):  <>
-               
+              </>
+            ) : (
+              <>
                 <AdjustIcon
-                sx={{ width: "15px", height: "15px" }}
-                className="text-green-600 p-0 mr-2 text-sm"
-              />
-              <span>Očekuje se dostava {order.deliveryDate}</span>
-              </>}
-            
+                  sx={{ width: "15px", height: "15px" }}
+                  className="text-green-600 p-0 mr-2 text-sm"
+                />
+                <span>Očekuje se dostava {order.deliveryDate}</span>
+              </>
+            )}
           </p>
-          {/* <p className="text-xs">Vaša porudžbina je dostavljena</p> */}
-          {/* {item.orderStatus === "DELIVERED" && (
-            <div
-              onClick={() => navigate(`/account/rate/{id}`)}
-              className="flex items-center text-blue-600 cursor-pointer"
-            >
-              <StarIcon sx={{ fontSize: "2rem" }} className="px-2 text-5xl" />
-              <span>Rate & Review Product</span>
-            </div>
-          )} */}
         </Grid>
       </Grid>
     </Box>

@@ -54,7 +54,6 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       orderStatus: "Pending",
       totalItem: cart.cart.totalItem || 0,
     };
-    console.log("Order data", orderData);
     dispatch(createOrder(orderData));
     handleNext();
   };

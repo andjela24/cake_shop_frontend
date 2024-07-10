@@ -12,10 +12,9 @@ import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { navigation } from "../../../config/navigationMenu";
 import AuthModal from "../auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
-import { deepPurple } from "@mui/material/colors";
 import { getUser, logout } from "../../../redux/auth/Action";
 import { getCart } from "../../../redux/customers/cart/Action";
-import { findCakesByCategory } from "../../../redux/customers/product/Action";
+import { findCakesByCategory } from "../../../redux/customers/cake/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -54,10 +53,7 @@ export default function Navigation() {
   };
 
   const handleCategoryClick = (category, featured, close) => {
-    dispatch(findCakesByCategory({ category: featured.id })); // Dispatch action to fetch cakes by category
-    // navigate(featured.href);
-    // navigate(`/${category.id}/${featured.id}`);
-    // navigate(`/cakes/${featured.id}`);
+    dispatch(findCakesByCategory({ category: featured.id }));
     navigate({ pathname: "/cakes", search: `?category=${featured.id}` });
     close();
   };
@@ -79,8 +75,6 @@ export default function Navigation() {
     handleCloseUserMenu();
     navigate("/account/order");
   };
-
-  console.log("U navbaru", auth.user);
 
   return (
     <div className="bg-white">
@@ -284,7 +278,6 @@ export default function Navigation() {
                             leaveTo="opacity-0"
                           >
                             <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                               <div
                                 className="absolute inset-0 top-1/2 bg-white shadow"
                                 aria-hidden="true"
@@ -368,7 +361,6 @@ export default function Navigation() {
                         aria-controls={open ? "basic-menu" : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
-                        // onClick={handleUserClick}
                         sx={{
                           bgcolor: "#132743",
                           color: "white",
@@ -377,15 +369,6 @@ export default function Navigation() {
                       >
                         {auth.user?.firstName?.[0].toUpperCase()}
                       </Avatar>
-                      {/* <Button
-                        id="basic-button"
-                        aria-controls={open ? "basic-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        onClick={handleUserClick}
-                      >
-                        Dashboard
-                      </Button> */}
                       <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}

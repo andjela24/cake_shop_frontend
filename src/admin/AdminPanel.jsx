@@ -18,9 +18,7 @@ import { customTheme } from "./theme/CustomTheme";
 import AdminNavbar from "./navigation/AdminNavbar";
 import Dashboard from "./views/Admin";
 import { Route, Routes, useNavigate } from "react-router-dom";
-// import DemoAdmin from "./views/DemoAdmin";
 import CreateProductForm from "./components/createProduct/CreateProductForm";
-import "./AdminPanel.css";
 import ProductsTable from "./components/products/ProductsTable";
 import OrdersTable from "./components/orders/OrdersTable";
 import Customers from "./components/customers/Customers";
@@ -29,21 +27,21 @@ import UpdateProductForm from "./components/updateProduct/UpdateProduct";
 const drawerWidth = 240;
 
 const menu = [
-  {name:"Dashboard",path:"/admin"},
-  {name:"Proizvodi",path:"/admin/products"},
-  {name:"Korisnici",path:"/admin/customers"},
-  {name:"Porudžbine",path:"/admin/orders"},
-  {name:"Ukupan profit",path:"/admin"},
-  {name:"Nedeljni pregled",path:"/admin"},
-  {name:"Mesečni pregled",path:"/admin"},
-  {name:"Dodaj proizvod",path:"/admin/product/create"},
+  { name: "Dashboard", path: "/admin" },
+  { name: "Proizvodi", path: "/admin/products" },
+  { name: "Korisnici", path: "/admin/customers" },
+  { name: "Porudžbine", path: "/admin/orders" },
+  { name: "Ukupan profit", path: "/admin" },
+  { name: "Nedeljni pregled", path: "/admin" },
+  { name: "Mesečni pregled", path: "/admin" },
+  { name: "Dodaj proizvod", path: "/admin/product/create" },
 ];
 
 export default function AdminPannel() {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const [sideBarVisible, setSideBarVisible] = React.useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const drawer = (
     <Box
@@ -57,7 +55,11 @@ export default function AdminPannel() {
       {isLargeScreen && <Toolbar />}
       <List>
         {menu.map((item, index) => (
-          <ListItem key={item.name} disablePadding onClick={()=>navigate(item.path)}>
+          <ListItem
+            key={item.name}
+            disablePadding
+            onClick={() => navigate(item.path)}
+          >
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -126,18 +128,22 @@ export default function AdminPannel() {
         >
           {drawer}
         </Drawer>
-        <Box className="adminContainer" component="main" sx={{ flexGrow: 1 }}>
+        <Box className="!bg-[rgb(0,_0,_22)] p-4 min-h-screen w-full" component="main" sx={{ flexGrow: 1 }}>
           <Toolbar />
           <Routes>
-            <Route path="/" element={ <Dashboard />}></Route>
-            <Route path="/product/create" element={<CreateProductForm/>}></Route>
-            <Route path="/product/update/:productId" element={<UpdateProductForm/>}></Route>
-            <Route path="/products" element={<ProductsTable/>}></Route>
-            <Route path="/orders" element={<OrdersTable/>}></Route>
-            <Route path="/customers" element={<Customers/>}></Route>
-            {/* <Route path="/demo" element={<DemoAdmin />}></Route> */}
+            <Route path="/" element={<Dashboard />}></Route>
+            <Route
+              path="/product/create"
+              element={<CreateProductForm />}
+            ></Route>
+            <Route
+              path="/product/update/:productId"
+              element={<UpdateProductForm />}
+            ></Route>
+            <Route path="/products" element={<ProductsTable />}></Route>
+            <Route path="/orders" element={<OrdersTable />}></Route>
+            <Route path="/customers" element={<Customers />}></Route>
           </Routes>
-         
         </Box>
       </Box>
     </ThemeProvider>

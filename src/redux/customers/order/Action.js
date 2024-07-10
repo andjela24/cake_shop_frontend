@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   CREATE_ORDER_FAILURE,
   CREATE_ORDER_REQUEST,
@@ -10,7 +9,7 @@ import {
   GET_ORDER_HISTORY_REQUEST,
   GET_ORDER_HISTORY_SUCCESS,
 } from "./ActionType";
-import api, { API_BASE_URL } from "../../../config/api";
+import api from "../../../config/api";
 
 export const createOrder = (reqData) => async (dispatch) => {
   try {
@@ -23,7 +22,6 @@ export const createOrder = (reqData) => async (dispatch) => {
       },
     };
 
-    // Kreiranje objekta zahteva koji uključuje address i cartItems
     const requestData = {
       userId: reqData.userId,
       cartItems: reqData.cartItems,
@@ -36,7 +34,6 @@ export const createOrder = (reqData) => async (dispatch) => {
       orderStatus: "Pending",
       totalItem: reqData.cartItems.length,
     };
-    console.log("REQUEST DATA za order: ", requestData);
 
     const { data } = await api.post(`/api/orders`, requestData, config);
 
@@ -59,7 +56,6 @@ export const createOrder = (reqData) => async (dispatch) => {
 };
 
 export const getOrderById = (orderId) => async (dispatch) => {
-  console.log("get order req ", orderId);
   try {
     dispatch({ type: GET_ORDER_BY_ID_REQUEST });
 
@@ -67,14 +63,11 @@ export const getOrderById = (orderId) => async (dispatch) => {
       `/api/orders/${orderId}`,
       
     );
-    console.log("order id u action", orderId);
-    console.log("order by id ", data);
     dispatch({
       type: GET_ORDER_BY_ID_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    console.log("catch ",error)
     dispatch({
       type: GET_ORDER_BY_ID_FAILURE,
       payload:
@@ -96,7 +89,6 @@ export const getOrderHistory = (reqData) => async (dispatch, getState) => {
     };
 
     const { data } = await api.get(`/api/orders/user`);
-    console.log("order history -------- ", data);
     dispatch({
       type: GET_ORDER_HISTORY_SUCCESS,
       payload: data,

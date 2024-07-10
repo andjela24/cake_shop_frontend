@@ -1,7 +1,22 @@
-import { useState, useEffect, Fragment } from "react";
-import { Typography, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Alert, Snackbar } from "@mui/material";
+import { useState, useEffect } from "react";
+import {
+  Typography,
+  Grid,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductById, updateProduct, getCategories } from "../../../redux/admin/product/Action";
+import {
+  getProductById,
+  updateProduct,
+  getCategories,
+} from "../../../redux/admin/product/Action";
 import { useParams, useNavigate } from "react-router-dom";
 
 const UpdateProductForm = () => {
@@ -21,14 +36,14 @@ const UpdateProductForm = () => {
   const navigate = useNavigate();
 
   const { productId } = useParams();
-  const [alertOpen, setAlertOpen] = useState(false); // State for displaying alert
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const product = useSelector((store) => store.adminsProduct.product);
-  const categories = useSelector((store) => store.adminsProduct.categories); // Assume categories are fetched and stored here
+  const categories = useSelector((store) => store.adminsProduct.categories);
 
   useEffect(() => {
     dispatch(getProductById(productId));
-    dispatch(getCategories()); // Fetch categories on component mount
+    dispatch(getCategories());
   }, [dispatch, productId]);
 
   useEffect(() => {
@@ -42,32 +57,17 @@ const UpdateProductForm = () => {
         maxWeight: product.maxWeight || "",
         minTier: product.minTier || "",
         maxTier: product.maxTier || "",
-        category: product.category || { id: "", name: "" }, // Ensure category is an object
+        category: product.category || { id: "", name: "" },
       });
     }
   }, [product]);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   if (name === "category") {
-  //     const selectedCategory = categories.find((cat) => cat.id === parseInt(value));
-  //     setProductData((prevState) => ({
-  //       ...prevState,
-  //       category: selectedCategory || { id: "", name: "" },
-  //     }));
-  //   } else {
-  //     setProductData((prevState) => ({
-  //       ...prevState,
-  //       [name]: value,
-  //     }));
-  //   }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("Selected category id:", value); // Dodajemo console.log ovde
     if (name === "category") {
-      const selectedCategory = categories.find((cat) => cat.id === parseInt(value));
+      const selectedCategory = categories.find(
+        (cat) => cat.id === parseInt(value)
+      );
       setProductData((prevState) => ({
         ...prevState,
         category: selectedCategory || { id: "", name: "" },
@@ -79,44 +79,34 @@ const UpdateProductForm = () => {
       }));
     }
   };
-  
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const updatedProduct = { ...productData,
-  //     categoryId: productData.category.id, // Dodajte categoryId ovde
-  //   productId: parseInt(productId)
-  //     //  productId
-      
-  //     };
-  //     console.log(updatedProduct.categoryId);
-  //   dispatch(updateProduct(updatedProduct));
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedProduct = {
       ...productData,
       categoryId: productData.category.id,
-      productId: parseInt(productId)
+      productId: parseInt(productId),
     };
     dispatch(updateProduct(updatedProduct))
       .then(() => {
         setAlertOpen(true);
         setTimeout(() => {
           setAlertOpen(false);
-          navigate("/admin/products"); // Preusmeravanje na /products putanju
+          navigate("/admin/products");
         }, 2000);
       })
       .catch((error) => {
         console.error("Error updating product:", error);
-        // Handle error state or display error message
       });
   };
 
   return (
     <div className="px-20 py-0">
-      <Typography variant="h3" sx={{ textAlign: "center", color: 'white.main' }} className="py-10 text-center">
+      <Typography
+        variant="h3"
+        sx={{ textAlign: "center", color: "white.main" }}
+        className="py-10 text-center"
+      >
         Izmeni proizvod
       </Typography>
       <form onSubmit={handleSubmit} className="px-20 py-0 min-h-screen">
@@ -219,7 +209,7 @@ const UpdateProductForm = () => {
           <Grid item xs={12}>
             <Button
               variant="contained"
-              sx={{ p: 1.8, color: 'white.main' }}
+              sx={{ p: 1.8, color: "white.main" }}
               size="large"
               type="submit"
             >
@@ -227,11 +217,15 @@ const UpdateProductForm = () => {
             </Button>
           </Grid>
         </Grid>
-        <Snackbar open={alertOpen} autoHideDuration={3000} onClose={() => setAlertOpen(false)}>
-        <Alert onClose={() => setAlertOpen(false)} severity="success">
-          Proizvod je uspešno izmenjen!
-        </Alert>
-      </Snackbar>
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={3000}
+          onClose={() => setAlertOpen(false)}
+        >
+          <Alert onClose={() => setAlertOpen(false)} severity="success">
+            Proizvod je uspešno izmenjen!
+          </Alert>
+        </Snackbar>
       </form>
     </div>
   );

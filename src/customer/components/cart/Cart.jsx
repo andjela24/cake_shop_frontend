@@ -11,7 +11,6 @@ const Cart = () => {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const { cart } = useSelector((store) => store);
-  console.log("cart ", cart);
 
   useEffect(() => {
     dispatch(getCart(jwt));

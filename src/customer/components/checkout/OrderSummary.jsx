@@ -34,22 +34,19 @@ const OrderSummary = () => {
         orderId: order.id,
         jwt,
         total: order.totalPrice,
-        currency: "EUR", // Postavite odgovarajuću valutu
-        description: "Opis plaćanja", // Postavite odgovarajući opis
+        currency: "EUR",
+        description: "Opis plaćanja",
       };
 
       const response = await dispatch(createPayment(paymentData));
 
-      // Nakon uspešnog kreiranja plaćanja, pozovite akciju za potvrdu plaćanja
       if (response && response.success) {
-        // Preusmerite na success stranicu
         navigate(`/payments/success`);
       } else {
         throw new Error("Payment creation failed");
       }
     } catch (error) {
       console.error("Error creating payment:", error);
-      // Handle error if needed
     }
   };
 
@@ -99,7 +96,7 @@ const OrderSummary = () => {
                 padding: ".8rem 2rem",
                 marginTop: "2rem",
                 width: "100%",
-                background: "#132743"
+                background: "#132743",
               }}
             >
               PLAĆANJE

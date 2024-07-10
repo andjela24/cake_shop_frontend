@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { findCakeById } from "../../../../redux/customers/product/Action";
+import { findCakeById } from "../../../../redux/customers/cake/Action";
 import { addItemToCart } from "../../../../redux/customers/cart/Action";
 import { fetchFlavors } from "../../../../redux/customers/flavor/Action";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,7 +16,7 @@ export default function CakeDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cakeId } = useParams();
-  const cake = useSelector((store) => store.customersProduct.product);
+  const cake = useSelector((store) => store.customersCake.cake);
   const flavorsList = useSelector((store) => store.flavors.flavors);
 
   const [selectedSize, setSelectedSize] = useState("");
@@ -42,10 +42,6 @@ export default function CakeDetails() {
     setSelectedFlavors(Array(size).fill(""));
   };
 
-  const handleFakeTierChange = (e) => {
-    setFakeTier(parseInt(e.target.value));
-  };
-
   const handleFlavorChange = (tierIndex, flavorId) => {
     setSelectedFlavors((prevSelectedFlavors) => {
       const newSelectedFlavors = [...prevSelectedFlavors];
@@ -65,7 +61,6 @@ export default function CakeDetails() {
       note: "",
       fakeTier: parseInt(fakeTier),
     };
-    console.log("DATA ", data);
     dispatch(addItemToCart(data, jwt));
     navigate("/");
   };

@@ -29,7 +29,6 @@ export const getProducts = () => async (dispatch) => {
     dispatch({ type: GET_PRODUCTS_REQUEST });
 
     const { data } = await api.get(`/api/admin/cakes`);
-    console.log("GET PRODUCTS", data);
     dispatch({
       type: GET_PRODUCTS_SUCCESS,
       payload: data,
@@ -110,7 +109,6 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 
-
 export const productsPagable = (reqData) => async (dispatch) => {
   const {
     category,
@@ -130,7 +128,6 @@ export const productsPagable = (reqData) => async (dispatch) => {
       `/api/user-cake/cakes?category=${category}&minWeight=${minWeight}&maxWeight=${maxWeight}&minTier=${minTier}&maxTier=${maxTier}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
 
-    console.log("Cakes Pagable - ", data);
     dispatch({
       type: GET_PRODUCT_PAGABLE_SUCCESS,
       payload: data,
@@ -150,17 +147,13 @@ export const createProduct = (product) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_PRODUCT_REQUEST });
 
-    const { data } = await api.post(
-      `/api/admin/cakes`,
-      product.data
-    );
+    const { data } = await api.post(`/api/admin/cakes`, product.data);
 
     dispatch({
       type: CREATE_PRODUCT_SUCCESS,
       payload: data,
     });
 
-    console.log("created product ", data);
   } catch (error) {
     dispatch({
       type: CREATE_PRODUCT_FAILURE,
@@ -172,25 +165,23 @@ export const createProduct = (product) => async (dispatch) => {
   }
 };
 
+export const deleteProduct = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_PRODUCT_REQUEST });
 
+    await api.delete(`/api/admin/products/${data.productId}`);
 
-// export const deleteProduct = (data) => async (dispatch) => {
-//   try {
-//     dispatch({ type: DELETE_PRODUCT_REQUEST });
-
-//     await api.delete(`/api/admin/products/${data.productId}`);
-
-//     dispatch({
-//       type: DELETE_PRODUCT_SUCCESS,
-//       payload: data.productId,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: DELETE_PRODUCT_FAILURE,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
+    dispatch({
+      type: DELETE_PRODUCT_SUCCESS,
+      payload: data.productId,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_PRODUCT_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { confirmPaymentSuccess } from "../../../redux/customers/payment/Action";
 import OrderTracker from "../orders/OrderTracker";
 import AddressCard from "../address/AddressCard";
 import { Alert, AlertTitle, Grid } from "@mui/material";
 
 const PaymentSuccess = () => {
-  const { orderId } = useParams();
   const dispatch = useDispatch();
   const order = useSelector((store) => store.order.order);
 
@@ -19,13 +17,12 @@ const PaymentSuccess = () => {
     const storedOrderId = localStorage.getItem("orderId");
 
     if (paymentId && payerId) {
-      // Pozivamo akciju confirmPaymentSuccess kako bi ažurirali stanje porudžbine
       dispatch(confirmPaymentSuccess(paymentId, payerId, storedOrderId));
     }
   }, [dispatch]);
 
   return (
-    <div className="px-2 lg:px-36">
+    <div className="pt-6 px-2 lg:px-36">
       <div className="flex flex-col justify-center items-center">
         <Alert
           variant="filled"

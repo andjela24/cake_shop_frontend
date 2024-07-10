@@ -19,14 +19,13 @@ const steps = [
 export default function Checkout() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const step = parseInt(queryParams.get('step')) || 1;
+  const step = parseInt(queryParams.get("step")) || 1;
   const navigate = useNavigate();
 
-  // State za čuvanje orderId
   const [orderId, setOrderId] = React.useState(null);
 
   const handleNext = (id) => {
-    setOrderId(id); // Postavi orderId u stanje komponente
+    setOrderId(id);
     const nextStep = step + 1;
     navigate(`/checkout?step=${nextStep}`);
   };
@@ -41,7 +40,7 @@ export default function Checkout() {
   };
 
   return (
-    <Box className="px-5 lg:px-32 " sx={{ width: "100%" }}>
+    <Box className="pt-6 px-5 lg:px-32 " sx={{ width: "100%" }}>
       <Stepper activeStep={step - 1}>
         {steps.map((label, index) => (
           <Step key={label}>

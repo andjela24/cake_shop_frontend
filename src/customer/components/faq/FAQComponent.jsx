@@ -1,7 +1,13 @@
-import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Container } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { faqs } from './Faqs';
+import React from "react";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Container,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { faqs } from "./Faqs";
 
 const FAQComponent = () => {
   return (
@@ -16,7 +22,7 @@ const FAQComponent = () => {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              {faq.answer.split('\n').map((line, idx) => (
+              {faq.answer.split("\n").map((line, idx) => (
                 <React.Fragment key={idx}>
                   {line}
                   <br />

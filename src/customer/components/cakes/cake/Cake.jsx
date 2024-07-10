@@ -6,7 +6,6 @@ import {
   FunnelIcon,
   MinusIcon,
   PlusIcon,
-  Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -15,10 +14,10 @@ import FormControl from "@mui/material/FormControl";
 import Pagination from "@mui/material/Pagination";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cakesPagable } from "../../../../redux/customers/product/Action";
+import { cakesPagable } from "../../../../redux/customers/cake/Action";
 import { Backdrop, CircularProgress } from "@mui/material";
 import CakeCard from "../cakeCard/CakeCard";
-import { filters, singleFilter, sortOptions } from "./FilterData";
+import { filters, sortOptions } from "./FilterData";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -61,7 +60,7 @@ export default function Cake() {
       minTier: minTierValue || 1,
       maxTier: maxTierValue || 4,
       sort: value,
-      pageNumber: 0, // Reset page number to 0
+      pageNumber: 0,
       pageSize: 10,
     }));
   };
@@ -75,12 +74,11 @@ export default function Cake() {
 
   const handleCategoryFilterChange = (event) => {
     const searchParams = new URLSearchParams(location.search);
-    searchParams.set("category", event.target.value); // Update category parameter
-    searchParams.delete("pageNumber"); // Reset pageNumber when changing filters
+    searchParams.set("category", event.target.value);
+    searchParams.delete("pageNumber");
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
 
-    // Dispatch cakesPagable with updated category
     dispatch(cakesPagable({
       category: event.target.value,
       minWeight: minWeightValue || 1,
@@ -88,7 +86,7 @@ export default function Cake() {
       minTier: minTierValue || 1,
       maxTier: maxTierValue || 4,
       sort: sortValue || "price_low",
-      pageNumber: 0, // Reset page number to 0
+      pageNumber: 0,
       pageSize: 10,
     }));
   };
@@ -124,7 +122,6 @@ export default function Cake() {
       setIsLoaderOpen(false);
     }
   }, [customersCake.loading]);
-  console.log({ cakes });
   return (
 <div className="bg-white -z-20">
       <div>

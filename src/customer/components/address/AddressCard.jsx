@@ -7,7 +7,6 @@ const AddressCard = ({ address }) => {
 
   return (
     <div className="p-5 border rounded-md">
-      {/* <div className="grid grid-cols-3 gap-10"> */}
       <div className="flex justify-between">
         {user ? (
           <>
@@ -29,7 +28,7 @@ const AddressCard = ({ address }) => {
           <p>Nema informacija o korisniku</p>
         )}
       </div>
-     </div>
+    </div>
   );
 };
 
