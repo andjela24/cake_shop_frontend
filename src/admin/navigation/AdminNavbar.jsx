@@ -183,6 +183,8 @@ export default function AdminNavbar({ handleSideBarViewInMobile }) {
           <Avatar
             alt="PrincessAndjela"
             src="https://res.cloudinary.com/do7xoj7ks/image/upload/v1719396356/PrincessAndjelaLogo_vuim5x.png"
+            onClick={() => navigate("/")}
+            sx={{ cursor: "pointer" }}
           />
           <Search>
             <SearchIconWrapper>

@@ -18,9 +18,23 @@ const Cart = () => {
 
   if (!jwt) {
     return (
-      <Box textAlign="center" mt={4}>
+      <Box
+        textAlign="center"
+        mt={4}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+          <img
+            src="https://img.freepik.com/free-vector/my-password-concept-illustration_114360-4294.jpg?t=st=1720693046~exp=1720696646~hmac=61b778ec1c3b12b5e616bb86379d740e2ea7af72d2675a3565290b77114411df&w=826"
+            alt="Login illustration"
+            className="object-cover object-center h-3/6"
+          />
         <Typography variant="h6">
-          Prijavite se da bi videli svoju korpu
+          Prijavite se da bi videli svoju korpu.
         </Typography>
       </Box>
     );
@@ -28,7 +42,17 @@ const Cart = () => {
 
   if (cart.cartItems.length === 0) {
     return (
-      <Box textAlign="center" mt={4}>
+      <Box textAlign="center" mt={4}  sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+      }}>
+        <img
+            src="https://img.freepik.com/free-vector/empty-shopping-basket-concept-illustration_114360-17072.jpg?t=st=1720694255~exp=1720697855~hmac=e910d23a37492fa3d82fdb85dbe86744a21b13548214ea03178b78aa3053369c&w=826"
+            alt="Cart illustration"
+            className="object-cover object-center h-3/6"
+          />
         <Typography variant="h6">Nemate proizvoda u korpi</Typography>
       </Box>
     );

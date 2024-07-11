@@ -165,9 +165,6 @@ export default function Navigation() {
                                 />
                                 {item.name}
                               </a>
-                              <p aria-hidden="true" className="mt-1">
-                                Shop now
-                              </p>
                             </div>
                           ))}
                         </div>
@@ -203,14 +200,14 @@ export default function Navigation() {
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="/" className="-m-2 flex items-center p-2">
                     <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
+                      src="https://www.svgrepo.com/show/405597/flag-for-flag-serbia.svg"
+                      alt="Serbia flag"
                       className="block h-auto w-5 flex-shrink-0"
                     />
                     <span className="ml-3 block text-base font-medium text-gray-900">
                       RSD
                     </span>
-                    <span className="sr-only">, change currency</span>
+                    <span className="sr-only">, Promeni valutu</span>
                   </a>
                 </div>
               </Dialog.Panel>
@@ -422,7 +419,7 @@ export default function Navigation() {
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
                       {cart.cartItems.length}
                     </span>
-                    <span className="sr-only">items in cart, view bag</span>
+                    <span className="sr-only">Proizvodi u korpi</span>
                   </Button>
                 </div>
               </div>
