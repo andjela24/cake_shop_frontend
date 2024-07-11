@@ -28,11 +28,11 @@ export const addItemToCart = (itemData, jwt) => async (dispatch) => {
       },
     };
 
-    const { data } = await api.put(`/api/carts/add`, itemData, config);
+    const {data} = await api.put(`/api/carts/add`, itemData, config);
 
     dispatch({
       type: ADD_ITEM_TO_CART_SUCCESS,
-      payload: data,
+      payload: { cartItems: data },
     });
   } catch (error) {
     dispatch({

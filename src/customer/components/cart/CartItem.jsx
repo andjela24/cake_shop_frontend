@@ -13,7 +13,7 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 const CartItem = ({ item, showButton }) => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const [updatedWeight, setUpdatedWeight] = useState(item.selectedWeight);
+  const [updatedWeight, setUpdatedWeight] = useState(item?.selectedWeight);
 
   const handleRemoveItemFromCart = () => {
     dispatch(removeCartItem(item.id, jwt));

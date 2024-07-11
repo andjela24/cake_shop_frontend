@@ -22,34 +22,35 @@ const CustomerRoutes = () => {
   const showNavigation = location.pathname !== "*";
 
   return (
-    <div>
-      <ThemeProvider theme={customerTheme}>
-        {showNavigation && <Navigation />}
-        <Routes>
-          <Route path="/login" element={<Homepage />}></Route>
-          <Route path="/register" element={<Homepage />}></Route>
-          <Route path="/cakes" element={<Cake />}></Route>
-          <Route path="/cakes/:cakeId" element={<CakeDetails />}></Route>
+    <ThemeProvider theme={customerTheme}>
+      {showNavigation && <Navigation />}
+      <div className="flex-1">
 
-          <Route path="/" element={<Homepage />}></Route>
-          <Route path="/home" element={<Homepage />}></Route>
-          <Route path="/flavors" element={<FlavorGrid />}></Route>
-          <Route path="/prices" element={<PriceList />}></Route>
-          <Route path="/questions" element={<FAQComponent />}></Route>
+      <Routes>
+        <Route path="/login" element={<Homepage />}></Route>
+        <Route path="/register" element={<Homepage />}></Route>
+        <Route path="/cakes" element={<Cake />}></Route>
+        <Route path="/cakes/:cakeId" element={<CakeDetails />}></Route>
 
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/account/order" element={<Order />}></Route>
-          <Route
-            path="/account/order/:orderId"
-            element={<OrderDetails />}
-          ></Route>
-          <Route path="/checkout" element={<Checkout />}></Route>
-          <Route path="/payments/success" element={<PaymentSuccess />} />
-        </Routes>
-        <Footer />
-      </ThemeProvider>
-    </div>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/home" element={<Homepage />}></Route>
+        <Route path="/flavors" element={<FlavorGrid />}></Route>
+        <Route path="/prices" element={<PriceList />}></Route>
+        <Route path="/questions" element={<FAQComponent />}></Route>
+
+        <Route path="/about" element={<About />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/account/order" element={<Order />}></Route>
+        <Route
+          path="/account/order/:orderId"
+          element={<OrderDetails />}
+        ></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/payments/success" element={<PaymentSuccess />} />
+      </Routes>
+      </div>
+      <Footer />
+    </ThemeProvider>
   );
 };
 
