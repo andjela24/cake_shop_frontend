@@ -130,14 +130,23 @@ const productReducer = (state = initialState, action) => {
         loading: true,
         error: null,
       };
-    case DELETE_PRODUCT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        products: state.products.filter(
-          (product) => product._id !== action.payload
-        ),
-      };
+      case DELETE_PRODUCT_SUCCESS:
+  return {
+    ...state,
+    loading: false,
+    products: state.products.filter(
+      (product) => product.id !== action.payload
+    ),
+  };
+
+    // case DELETE_PRODUCT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     products: state.products.filter(
+    //       (product) => product._id !== action.payload
+    //     ),
+    //   };
     case DELETE_PRODUCT_FAILURE:
       return {
         ...state,

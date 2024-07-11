@@ -164,16 +164,15 @@ export const createProduct = (product) => async (dispatch) => {
     });
   }
 };
-
-export const deleteProduct = (data) => async (dispatch) => {
+export const deleteProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
-    await api.delete(`/api/admin/products/${data.productId}`);
+    await api.delete(`/api/admin/cakes/${productId}`);
 
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,
-      payload: data.productId,
+      payload: productId,
     });
   } catch (error) {
     dispatch({
@@ -185,3 +184,24 @@ export const deleteProduct = (data) => async (dispatch) => {
     });
   }
 };
+
+// export const deleteProduct = (data) => async (dispatch) => {
+//   try {
+//     dispatch({ type: DELETE_PRODUCT_REQUEST });
+
+//     await api.delete(`/api/admin/cakes/${data.productId}`);
+
+//     dispatch({
+//       type: DELETE_PRODUCT_SUCCESS,
+//       payload: data.productId,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: DELETE_PRODUCT_FAILURE,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };

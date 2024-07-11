@@ -1,31 +1,19 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardHeader,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, Card, CardHeader, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Snackbar, Alert } from "@mui/material";
 
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../../../redux/admin/product/Action";
 import { getProducts } from "../../../redux/admin/product/Action";
 
 const ProductsTable = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const products = useSelector((store) => store.adminsProduct.products);
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -33,6 +21,14 @@ const ProductsTable = () => {
 
   const handleDeleteProduct = (productId) => {
     dispatch(deleteProduct(productId));
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
   };
 
   return (
@@ -66,45 +62,26 @@ const ProductsTable = () => {
                   sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}
                 >
                   <TableCell>
-                    {" "}
-                    <Avatar alt={item.titel} src={item.imageUrl} />{" "}
+                    <Avatar alt={item.title} src={item.imageUrl} />
                   </TableCell>
-
-                  <TableCell
-                    sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}
-                  >
+                  <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
                     <Box sx={{ display: "flex", flexDirection: "column" }}>
                       <Typography
-                        sx={{
-                          fontWeight: 500,
-                          fontSize: "0.875rem !important",
-                        }}
+                        sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}
                       >
                         {item.title}
                       </Typography>
                     </Box>
                   </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>{item.category.name}</TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>{item.pricePerKilo} RSD</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {item.category.name}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {item.pricePerKilo} RSD
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <Button
-                      onClick={() =>
-                        navigate(`/admin/product/update/${item.id}`)
-                      }
-                      variant="text"
-                    >
+                    <Button onClick={() => navigate(`/admin/product/update/${item.id}`)} variant="text">
                       Izmeni
                     </Button>
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    <Button
-                      variant="text"
-                      onClick={() => handleDeleteProduct(item.id)}
-                    >
+                    <Button variant="text" onClick={() => handleDeleteProduct(item.id)}>
                       Obriši
                     </Button>
                   </TableCell>
@@ -114,6 +91,11 @@ const ProductsTable = () => {
           </Table>
         </TableContainer>
       </Card>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+          Proizvod je uspešno obrisan!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
