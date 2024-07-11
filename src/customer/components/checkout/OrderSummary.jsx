@@ -33,7 +33,7 @@ const OrderSummary = () => {
       const paymentData = {
         orderId: order.id,
         jwt,
-        total: order.totalPrice,
+        total: order.totalPrice / 117.5,
         currency: "EUR",
         description: "Opis plaćanja",
       };

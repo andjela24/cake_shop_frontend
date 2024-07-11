@@ -95,8 +95,8 @@ export default function CakeDetails() {
               </svg>
             </li>
             <li>
-              <a href="/cakes" className="text-sm font-medium text-gray-900">
-                Svadbene torte
+              <a href={`/cakes?category=${cake.category.name}`} className="text-sm font-medium text-gray-900">
+              {cake.category.name}
               </a>
             </li>
             <li>

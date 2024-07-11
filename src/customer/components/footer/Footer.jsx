@@ -56,7 +56,7 @@ const Footer = () => {
         <Typography className="pb-5" variant="h6" gutterBottom>
           Društvene mreže
         </Typography>
-        <Typography variant="body2" component="p" gutterBottom>
+        <Typography variant="body2" component="div" gutterBottom>
           <Grid container alignItems="center" spacing={1}>
             <Grid item>
               <InstagramIcon />
@@ -64,7 +64,7 @@ const Footer = () => {
             <Grid item>Instagram</Grid>
           </Grid>
         </Typography>
-        <Typography variant="body2" component="p" gutterBottom>
+        <Typography variant="body2" component="div" gutterBottom>
           <Grid container alignItems="center" spacing={1}>
             <Grid item>
               <FacebookIcon />
@@ -72,7 +72,7 @@ const Footer = () => {
             <Grid item>Facebook</Grid>
           </Grid>
         </Typography>
-        <Typography variant="body2" component="p" gutterBottom>
+        <Typography variant="body2" component="div" gutterBottom>
           <Grid container alignItems="center" spacing={1}>
             <Grid item>
               <LinkedInIcon />

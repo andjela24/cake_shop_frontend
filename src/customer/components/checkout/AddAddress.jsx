@@ -40,13 +40,17 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       zipCode: data.get("zip"),
     };
 
+    const deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate() + 7);
+    const isoDeliveryDate = deliveryDate.toISOString();
+  
     const orderData = {
       address,
       jwt,
       navigate,
       userId: auth.user?.id,
       cartItems: cart.cart.cartItems.map((item) => item.id),
-      deliveryDate: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString() + 7,
+      deliveryDate: isoDeliveryDate,
       totalPrice: cart.cart.totalPrice || 1,
       totalDiscountedPrice: cart.cart.totalDiscountedPrice || 0,
       discount: cart.cart.discount || 0,
@@ -54,6 +58,7 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       orderStatus: "Pending",
       totalItem: cart.cart.totalItem || 0,
     };
+  
     dispatch(createOrder(orderData));
     handleNext();
   };
