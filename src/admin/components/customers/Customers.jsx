@@ -66,7 +66,7 @@ const Customers = () => {
     <Box>
       <Card>
         <CardHeader
-          title="All Customers"
+          title="Svi korisnici"
           sx={{
             pt: 2,
             alignItems: "center",

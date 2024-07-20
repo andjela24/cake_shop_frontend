@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Homepage from "../customer/pages/HomePage";
 import About from "../customer/pages/About";
+import Contact from "../customer/pages/Contact";
 import Navigation from "../customer/components/navbar/Navigation";
 import Cart from "../customer/components/cart/Cart";
 import { ThemeProvider } from "@mui/material/styles";
@@ -39,6 +40,7 @@ const CustomerRoutes = () => {
         <Route path="/questions" element={<FAQComponent />}></Route>
 
         <Route path="/about" element={<About />}></Route>
+        <Route path="/contact" element={<Contact />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/account/order" element={<Order />}></Route>
         <Route
