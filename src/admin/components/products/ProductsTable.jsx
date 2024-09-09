@@ -1,4 +1,19 @@
-import { Avatar, Box, Button, Card, CardHeader, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Snackbar, Alert } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +40,7 @@ const ProductsTable = () => {
   };
 
   const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpenSnackbar(false);
@@ -64,24 +79,41 @@ const ProductsTable = () => {
                   <TableCell>
                     <Avatar alt={item.title} src={item.imageUrl} />
                   </TableCell>
-                  <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
+                  <TableCell
+                    sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}
+                  >
                     <Box sx={{ display: "flex", flexDirection: "column" }}>
                       <Typography
-                        sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}
+                        sx={{
+                          fontWeight: 500,
+                          fontSize: "0.875rem !important",
+                        }}
                       >
                         {item.title}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>{item.category.name}</TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>{item.pricePerKilo} RSD</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    <Button onClick={() => navigate(`/admin/product/update/${item.id}`)} variant="text">
+                    {item.category.name}
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {item.pricePerKilo} RSD
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    <Button
+                      onClick={() =>
+                        navigate(`/admin/product/update/${item.id}`)
+                      }
+                      variant="text"
+                    >
                       Izmeni
                     </Button>
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    <Button variant="text" onClick={() => handleDeleteProduct(item.id)}>
+                    <Button
+                      variant="text"
+                      onClick={() => handleDeleteProduct(item.id)}
+                    >
                       Obriši
                     </Button>
                   </TableCell>
@@ -91,8 +123,16 @@ const ProductsTable = () => {
           </Table>
         </TableContainer>
       </Card>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           Proizvod je uspešno obrisan!
         </Alert>
       </Snackbar>

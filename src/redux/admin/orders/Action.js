@@ -119,7 +119,7 @@ export const cancelOrder = (orderId) => async (dispatch) => {
 export const deleteOrder = (orderId) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
-    const data = await api.put(`/api/admin/orders/${orderId}/delete`);
+    const data = await api.delete(`/api/admin/orders/${orderId}`);
     dispatch({
       type: DELETE_ORDER_SUCCESS,
       payload: data,

@@ -68,7 +68,8 @@ export default function RegisterUserForm({ handleNext }) {
       errors.email = "Email format nije validan.";
     }
     if (!passwordRegex.test(userData.password)) {
-      errors.password = "Šifra mora imati najmanje 8 karaktera, uključujući slova i brojeve.";
+      errors.password =
+        "Šifra mora imati najmanje 8 karaktera, uključujući slova i brojeve.";
     }
     if (!nameRegex.test(userData.firstName)) {
       errors.firstName = "Ime mora imati najmanje 2 karaktera.";
@@ -174,14 +175,28 @@ export default function RegisterUserForm({ handleNext }) {
       <div className="flex justify-center flex-col items-center">
         <div className="py-3 flex items-center">
           <p className="m-0 p-0">Već imaš nalog?</p>
-          <Button onClick={() => navigate("/login")} className="ml-5" size="small">
+          <Button
+            onClick={() => navigate("/login")}
+            className="ml-5"
+            size="small"
+          >
             Uloguj se
           </Button>
         </div>
       </div>
-      <Snackbar open={openSnackBar} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={registrationSuccess ? "success" : "error"} sx={{ width: "100%" }}>
-          {registrationSuccess ? "Uspešna registracija!" : "Neuspešna registracija! Pokušajte ponovo."}
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={registrationSuccess ? "success" : "error"}
+          sx={{ width: "100%" }}
+        >
+          {registrationSuccess
+            ? "Uspešna registracija!"
+            : "Neuspešna registracija! Pokušajte ponovo."}
         </Alert>
       </Snackbar>
     </div>

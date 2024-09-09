@@ -43,7 +43,7 @@ export default function AddDeliveryAddressForm({ handleNext }) {
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 7);
     const isoDeliveryDate = deliveryDate.toISOString();
-  
+
     const orderData = {
       address,
       jwt,
@@ -58,7 +58,7 @@ export default function AddDeliveryAddressForm({ handleNext }) {
       orderStatus: "Pending",
       totalItem: cart.cart.totalItem || 0,
     };
-  
+
     dispatch(createOrder(orderData));
     handleNext();
   };
@@ -66,13 +66,17 @@ export default function AddDeliveryAddressForm({ handleNext }) {
   const handleAddressSelect = () => {
     if (!selectedAddress) return;
 
+    const deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate() + 7);
+    const isoDeliveryDate = deliveryDate.toISOString();
+
     const orderData = {
       address: selectedAddress,
       jwt,
       navigate,
       userId: auth.user?.id,
       cartItems: cart.cart.cartItems.map((item) => item.id),
-      deliveryDate: new Date().toISOString(),
+      deliveryDate: isoDeliveryDate,
       totalPrice: cart.cart.totalPrice,
       totalDiscountedPrice: cart.cart.totalDiscountedPrice,
       discount: cart.cart.discount,
@@ -94,7 +98,9 @@ export default function AddDeliveryAddressForm({ handleNext }) {
               <div
                 key={item.id}
                 onClick={() => setSelectedAddress(item)}
-                className={`p-5 py-7 border-b cursor-pointer ${selectedAddress?.id === item.id ? "bg-gray-200" : ""}`}
+                className={`p-5 py-7 border-b cursor-pointer ${
+                  selectedAddress?.id === item.id ? "bg-gray-200" : ""
+                }`}
               >
                 <AddressCard address={item} />
               </div>
@@ -213,7 +219,11 @@ export default function AddDeliveryAddressForm({ handleNext }) {
                 </Button>
                 {selectedAddress && (
                   <Button
-                    sx={{ padding: ".9rem 1.5rem", background: "#132743", marginLeft: "1rem" }}
+                    sx={{
+                      padding: ".9rem 1.5rem",
+                      background: "#132743",
+                      marginLeft: "1rem",
+                    }}
                     size="large"
                     variant="contained"
                     onClick={handleAddressSelect}

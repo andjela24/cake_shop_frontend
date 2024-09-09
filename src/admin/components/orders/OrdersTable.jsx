@@ -13,11 +13,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 
 import React, { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   confirmOrder,
@@ -33,10 +34,18 @@ const OrdersTable = () => {
   const dispatch = useDispatch();
   const { adminsOrder } = useSelector((store) => store);
   const [anchorElArray, setAnchorElArray] = useState([]);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     dispatch(getAllOrders());
   }, [dispatch]);
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   const handleUpdateStatusMenuClick = (event, index) => {
     const newAnchorElArray = [...anchorElArray];
@@ -213,6 +222,19 @@ const OrdersTable = () => {
           onChange={handlePaginationChange}
         />
       </Card>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Narudžbina je uspešno obrisana!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

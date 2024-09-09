@@ -70,6 +70,7 @@ export default function Navigation() {
   const handleLogout = () => {
     handleCloseUserMenu();
     dispatch(logout());
+    navigate("/");
   };
   const handleMyOrderClick = () => {
     handleCloseUserMenu();
@@ -153,6 +154,7 @@ export default function Navigation() {
                                   src={item.imageSrc}
                                   alt={item.imageAlt}
                                   className="object-cover object-center"
+                                  loading="lazy"
                                 />
                               </div>
                               <a
